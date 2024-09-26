@@ -13,3 +13,7 @@ Route::get('/login', function () {
 Route::get('/profile', function () {
     return view('login');
 });
+
+Route::get('/order', function () {
+    return view('order');
+});
