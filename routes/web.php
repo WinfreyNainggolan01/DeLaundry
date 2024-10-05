@@ -13,3 +13,11 @@ Route::get('/login', function () {
 Route::get('/profile', function () {
     return view('login');
 });
+
+Route::get('/admin', function () {
+    return view('admin-dashboard');
+});
+
+Route::get('/user', function () {
+    return view('admin-user');
+});

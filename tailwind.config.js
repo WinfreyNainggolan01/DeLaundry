@@ -14,7 +14,7 @@ export default {
         'button-blue': '#00427B'
       },
       fontFamily: {
-        sans: ['Inter var', ...defaultTheme.fontFamily.sans],
+        sans: ['Inter', ...defaultTheme.fontFamily.sans],
         'title-content': ['Nunito', 'sans-serif'],
       },
     },

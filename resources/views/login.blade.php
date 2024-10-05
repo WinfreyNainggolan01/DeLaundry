@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     @vite('resources/css/app.css')
-    <title>Login</title>
+    <title>Login</title> 
 </head>
 <body class="bg-dark-blue">
     <div class="flex min-h-screen items-center justify-center px-6 py-12 lg:px-8">
@@ -13,8 +13,11 @@
             <!-- Left Section: Image and Text -->
             <div class="relative text-white">
                 <!-- Background image -->
-                <div class="absolute inset-0 bg-no-repeat bg-cover bg-center opacity-20" style="background-image: url('{{ asset('img/well-done-baloon.png') }}');"></div>
+                {{-- <div class="absolute inset-0 bg-no-repeat bg-cover bg-center opacity-20" style="background-image: url('{{ asset('img/well-done-baloon.png') }}');"></div> --}}
                 <!-- Overlay text -->
+
+                <img class="absolute inset-0 bg-no-repeat bg-cover bg-center opacity-20 scale-110 -my-24" src="{{ asset('img/well-done-baloon.png') }}" alt="balloon">
+
                 <div class="relative z-10">
                     <h1 class="text-sm font-semibold uppercase tracking-wide text-teal-300">Best Laundry</h1>
                     <h2 class="mt-4 text-4xl font-bold">Your Trusted Professional Laundry Service</h2>
