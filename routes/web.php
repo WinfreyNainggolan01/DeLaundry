@@ -17,3 +17,7 @@ Route::get('/profile', function () {
 Route::get('/order', function () {
     return view('order');
 });
+
+Route::get('/profile', function () {
+    return view('profile');
+});
