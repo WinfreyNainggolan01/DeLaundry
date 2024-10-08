@@ -1,23 +1,17 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\HomepageController;
 
-Route::get('/', function () {
-    return view('homepage');
-});
+// User
+Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
+Route::post('/login', [LoginController::class, 'authenticate']);
+Route::post('/logout', [LoginController::class, 'logout']);
 
-Route::get('/login', function () {
-    return view('login');
-});
+Route::get('/homepage', [HomepageController::class, 'index'])->middleware('auth');
 
-Route::get('/profile', function () {
-    return view('login');
-});
-
-Route::get('/admin', function () {
-    return view('admin-dashboard');
-});
-
-Route::get('/user', function () {
-    return view('admin-user');
-});
+// Route::get('/homepage', function () {
+//     return view('homepage');
+// });
+require __DIR__.'/customer-auth.php';

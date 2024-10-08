@@ -6,6 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     @vite('resources/css/app.css')
     <title>Login</title> 
+    <link
+      rel="shortcut icon"
+      href="{{ asset('img/Logo-DeLaundry.png') }}"
+      type="image/x-icon"
+    />
 </head>
 <body class="bg-dark-blue">
     <div class="flex min-h-screen items-center justify-center px-6 py-12 lg:px-8">
@@ -31,20 +36,41 @@
                     <img class="mx-auto h-12 w-auto" src="{{ asset('img/Logo-DeLaundry.png') }}" alt="Logo DeLaundry">
                     <h2 class="mt-6 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Account Login</h2>
                 </div>
-        
+                @if(session()->has('success'))
+                    <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mt-6" role="alert">
+                        <strong class="font-bold">Success!</strong>
+                        <span class="block sm:inline">{{ session('success') }}</span>
+                    </div>
+                @endsession
+
+                @if(session()->has('loginError'))
+                    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mt-6" role="alert">
+                        <strong class="font-bold">Error!</strong>
+                        <span class="block sm:inline">{{ session('loginError') }}</span>
+                    </div>
+                @endsession
+
                 <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-                    <form class="space-y-6" action="#" method="POST">
+                    <form class="space-y-6" action="/login" method="POST">
+                        @csrf
                         <div>
                             <label for="username" class="block text-sm font-medium leading-6 text-gray-900">Username</label>
                             <div class="mt-2">
-                                <input id="username" name="username" type="text" autocomplete="username" required class="block w-full rounded-md border-0 py-1.5  text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 p-3">
+                                <input id="username" name="username" type="username" autocomplete="username" required class="block w-full rounded-md border-0 py-1.5  text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 p-3" @error('username')
+                                    is-invalid
+                                @enderror autofocus required>
                             </div>
+                            @error('username')
+                                <div class="invalid">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                         </div>
                     
                         <div>
                             <label for="password" class="block text-sm font-medium leading-6 text-gray-900">Password</label>
                             <div class="mt-2">
-                                <input id="password" name="password" type="password" autocomplete="current-password" required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 p-3">
+                                <input id="password" name="password" type="password" autocomplete="current-password" required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 p-3" required>
                             </div>
                         </div>
                     

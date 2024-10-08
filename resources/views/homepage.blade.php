@@ -10,14 +10,14 @@
       rel="shortcut icon"
       href="{{ asset('img/Logo-DeLaundry.png') }}"
       type="image/x-icon"
-    />
+    />
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     @vite('resources/css/app.css')
 </head>
 
+@auth
 <body class="h-full">
-
 <div class="min-h-full">
     <!-- Navbar Section -->
     <nav class="bg-white" x-data="{ isOpen: false }">
@@ -77,8 +77,11 @@
                 class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
                   <!-- Active: "bg-gray-100", Not Active: "" -->
                   <a href="/profile" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-0">Your Profile</a>
-                  <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-1">Settings</a>
-                  <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-2">Sign out</a>
+                  <form action="/logout" method="POST">
+                    @csrf
+                    <button type="submit" class="block w-full text-left px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-1">Sign out
+                    </button>
+                  </form>
                 </div>
               </div>
             </div>
@@ -131,19 +134,26 @@
             </button>
           </div>
           <div class="mt-3 space-y-1 px-2">
-            <a href="/profile" class="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white">Your Profile</a>
-            <a href="#" class="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white">Settings</a>
-            <a href="#" class="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white">Sign out</a>
+            <a href="#" class="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white">Your Profile</a>
+            <a href="#" method="" class="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white">Sign out</a>
           </div>
         </div>
       </div>
     </nav>
   
-    <header class="bg-dark-blue shadow">
+    <!-- Header -->
+    
+      <header class="bg-dark-blue shadow">
+        <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+          <h1 class="text-2xl font-bold tracking-tight text-gray-100">Welcome, {{ auth()->student()->name  }} Winfrey Nainggolan</h1>
+        </div>
+      </header>
+
+    {{-- <header class="bg-dark-blue shadow">
       <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-        <h1 class="text-3xl font-bold tracking-tight text-gray-100">DeLaundry</h1>
+        <h1 class="text-2xl font-bold tracking-tight text-gray-100">Welcome, {{  }} Winfrey Nainggolan</h1>
       </div>
-    </header>
+    </header> --}}
 
     <!-- Main content -->
     <main>
@@ -276,5 +286,7 @@
     </div>
 </div>
 </footer>
+
+@endauth
 
 </html>

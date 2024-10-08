@@ -7,7 +7,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 
-class Customer extends Authenticatable
+class Admin extends Authenticatable
 {
     use HasFactory, Notifiable;
 
@@ -16,11 +16,14 @@ class Customer extends Authenticatable
      *
      * @var array<int, string>
      */
+    protected $guard = 'admin';
+    protected $table = 'admins';
+
     protected $fillable = [
         'name',
         'username',
         'password',
-        'dormitory',
+        'phone-number',
     ];
 
     /**
@@ -41,7 +44,6 @@ class Customer extends Authenticatable
     protected function casts(): array
     {
         return [
-            'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
     }
