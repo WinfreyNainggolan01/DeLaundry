@@ -9,9 +9,15 @@ Route::get('/login', [LoginController::class, 'index'])->name('login')->middlewa
 Route::post('/login', [LoginController::class, 'authenticate']);
 Route::post('/logout', [LoginController::class, 'logout']);
 
+
 Route::get('/homepage', [HomepageController::class, 'index'])->middleware('auth');
 
 // Route::get('/homepage', function () {
 //     return view('homepage');
 // });
+
+Route::get('/profile', function () {
+     return view('profile');
+});
+
 require __DIR__.'/customer-auth.php';
