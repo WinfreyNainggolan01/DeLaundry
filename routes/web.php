@@ -20,4 +20,8 @@ Route::get('/profile', function () {
      return view('profile');
 });
 
+Route::get('/order', function () {
+    return view('order');
+});
+
 require __DIR__.'/customer-auth.php';
