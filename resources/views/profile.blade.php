@@ -139,4 +139,8 @@
   </div>
 </body>
 
+<<<<<<< HEAD
 </html>
+=======
+</html>
+>>>>>>> 2ed52f1 (Adding Admin UI)

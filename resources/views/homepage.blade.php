@@ -16,7 +16,7 @@
     @vite('resources/css/app.css')
 </head>
 
-@auth
+
 <body class="h-full">
 <div class="min-h-full">
     <!-- Navbar Section -->
@@ -142,18 +142,20 @@
     </nav>
   
     <!-- Header -->
-    
-      <header class="bg-dark-blue shadow">
-        <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-          <h1 class="text-2xl font-bold tracking-tight text-gray-100">Welcome, {{ auth()->student()->name  }} Winfrey Nainggolan</h1>
-        </div>
-      </header>
-
-    {{-- <header class="bg-dark-blue shadow">
+    @auth
+    <header class="bg-dark-blue shadow">
       <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-        <h1 class="text-2xl font-bold tracking-tight text-gray-100">Welcome, {{  }} Winfrey Nainggolan</h1>
+        <h1 class="text-2xl font-bold tracking-tight text-gray-100">Welcome, {{ auth()->student()->name}}</h1>
       </div>
-    </header> --}}
+    </header>
+    @else
+    <header class="bg-dark-blue shadow">
+      <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+        <h1 class="text-2xl font-bold tracking-tight text-gray-100">DeLaundry</h1>
+      </div>
+    </header>
+    @endauth
+      
 
     <!-- Main content -->
     <main>
@@ -286,7 +288,5 @@
     </div>
 </div>
 </footer>
-
-@endauth
 
 </html>

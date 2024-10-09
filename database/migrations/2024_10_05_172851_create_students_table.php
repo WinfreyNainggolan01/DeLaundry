@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('password');
             $table->enum('gender',['male', 'female']);
             $table->foreignId('dormitory_id')->constrained()->cascadeOnDelete();
-            $table->string('phone-number');
+            $table->string('phone_number');
             $table->softDeletes();
             $table->rememberToken();
             $table->timestamps();

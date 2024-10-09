@@ -8,14 +8,10 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
-    public function index()
+    public function index(): \Illuminate\View\View
     {
-        return view('login',[
-            'title' => 'Login',
-            'active' => 'login'
-        ]);
+        return view('login');
     }
-
     public function authenticate(Request $request): RedirectResponse
     {
         $credentials = $request->validate([
@@ -23,25 +19,24 @@ class LoginController extends Controller
             'password' => ['required'],
         ]);
 
-
         if (Auth::guard('student')->attempt($credentials)) {
             $request->session()->regenerate();
 
             return redirect()->intended('/homepage');
         }
 
-        return back()->with([ 'loginError' => 'Login failed!',
+        return back()->withErrors([
+            'loginError' => 'Login failed!',
         ])->onlyInput('username');
     }
 
     public function logout(Request $request): RedirectResponse
     {
-        Auth::logout();
-    
+        Auth::guard('student')->logout();
+
         $request->session()->invalidate();
-    
         $request->session()->regenerateToken();
-    
+
         return redirect('/login');
     }
 }

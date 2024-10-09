@@ -20,7 +20,7 @@ class StudentSeeder extends Seeder
                 'password' => bcrypt('winfrey123'),
                 'gender' => 'male',
                 'dormitory_id' => '1',
-                'phone-number' => '081234567890',
+                'phone_number' => '081234567890',
             ],
             [
                 'name' => 'Yohana Siahaan',
@@ -29,7 +29,7 @@ class StudentSeeder extends Seeder
                 'password' => bcrypt('yohana123'),
                 'gender' => 'female',
                 'dormitory_id' => '2',
-                'phone-number' => '081234567891',
+                'phone_number' => '081234567891',
             ], 
             [
                 'name' => 'Ira Silalahi',
@@ -38,7 +38,7 @@ class StudentSeeder extends Seeder
                 'password' => bcrypt('ira123'),
                 'gender' => 'female',
                 'dormitory_id' => '2',
-                'phone-number' => '081234567892',
+                'phone_number' => '081234567892',
             ],
         ];
         foreach ($students as $student) {
