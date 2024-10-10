@@ -24,4 +24,12 @@ Route::get('/order', function () {
     return view('order');
 });
 
+Route::get('/complaint', function () {
+    return view('complaint');
+});
+
+Route::get('/finance', function () {
+    return view('finance');
+});
+
 require __DIR__.'/customer-auth.php';
