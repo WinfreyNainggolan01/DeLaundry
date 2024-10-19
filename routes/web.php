@@ -28,6 +28,7 @@ Route::get('/admin-dashboard', [AdminDashboardController::class, 'index'])->name
 //     return view('homepage');
 // });
 
+<<<<<<< HEAD
 Route::get('/profile', function () {
 <<<<<<< HEAD
      return view('profile');
@@ -41,18 +42,56 @@ require __DIR__.'/customer-auth.php';
 =======
     return view('profile');
 });
+=======
+>>>>>>> 73f7336 (Fixing feature)
 
 // Admin Route
 Route::get('/admin-dashboard', function () {
     return view('admin_dashboard');
 });
+
+// Order Route
 Route::get('/admin-order', function () {
     return view('admin_order');
 });
+
+Route::get('/admin-order/fill-order', function () {
+    return view('admin_order');
+});
+
+Route::get('/admin-order/detail', function () {
+    return view('admin_order');
+});
+
+
 Route::get('/admin-user', function () {
     return view('admin_user');
 });
 Route::get('/admin-complaint', function () {
     return view('admin_complaint');
 });
+<<<<<<< HEAD
 >>>>>>> 2ed52f1 (Adding Admin UI)
+=======
+
+
+Route::get('/profile', function () {
+    return view('profile');
+});
+
+Route::get('/order', function () {
+    return view('order');
+});
+
+Route::get('/complaint', function () {
+    return view('complaint');
+});
+
+Route::get('/finance', function () {
+    return view('finance');
+});
+
+Route::get('/tracking', function () {
+    return view('tracking');
+});
+>>>>>>> 73f7336 (Fixing feature)

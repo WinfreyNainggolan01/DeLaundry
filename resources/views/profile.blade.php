@@ -140,7 +140,11 @@
 </body>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 </html>
 =======
 </html>
 >>>>>>> 2ed52f1 (Adding Admin UI)
+=======
+</html>
+>>>>>>> 73f7336 (Fixing feature)
