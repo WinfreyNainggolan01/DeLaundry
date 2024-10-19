@@ -44,7 +44,8 @@
 
 
             <!--- Menu -->
-            <div class="srcollbar scroll -px-48" data-simplebar>
+             <!--- Menu -->
+             <div class="srcollbar scroll -px-48" data-simplebar>
                 <ul class="menu scroll" data-fc-type="accordion">
                     <li class="menu-title">Menu</li>
 
@@ -58,21 +59,21 @@
                     <li class="menu-title">Manager</li>
 
                     <li class="menu-item">
-                        <a href="/admin-user" class="menu-link">
+                        <a href="/admin-user" :active="request()->is('admin-user')" class="menu-link">
                             <img src="{{ asset('img/people.svg') }}" alt="user">
                             <h1 class="text-sm ml-3">Users</h1>
                         </a>
                     </li>
 
                     <li class="menu-item">
-                        <a href="/admin-order" class="menu-link">
+                        <a href="/admin-order" :active="request()->is('admin-order')" class="menu-link">
                             <img src="{{ asset('img/collection.svg') }}" alt="order">
                             <h1 class="text-sm ml-3">Orders</h1>
                         </a>
                     </li>
 
                     <li class="menu-item">
-                        <a href="/admin-complaint" class="menu-link">
+                        <a href="/admin-complaint" :active="request()->is('admin-complaint')" class="menu-link">
                             <img src="{{ asset('img/chat-right-text.svg') }}" alt="complaint">
                             <h1 class="text-sm ml-3">Complaints</h1>
                         </a>
@@ -164,9 +165,7 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
-
 
                 <div class="flex flex-col align-self-center py-6">
                     <!-- Table -->
@@ -203,14 +202,6 @@
                                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Nazareth</td>
                                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Male</td>
                                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">081234567890</td>
-                                                    <td class="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
-                                                        <a class="text-primary hover:text-sky-700" href="#">Action</a>
-                                                    </td>
-                                                    <td class="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
-                                                        <a class="text-primary hover:text-sky-700" href="#">
-                                                            <img src="{{ asset('img/pencil-square.svg') }}" alt="">
-                                                        </a>
-                                                    </td>
                                                 </tr>
 
                                                 <tr>
@@ -220,14 +211,7 @@
                                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Kana</td>
                                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Female</td>
                                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">081234567890</td>
-                                                    <td class="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
-                                                        <a class="text-primary hover:text-sky-700" href="#">Action</a>
-                                                    </td>
-                                                    <td class="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
-                                                        <a class="text-primary hover:text-sky-700" href="#">
-                                                            <img src="{{ asset('img/pencil-square.svg') }}" alt="">
-                                                        </a>
-                                                    </td>
+                                                    
                                                 </tr>
 
                                                 <tr>
@@ -252,7 +236,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div> <!-- end card -->
+                    </div> <!-- end table-->
                     
                     
                 </div>

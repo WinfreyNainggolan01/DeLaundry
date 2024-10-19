@@ -152,7 +152,7 @@
                     <div class="card">
                         <div class="p-5">
                             <div class="flex justify-between">
-                                <div class="w-20 h-20 rounded-full inline-flex items-center justify-center bg-primary/25 ">
+                                <div class="w-20 h-20 rounded-full inline-flex items-center justify-center bg-blue-100 ">
                                     <img src="{{ asset('img/person.svg') }}" alt="person" class="h-10 w-auto">
                                 </div>
                                 <div class="text-right">
@@ -166,8 +166,8 @@
                     <div class="card">
                         <div class="p-5">
                             <div class="flex justify-between">
-                                <div class="w-20 h-20 rounded-full inline-flex items-center justify-center bg-yellow-100">
-                                    <img src="{{ asset('img/box-seam.svg') }}" alt="person" class="h-10 w-auto">
+                                <div class="w-20 h-20 rounded-full inline-flex items-center justify-center bg-blue-100">
+                                    <img src="{{ asset('img/box-seam-blue.svg') }}" alt="person" class="h-10 w-auto">
                                 </div>
                                 <div class="text-right text-gray-900">
                                     <h3 class="text-gray-900 mt-1 text-2xl font-bold mb-5">3</h3>
@@ -180,8 +180,8 @@
                     <div class="card">
                         <div class="p-5">
                             <div class="flex justify-between">
-                                <div class="w-20 h-20 rounded-full inline-flex items-center justify-center bg-green-100">
-                                    <img src="{{ asset('img/headset.svg') }}" alt="person" class="h-10 w-auto">
+                                <div class="w-20 h-20 rounded-full inline-flex items-center justify-center bg-blue-100">
+                                    <img src="{{ asset('img/headset-blue.svg') }}" alt="person" class="h-10 w-auto">
                                 </div>
                                 <div class="text-right"> 
                                     <h3 class=" mt-1 text-2xl font-bold mb-5 text-gray-900">3</h3>
@@ -190,6 +190,7 @@
                             </div>
                         </div>
                     </div>
+                    
                 </div>
 
 

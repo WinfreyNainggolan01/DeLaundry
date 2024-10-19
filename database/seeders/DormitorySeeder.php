@@ -12,17 +12,23 @@ class DormitorySeeder extends Seeder
      */
     public function run(): void
     {
+        // $dormitory = [
+        //     [
+        //         'name' => 'Nazareth',
+        //         'gender' => 'male',
+        //     ],
+        //     [
+        //         'name' => 'Kana',
+        //         'gender'=> 'female',
+        //     ],
+        //     [
+        //         'name' => 'Pniel',
+        //         'gender' => 'male',
+        //     ],
+        // ];
         $dormitory = [
             [
-                'name' => 'Nazareth',
-                'gender' => 'male',
-            ],
-            [
-                'name' => 'Kana',
-                'gender'=> 'female',
-            ],
-            [
-                'name' => 'Pniel',
+                'name' => 'Anthokia',
                 'gender' => 'male',
             ],
         ];

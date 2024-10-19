@@ -55,7 +55,7 @@ return [
         ],
         'admin' => [
             'driver' => 'session',
-            'provider' => 'admins',  // provider untuk Student
+            'provider' => 'admins',
         ],
         'admin-api' => [
             'driver' => 'token',
