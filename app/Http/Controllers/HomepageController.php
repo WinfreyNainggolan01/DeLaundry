@@ -8,7 +8,12 @@ class HomepageController extends Controller
 {
     public function index()
     {
-        return view('homepage');
+        // return view('homepage', [
+        //     'title' => 'Home Page',
+        // ]);
+        return view('student.homepage', [
+            'title' => 'Home Page',
+        ]);
         
     }
 }

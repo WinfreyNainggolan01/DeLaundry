@@ -120,11 +120,13 @@
                         <img src="{{asset('vendor/images/users/user-6.jpg')}}" alt="user-image" class="rounded-full h-10 px-5">
                     </button>
                     <div class="fc-dropdown fc-dropdown-open:opacity-100 hidden opacity-0 w-44 z-50 transition-[margin,opacity] duration-300 mt-2 bg-white shadow-lg border rounded-lg p-2 border-gray-200">
-                        <a class="flex items-center py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100" 
-                        href="#">
+                        <form action="/logout" method="POST">
+                        @csrf
+                        <button type="submit" class="flex items-center py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100">
                             <i class="mgc_exit_line me-2"></i> 
-                            <span>Log Out</span>
-                        </a>
+                            <span>Sign Out</span>
+                        </form>
+                        
                     </div>
                 </div>
             </header>
@@ -224,9 +226,7 @@
             </main>
 
             <!-- Footer Start -->
-            <x-admin_footer>
-
-            </x-admin_footer>
+            <x-admin_footer />
 
         </div>
 

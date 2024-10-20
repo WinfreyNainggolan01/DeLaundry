@@ -40,25 +40,12 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
-        'api' => [
-            'driver' => 'token',
-            'provider' => 'users',
-            'hash' => false,
-        ],
         'student' => [
             'driver' => 'session',
             'provider' => 'students',  // provider untuk Student
         ],
-        'student-api' => [
-            'driver' => 'token',
-            'provider' => 'students',
-        ],
         'admin' => [
             'driver' => 'session',
-            'provider' => 'admins',
-        ],
-        'admin-api' => [
-            'driver' => 'token',
             'provider' => 'admins',
         ],
     ],
@@ -133,6 +120,8 @@ return [
             
         ],
     ],
+
+    
 
     /*
     |--------------------------------------------------------------------------

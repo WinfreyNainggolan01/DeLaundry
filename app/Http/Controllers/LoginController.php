@@ -19,10 +19,18 @@ class LoginController extends Controller
             'password' => ['required'],
         ]);
 
+        // dd('berhasil login');
+
         if (Auth::guard('student')->attempt($credentials)) {
             $request->session()->regenerate();
-
+            // dd('berhasil login student');
             return redirect()->intended('/homepage');
+        }
+
+        if (Auth::guard('admin')->attempt($credentials)) {
+            $request->session()->regenerate();
+            // dd('berhasil login admin');
+            return redirect()->intended('/admin-dashboard');
         }
 
         return back()->withErrors([
@@ -32,7 +40,13 @@ class LoginController extends Controller
 
     public function logout(Request $request): RedirectResponse
     {
-        Auth::guard('student')->logout();
+        if(Auth::guard('admin')->check()){
+            Auth::guard('admin')->logout();
+
+        }else{
+            Auth::guard('student')->logout();
+        }
+
 
         $request->session()->invalidate();
         $request->session()->regenerateToken();
