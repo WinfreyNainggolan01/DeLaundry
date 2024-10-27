@@ -93,9 +93,7 @@
                                             </div>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
-                                            <a class="text-primary hover:text-sky-700" href="#">
-                                                <img src="{{ asset('img/pencil-square.svg') }}" alt="">
-                                            </a>
+                                            @include('admin.layout.modal')
                                         </td>
                                     </tr>
 

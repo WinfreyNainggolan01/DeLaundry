@@ -2,13 +2,15 @@
 
 namespace App\Models;
 
-use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Relations\BelongsTo; 
 
 class Student extends Authenticatable
 {
-    use Notifiable, SoftDeletes;
+    use Notifiable, SoftDeletes, HasFactory;
 
     protected $guard = 'student';  // pastikan ini sesuai
 
@@ -30,4 +32,10 @@ class Student extends Authenticatable
     protected $casts = [
         'password' => 'hashed',
     ];
+
+    // Tambahkan relasi dormitory
+    public function dormitory(): BelongsTo // Ubah ini
+    {
+        return $this->belongsTo(Dormitory::class);
+    }
 }

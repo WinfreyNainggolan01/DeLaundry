@@ -2,33 +2,45 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
-    public function index() 
+    // dashboard function
+    public function admin_dashboard()
     {
-        echo "Hallo, Admin";
-        echo "<h1>". Auth::user()->name ."</h1>";
-        echo "<a href='/logout' class='btn btn-danger ms-3'>Logout</a></div>";
+        return view('admin.dashboard',[
+            // send total user in database 
+            'total_user' => Student::count(),
+        ]);
     }
 
-    public function operator() 
+    // user function
+    public function admin_user()
     {
-        echo "Hallo, Operator!";
-        echo "<h1>". Auth::user()->name ."</h1>";
-        echo "<a href='/logout' class='btn btn-danger ms-3'>Logout</a></div>";
+        return view('admin.user',[
+            // send all data student to view
+            // 'students' => Student::paginate(10),
+            'students' => Student::all(),
+            'total_user' => Student::count(),
+
+        ]);
+    }
+    // order function
+    public function admin_order()
+    {
+        return view('admin.order', [
+            'title' => 'Order Page',
+        ]);
     }
 
-    public function user() 
+    // complaint function
+    public function admin_complaint()
     {
-        echo "Hallo, User!";
-        echo "<h1>". Auth::user()->name ."</h1>";
-        echo "<a href='/logout' class='btn btn-danger ms-3'>Logout</a></div>";
-    }
-
-    public function checkrole() {
-        echo "Role : ",Auth::user()->role;
+        return view('admin.complaint', [
+            'title' => 'Complaint Page',
+        ]);
     }
 }

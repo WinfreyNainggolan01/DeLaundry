@@ -15,7 +15,7 @@
                         <img src="{{ asset('img/person.svg') }}" alt="person" class="h-10 w-auto">
                     </div>
                     <div class="text-right">
-                        <h3 class="mt-1 text-2xl font-bold mb-5 text-gray-900">3</h3>
+                        <h3 class="mt-1 text-2xl font-bold mb-5 text-gray-900">{{ $total_user }}</h3>
                         <p class="mb-1 truncate text-gray-900">Total Users</p>
                     </div>
                 </div>
@@ -50,43 +50,35 @@
 
                                     </tr>
                                 </thead>
+                                @foreach ($students as $student)
                                 <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
                                     <tr>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">1</td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">12S22001</td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Winfrey Nainggolan</td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Nazareth</td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Male</td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">081234567890</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">2</td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">12S22003</td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Yohana Siahaan</td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Kana</td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Female</td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">081234567890</td>
-                                        
-                                    </tr>
-
-                                    <tr>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">3</td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">12S22048</td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Ira Silalahi</td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Kana</td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Female</td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">081234567890</td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
-                                            <a class="text-primary hover:text-sky-700" href="#">Action</a>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
-                                            <a class="text-primary hover:text-sky-700" href="#">
-                                                <img src="{{ asset('img/pencil-square.svg') }}" alt="">
-                                            </a>
-                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ $loop->iteration }}</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ $student->nim }}</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ $student->name }}</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $student->dormitory->name }}</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $student->gender }}</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $student->phone_number }}</td>
                                     </tr>
                                 </tbody>
+                                @endforeach
+                                {{-- {{ $students->links() }} --}}
+                                {{-- <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">3</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">12S22048</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Ira Silalahi</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Kana</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Female</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">081234567890</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
+                                        <a class="text-primary hover:text-sky-700" href="#">Action</a>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
+                                        <a class="text-primary hover:text-sky-700" href="#">
+                                            <img src="{{ asset('img/pencil-square.svg') }}" alt="">
+                                        </a>
+                                    </td>
+                                </tr> --}}
                             </table>
                         </div>
                     </div>
