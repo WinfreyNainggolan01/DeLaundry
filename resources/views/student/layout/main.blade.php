@@ -180,11 +180,7 @@
     </nav>
   
     <!-- Header -->
-    @auth('student')
       @include('student.layout.auth-header')
-    @else
-      @include('student.layout.guest-header')
-    @endauth
       
     <!-- Main content -->
     @yield('content')

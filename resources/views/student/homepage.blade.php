@@ -2,6 +2,14 @@
 @section('head')
     <title>Homepage | DeLaundry</title>
 @endsection
+{{-- 
+@section('header')
+<header class="bg-dark-blue shadow">
+    <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+        <h1 class="text-2xl font-bold tracking-tight text-gray-100">Welcome, {{ Auth::guard('student')->user()->name }}</h1>
+    </div>
+</header>
+@endsection --}}
 
 @section('content')
 <main>
@@ -38,7 +46,7 @@
                 <div class="flex justify-center items-center">
                     <!-- Buttons -->
                     <a href="{{ route('order') }}" class="inline-flex items-center font-medium text-primary-600 dark:text-primary-500">
-                        <button class="bg-blue-500 text-white px-6 py-2 rounded-2xl shadow hover:bg-blue-600">Add Request
+                        <button class="bg-sky-800 text-white px-6 py-2 rounded-2xl shadow hover:bg-blue-600">Add Request
                         </button>
                     </a>
                 </div>
@@ -54,7 +62,7 @@
                 <div class="flex justify-center items-center">
                     <!-- Buttons -->
                     <a href="{{ route('complaint') }}" class="inline-flex items-center font-medium text-primary-600 dark:text-primary-500">
-                        <button class="bg-blue-500 text-white px-6 py-2 rounded-2xl shadow hover:bg-blue-600">Complaint</button>
+                        <button class="bg-sky-800 text-white px-6 py-2 rounded-2xl shadow hover:bg-blue-600">Complaint</button>
                     </a>
                 </div>
             </article>
@@ -69,7 +77,7 @@
                 <div class="flex justify-center items-center">
                     <!-- Buttons -->
                     <a href="{{ route('tracking') }}" class="inline-flex items-center font-medium text-primary-600 dark:text-primary-500">
-                        <button class="bg-blue-500 text-white px-6 py-2 rounded-2xl shadow hover:bg-blue-600">Track</button>
+                        <button class="bg-sky-800 text-white px-6 py-2 rounded-2xl shadow hover:bg-blue-600">Track</button>
                     </a>
                 </div>
             </article>                    

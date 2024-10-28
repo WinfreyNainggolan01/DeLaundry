@@ -5,69 +5,121 @@
 @endsection
 
 @section('content')
-<main>
-    <section class="order-form mx-auto max-w-7xl p-4">
-        <h2 class="text-2xl font-bold mb-10 text-left ">Fill Your Items</h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-
-            <!--  (Name Item, Quantity, Category) -->
+<main class="container mx-auto px-4 py-8">
+    <section class="container mx-auto px-4 py-8">
+        <h2 class="text-2xl font-bold text-gray-800 mb-6">
+            Fill Your Items
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div>
-                <div class="flex flex-col mb-4 ml-14">
-                    <label for="itemName" class="text-sm font-medium mb-1">Name Item</label>
-                    <input type="text" id="itemName" class="border border-gray-300 p-1 rounded-md w-3/4" placeholder="Enter item name">
-                </div>
-                <div class="flex flex-col mb-4 ml-14">
-                    <label for="quantity" class="text-sm font-medium mb-1">Quantity</label>
-                    <input type="number" min="1" id="quantity" class="border border-gray-300 p-1 rounded-md w-3/4" placeholder="Enter quantity">
-                </div>
-                <div class="flex flex-col mb-4 ml-14">
-                    <label for="category" class="text-sm font-medium mb-1">Category</label>
-                    <select id="category" class="border border-gray-300 p-1 rounded-md w-3/4">
-                        <option value="Shirt">Shirt</option>
-                        <option value="Pants">Pants</option>
-                        <option value="Hoodie">Hoodie</option>
-                        <option value="Blanket">Blanket</option>
-                        <option value="Other">Other</option>
-                    </select>
-                </div>
+            <div class="mb-4">
+            <label class="block text-gray-700 font-bold mb-2" for="name-item">
+            Name Item <span class="text-red-700">*</span>
+            </label>
+            <input class="w-full px-3 py-2 border rounded" id="name-item" type="text" placeholder="Write name item" autocomplete="none"/>
             </div>
-
-            <!--  (Note) -->
+            <div class="mb-4">
+            <label class="block text-gray-700 font-bold mb-2" for="quantity">
+            Quantity <span class="text-red-700">*</span>
+            </label>
+            {{-- <input class="w-full border border-gray-300 p-2 rounded" id="order-id" placeholder="Write an Order ID" type="text"/> --}}
+            <input class="w-full px-3 py-2 border rounded" id="name-item" type="text" placeholder="Write quantity the item" autocomplete="none"/>
+            </option>
+            </select>
+            </div>
+            </div>
             <div>
-                <div class="flex flex-col mb-1 ">
-                    <label for="note" class="text-sm font-medium mb-1">Note</label>
-                    <textarea id="note" class="border border-gray-300 p-2 rounded-md w-4/5" rows="3" placeholder="Enter special instructions (optional)"></textarea>
-                </div>
+            <label class="block text-gray-700 font-bold mb-2" for="note">
+            Note
+            </label>
+            <textarea class="w-full px-3 py-2 border rounded" id="note" rows="5" placeholder="Write the note"></textarea>
             </div>
-
-            <!-- (Order Summary) -->
-            <div class=" mb-4 ml-0">
-                <h2 class="text-xl font-bold mb-4 text-center">Order Summary</h2>
-                <div class="overflow-x-auto mb-4">
-                    <div class="overflow-x-auto mb-4">
-                        <table class="table-auto w-full max-w-screen-sm border border-gray-300">
-                            <thead>
-                                <tr class="text-left border-b border-gray-300 bg-dark-blue shadow text-white">
-                                    <th class="px-2 py-1">Item</th>
-                                    <th class="px-2 py-1">Quantity</th>
-                                    <th class="px-2 py-1">Category</th>
-                                    <th class="px-2 py-1">Note</th>
-                                    <th class="px-2 py-1">Actions</th> 
-                                </tr>
-                            </thead>
-                            <tbody id="order-summary-body">
-                                <!-- Summary will be populated here -->
-                            </tbody>
-                        </table>
-                
-                <!-- Tombol bawah tabel -->
-                <div class="flex justify-between mt-4">
-                    <button type="button" id="add-item-btn" class="bg-sky-500 hover:bg-sky-700 text-white font-medium py-2 px-4 rounded-md">Add Item</button>
-                    <button type="button" class="bg-[#005DAD] hover:bg-[#004080] text-white font-medium py-2 px-4 rounded-md">Done</button>
-                </div>
-            </div>
-
         </div>
-    </section>
-</main>
+        <div class="mt-8">
+            <table class="w-full border-collapse">
+            <thead>
+            <tr class="bg-blue-900 text-white">
+            <th class="py-2 px-4 border">
+                Items
+            </th>
+            <th class="py-2 px-4 border">
+                Quantity
+            </th>
+            <th class="py-2 px-4 border">
+                Note
+            </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="bg-white">
+            <td class="py-2 px-4 border">
+                Kemeja
+            </td>
+            <td class="py-2 px-4 border">
+                4
+            </td>
+            <td class="py-2 px-4 border">
+                -
+            </td>
+            </tr>
+            <tr class="bg-gray-100">
+            <td class="py-2 px-4 border">
+                Celana pendek
+            </td>
+            <td class="py-2 px-4 border">
+                3
+            </td>
+            <td class="py-2 px-4 border">
+                -
+            </td>
+            </tr>
+            <tr class="bg-white">
+            <td class="py-2 px-4 border">
+                Jaket
+            </td>
+            <td class="py-2 px-4 border">
+                2
+            </td>
+            <td class="py-2 px-4 border">
+                -
+            </td>
+            </tr>
+            <tr class="bg-gray-100">
+            <td class="py-2 px-4 border">
+                Almamater
+            </td>
+            <td class="py-2 px-4 border">
+                1
+            </td>
+            <td class="py-2 px-4 border">
+                Mudah Luntur
+            </td>
+            </tr>
+            <tr class="bg-white">
+            <td class="py-2 px-4 border">
+                Selimut
+            </td>
+            <td class="py-2 px-4 border">
+                1
+            </td>
+            <td class="py-2 px-4 border">
+                -
+            </td>
+            </tr>
+            </tbody>
+            </table>
+        </div>
+        <div class="mt-8 flex justify-center space-x-4">
+            <button class="bg-sky-700 text-white px-4 py-2 rounded-lg">
+            Add Item
+            </button>
+            <button class="bg-gray-500 text-white px-4 py-2 rounded-lg">
+            Edit Item
+            </button>
+            <button class="bg-sky-700 text-white px-4 py-2 rounded-lg">
+            Done
+            </button>
+        </div>
+        </section>
+    </main>
 @endsection

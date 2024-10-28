@@ -19,7 +19,7 @@ class FrontendController extends Controller
     public function order()
     {
         return view('student.order', [
-            'title' => 'Order Page',
+            'title' => 'Create an Order',
         ]);
     }
 
@@ -27,7 +27,7 @@ class FrontendController extends Controller
     public function complaint()
     {
         return view('student.complaint', [
-            'title' => 'Complaint Page',
+            'title' => 'Create Complaint',
         ]);
     }
 
@@ -43,7 +43,7 @@ class FrontendController extends Controller
     public function profile()
     {
         return view('student.profile', [
-            'title' => 'Profile Page',
+            'title' => 'Profile',
         ]);
     }
 
@@ -51,7 +51,7 @@ class FrontendController extends Controller
     public function track()
     {
         return view('student.track', [
-            'title' => 'Track Page',
+            'title' => 'Track',
         ]);
     }
 
@@ -59,7 +59,7 @@ class FrontendController extends Controller
     public function finance()
     {
         return view('student.finance', [
-            'title' => 'Finance Page',
+            'title' => 'Finance',
         ]);
     }
 
