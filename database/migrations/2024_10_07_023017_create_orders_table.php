@@ -18,7 +18,6 @@ return new class extends Migration
             $table->date('date');
             $table->foreignId('student_id')->constrained()->cascadeOnDelete();
             $table->foreignId('dormitory_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('item_id')->constrained()->cascadeOnDelete();
             $table->softDeletes();
             $table->timestamps();
         });

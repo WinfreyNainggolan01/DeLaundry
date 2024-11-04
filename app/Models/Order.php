@@ -16,8 +16,7 @@ class Order extends Model
         'ordx_id',
         'date_at',
         'student_id',
-        'dormitory_id',
-        'item_id',    
+        'dormitory_id', 
     ];
 
     public static function generateUniqueOrdxId(): string
@@ -55,10 +54,6 @@ class Order extends Model
         return $this->belongsTo(Dormitory::class);
     }
 
-    public function item(): BelongsTo
-    {
-        return $this->belongsTo(Item::class);
-    }
 }
 
 

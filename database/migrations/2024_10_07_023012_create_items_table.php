@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('name');
             $table->integer('quantity');
             $table->string('note');
+            $table->foreignId('student_id')->constrained()->cascadeOnDelete();
             $table->softDeletes();
             $table->timestamps();
         });
