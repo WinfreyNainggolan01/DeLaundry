@@ -6,11 +6,12 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Database\Eloquent\Relations\BelongsTo; 
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Laravel\Sanctum\HasApiTokens;
 
 class Student extends Authenticatable
 {
-    use Notifiable, SoftDeletes, HasFactory;
+    use Notifiable, SoftDeletes, HasFactory, HasApiTokens;
 
     protected $guard = 'student';  // pastikan ini sesuai
 
@@ -21,7 +22,9 @@ class Student extends Authenticatable
         'password',
         'dormitory_id',
         'gender',
+        'program_study',
         'phone_number',
+        'photo',
     ];
 
     protected $hidden = [

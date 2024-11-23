@@ -18,8 +18,10 @@ return new class extends Migration
             $table->string('username')->unique();
             $table->string('password');
             $table->enum('gender',['male', 'female']);
+            $table->string('program_study');
             $table->foreignId('dormitory_id')->constrained()->cascadeOnDelete();
             $table->string('phone_number');
+            $table->string('photo')->nullable();
             $table->softDeletes();
             $table->rememberToken();
             $table->timestamps();

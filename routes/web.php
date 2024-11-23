@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ApiController;
 use App\Http\Middleware\AdminMiddleware;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LoginController;
@@ -8,13 +9,18 @@ use App\Http\Middleware\StudentMiddleware;
 use App\Http\Controllers\FrontendController;
 
 // User
+Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
+Route::post('/logout', [LoginController::class, 'logout']);
+Route::get('/homepage', [FrontendController::class, 'homepage'])->name('homepage');
+
 
 // --- GET ---
-Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
-Route::post('/login', [LoginController::class, 'authenticate']);
-Route::post('/logout', [LoginController::class, 'logout']);
-Route::get('/homepage', [FrontendController::class, 'homepage'])->middleware(StudentMiddleware::class)->name('homepage');
+// Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
+// Route::post('/login', [LoginController::class, 'authenticate']);
+// Route::post('/logout', [LoginController::class, 'logout']);
+// Route::get('/homepage', [FrontendController::class, 'homepage'])->middleware(StudentMiddleware::class)->name('homepage');
 // Route::get('/order', [FrontendController::class, 'order'])->middleware(StudentMiddleware::class)->name('order');
+
 Route::get('/profile', [FrontendController::class, 'profile'])->middleware(StudentMiddleware::class)->name('profile');
 Route::get('/complaint', [FrontendController::class, 'complaint'])->middleware(StudentMiddleware::class)->name('complaint');
 Route::get('/notification', [FrontendController::class, 'notification'])->middleware(StudentMiddleware::class)->name('notification');
@@ -26,13 +32,11 @@ Route::post('/complaint', [FrontendController::class, 'createComplaint'])->middl
 
 
 Route::get('/order', [FrontendController::class, 'order'])->middleware(StudentMiddleware::class)->name('order');
-Route::post('/order', [FrontendController::class, 'addItem'])->middleware(StudentMiddleware::class)->name('add.item');
+// Route::post('/order', [FrontendController::class, 'addItem'])->middleware(StudentMiddleware::class)->name('add.item');
 Route::post('/order/edit/{id}', [FrontendController::class, 'editItem'])->middleware(StudentMiddleware::class)->name('edit.item');
 Route::post('/order/done', [FrontendController::class, 'done'])->middleware(StudentMiddleware::class)->name('order.done');
 Route::get('/order/items', [FrontendController::class, 'showOrderItems'])->middleware(StudentMiddleware::class)->name('show.order.items');
 Route::post('/order/delete/{id}', [FrontendController::class, 'deleteItem'])->middleware(StudentMiddleware::class)->name('delete.item');
-
-
 
 
 
@@ -41,3 +45,18 @@ Route::get('/admin-dashboard', [AdminController::class, 'admin_dashboard'])->mid
 Route::get('/admin-user', [AdminController::class, 'admin_user'])->middleware(AdminMiddleware::class)->name('admin_user')->controllerMiddleware('admin');
 Route::get('/admin-order', [AdminController::class, 'admin_order'])->middleware(AdminMiddleware::class)->name('admin_order')->controllerMiddleware('admin');
 Route::get('/admin-complaint', [AdminController::class, 'admin_complaint'])->middleware(AdminMiddleware::class)->name('admin_complaint')->controllerMiddleware('admin');
+
+
+
+// API HAPI js
+Route::get('/data', [ApiController::class, 'showData']);
+
+Route::get('/admin-user', [ApiController::class, 'adminUser'])->name('admin_user');
+
+// Route::get('/admin-user', [ApiController::class, 'allStudent'])->name('admin_user');
+// return view admin user
+
+Route::get('/admin-user', function () {
+    // return view with name admin user
+    return view('admin.user')->name('admin_user');
+});
