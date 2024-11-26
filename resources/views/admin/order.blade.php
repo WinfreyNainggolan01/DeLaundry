@@ -60,80 +60,187 @@
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">1.6</td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">13/08/2024</td>
                                         <td class="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
-                                            <div class="relative z-10 ">
-                                                <a href="#" class="btn border-gray-700 text-gray-900 h-8 w-auto relative z-20">
-                                                    Submit
-                                                    <img src="{{ asset('img/caret-down-fill.svg') }}" alt="" class="absolute right-1 top-1/3 transform -translate-y-1/2 z-10 h-3 w-auto">
-                                                </a>
+                                            <div class="relative z-10">
+                                                <select class="btn border-gray-300 text-gray-900 h-10 rounded-md min-w-[180px] pl-3 pr-8 focus:outline-none focus:ring-2 focus:ring-blue-500 statusSelect" id="statusSelect-1">
+                                                    <option value="submit">Order Received</option>
+                                                    <option value="in_progress">Pick Up</option>
+                                                    <option value="completed">On Process</option>
+                                                    <option value="cancelled">Delivery</option>
+                                                    <option value="done">Done</option>
+                                                </select>
                                             </div>
-                                        </td>
+                                        </td>                                                                              
                                         <td class="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
-                                            <a class="text-primary hover:text-sky-700" href="#">
-                                                <img src="{{ asset('img/pencil-square.svg') }}" alt="">
+                                            <a class="text-primary hover:text-sky-700" href="#" onclick="openModal('editModal')">
+                                                <img src="{{ asset('img/pencil-square.svg') }}" alt="Edit">
                                             </a>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
-                                            <a class="text-primary hover:text-sky-700" href="#">
-                                                <img src="{{ asset('img/eye.svg') }}" alt="">
+                                            <a class="text-primary hover:text-sky-700" href="#" onclick="openModal('detailModal')">
+                                                <img src="{{ asset('img/eye.svg') }}" alt="Lihat Detail">
                                             </a>
                                         </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">2</td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"> - </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Yohana Siahaan</td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">12</td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900"> - </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">12/08/2024</td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
-                                            <div class="relative z-10 ">
-                                                <a href="#" class="btn border-gray-700 text-gray-900 h-8 w-auto relative z-20">
-                                                    Submit
-                                                    <img src="{{ asset('img/caret-down-fill.svg') }}" alt="" class="absolute right-1 top-1/3 transform -translate-y-1/2 z-10 h-3 w-auto">
-                                                </a>
-                                            </div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
-                                            <a class="text-primary hover:text-sky-700" href="#">
-                                                <img src="{{ asset('img/pencil-square.svg') }}" alt="">
-                                            </a>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
-                                            <a class="text-primary hover:text-sky-700" href="#">
-                                                <img src="{{ asset('img/eye.svg') }}" alt="">
-                                            </a>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">3</td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">DLR4324643</td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Ira Silalahi</td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">8</td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">1.4</td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">14/08/2024</td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
-                                            <div class="relative z-10 ">
-                                                <a href="#" class="btn border-gray-700 text-gray-900 h-8 w-auto relative z-20">
-                                                    Submit
-                                                    <img src="{{ asset('img/caret-down-fill.svg') }}" alt="" class="absolute right-1 top-1/3 transform -translate-y-1/2 z-10 h-3 w-auto">
-                                                </a>
-                                            </div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
-                                            <a class="text-primary hover:text-sky-700" href="#">
-                                                <img src="{{ asset('img/pencil-square.svg') }}" alt="">
-                                            </a>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
-                                            <a class="text-primary hover:text-sky-700" href="#">
-                                                <img src="{{ asset('img/eye.svg') }}" alt="">
-                                            </a>
-                                        </td>
-                                    </tr>
                                 </tbody>
                             </table>
+                            <script>
+                                const statusSelect = document.getElementById('statusSelect');
+                                const statusLabel = document.getElementById('statusLabel');
+                            
+                                statusSelect.addEventListener('change', function () {
+                                    statusLabel.textContent = statusSelect.options[statusSelect.selectedIndex].text;
+                                });
+                            </script>
+
+                            <!-- Modal untuk Detail -->
+                            <div id="detailModal" class="fixed inset-0 z-50 hidden bg-gray-500 bg-opacity-75 flex justify-center items-center">
+                                <div class="bg-white p-6 rounded-lg shadow-lg max-w-4xl w-full">
+                                    <div class="modal-header flex justify-between items-center mb-4">
+                                        <h5 class="text-xl font-bold text-gray-900">Detail Informasi</h5>
+                                        <button onclick="closeModal('detailModal')" class="text-gray-600 hover:text-gray-900">
+                                            <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                                            </svg>
+                                        </button>
+                                    </div>                                    
+                                    <div class="modal-body mb-4">
+                                        <div class="flex flex-col gap-3 mb-3">
+                                            <div class="flex items-center gap-4">
+                                                <label for="orderNumber" class="text-base font-medium text-black w-32">Order Number:</label>
+                                                <input type="text" id="orderNumber" value="DLR234324213" readonly
+                                                       class="block w-96 px-3 py-2 border border-gray-300 rounded-md bg-gray-50 text-gray-800"/>
+                                            </div>
+                                            <div class="flex items-center gap-4">
+                                                <label for="customerName" class="text-base font-medium text-black w-32">Customer:</label>
+                                                <input type="text" id="customerName" value="Jake Sembung" readonly
+                                                       class="block w-96 px-3 py-2 border border-gray-300 rounded-md bg-gray-50 text-gray-800"/>
+                                            </div>
+                                        </div>
+                                        <!-- Tabel untuk Menampilkan Item Laundry -->
+                                        <div class="mb-3">
+                                            <label for="itemDetails" class="block text-base font-medium text-black">Items Detail</label>
+                                        </div>
+                                        <table class="min-w-lg table-auto border border-gray-300 w-[80%] mx-auto">
+                                            <thead class="bg-blue-900 text-white">
+                                                <tr>
+                                                    <th class="px-4 py-2 text-left text-sm font-medium border border-gray-300">Items</th>
+                                                    <th class="px-4 py-2 text-left text-sm font-medium border border-gray-300">Quantity</th>
+                                                    <th class="px-4 py-2 text-left text-sm font-medium border border-gray-300">Note</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr class="odd:bg-gray-100 even:bg-white">
+                                                    <td class="px-4 py-2 border border-gray-300">Kemeja</td>
+                                                    <td class="px-4 py-2 border border-gray-300">4</td>
+                                                    <td class="px-4 py-2 border border-gray-300">-</td>
+                                                </tr>
+                                                <tr class="odd:bg-gray-100 even:bg-white">
+                                                    <td class="px-4 py-2 border border-gray-300">Celana pendek</td>
+                                                    <td class="px-4 py-2 border border-gray-300">3</td>
+                                                    <td class="px-4 py-2 border border-gray-300">-</td>
+                                                </tr>
+                                                <tr class="odd:bg-gray-100 even:bg-white">
+                                                    <td class="px-4 py-2 border border-gray-300">Jaket</td>
+                                                    <td class="px-4 py-2 border border-gray-300">2</td>
+                                                    <td class="px-4 py-2 border border-gray-300">Mudah Luntur</td>
+                                                </tr>
+                                                <tr class="odd:bg-gray-100 even:bg-white">
+                                                    <td class="px-4 py-2 border border-gray-300">Selimut</td>
+                                                    <td class="px-4 py-2 border border-gray-300">1</td>
+                                                    <td class="px-4 py-2 border border-gray-300">-</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>                                        
+                                    </div>
+                                    <div class="modal-footer flex justify-end">
+                                        <button onclick="closeModal('detailModal')" class="bg-gray-300  text-gray-700 px-4 py-2 rounded-md hover:bg-gray-400 mr-12">Back</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <script>
+                                function openModal(modalId) {
+                                    document.getElementById(modalId).classList.remove('hidden');
+                                    document.body.style.overflow = 'hidden';
+                                }
+                                function closeModal(modalId) {
+                                    document.getElementById(modalId).classList.add('hidden');
+                                    document.body.style.overflow = 'auto';
+                                }
+                                window.addEventListener('click', function(event) {
+                                    var modal = document.getElementById('detailModal');
+                                    if (event.target === modal) {
+                                        closeModal('detailModal');
+                                    }
+                                });
+                            </script>
+                            
+                            <!-- Modal untuk Edit Order -->
+                            <div id="editModal" class="fixed inset-0 z-50 hidden bg-gray-500 bg-opacity-75 flex justify-center items-center">
+                                <div class="bg-white p-6 rounded-lg shadow-lg max-w-4xl w-full">
+                                    <div class="modal-header flex flex-col mb-4">
+                                        <div class="flex justify-between items-center">
+                                            <h5 class="text-xl font-bold text-gray-900">Edit The Order Here</h5>
+                                            <button onclick="closeModal('editModal')" class="text-gray-600 hover:text-gray-900">
+                                                <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                        <p class="text-gray-600 text-[16px] mt-2 mt-2">Make changes to this profile here.Click save when<br>you're done.</p>
+                                    </div>
+
+                                    <div class="modal-body mb-4">
+                                        <!-- Form untuk mengedit data order -->
+                                        <form>
+                                            <div class="mb-3 flex items-center">
+                                                <label for="orderNumber" class="block text-sm font-medium text-gray-700 mr-0 w-1/3">Order Number</label>
+                                                <input type="text" class="form-control mt-1 block px-3 py-1 border border-gray-300 rounded-md w-2/3" id="orderNumber" value="">
+                                            </div>
+                                            <div class="mb-3 flex items-center">
+                                                <label for="weight" class="block text-sm font-medium text-gray-700 mr-0 w-1/3">Weight</label>
+                                                <input type="text" class="form-control mt-1 block px-3 py-1 border border-gray-300 rounded-md w-2/3" id="weight" value="">
+                                            </div>
+                                            <div class="mb-3 flex items-center">
+                                                <label for="dormitory" class="block text-sm font-medium text-gray-700 mr-0 w-1/3">Dormitory</label>
+                                                <input type="text" class="form-control mt-1 block px-3 py-1 border border-gray-300 rounded-md w-2/3" id="dormitory" value="">
+                                            </div>
+                                            <div class="mb-3 flex items-center">
+                                                <label for="gender" class="block text-sm font-medium text-gray-700 mr-0 w-1/3">Gender</label>
+                                                <input type="text" class="form-control mt-1 block px-3 py-1 border border-gray-300 rounded-md w-2/3" id="gender" value="">
+                                            </div>
+                                            <div class="mb-3 flex items-center">
+                                                <label for="phoneNumber" class="block text-sm font-medium text-gray-700 mr-0 w-1/3">Phone Number</label>
+                                                <input type="text" class="form-control mt-1 block px-3 py-1 border border-gray-300 rounded-md w-2/3" id="phoneNumber" value="">
+                                            </div>
+                                            <div class="mb-3 flex items-center">
+                                                <label for="totalPrice" class="block text-sm font-medium text-gray-700 mr-0 w-1/3">Total Price</label>
+                                                <input type="text" class="form-control mt-1 block px-3 py-1 border border-gray-300 rounded-md w-2/3" id="totalPrice" value="">
+                                            </div>
+                                        </form>                                                                                                                                                                                                                                                                                                                                
+                                    </div>
+
+                                    <div class="modal-footer flex justify-end">
+                                        <button onclick="closeModal('editModal')" class="bg-gray-300  text-gray-700 px-4 py-2 rounded-md hover:bg-gray-400 mr-12">Cancel</button>
+                                        <button type="submit" class="bg-[#28397e] text-white px-4 py-2 rounded-md hover:bg-[#1e2d63]">Save Changes</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <script>
+                                function openModal(modalId) {
+                                    document.getElementById(modalId).classList.remove('hidden');
+                                    document.body.style.overflow = 'hidden';
+                                }
+                                function closeModal(modalId) {
+                                    document.getElementById(modalId).classList.add('hidden');
+                                    document.body.style.overflow = 'auto';
+                                }
+                                window.addEventListener('click', function(event) {
+                                    var modal = document.getElementById('editModal');
+                                    if (event.target === modal) {
+                                        closeModal('editModal');
+                                    }
+                                });
+                            </script>
                         </div>
                     </div>
                 </div>
