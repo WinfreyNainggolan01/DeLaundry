@@ -18,19 +18,19 @@ Route::get('/order', function () {
     return view('order');
 });
 Route::get('/profile', function () {
-    return view('profile');
+    return view('student.profile');
 });
 Route::get('/order', function () {
-    return view('order');
+    return view('student.order');
 });
 Route::get('/complaint', function () {
-    return view('complaint');
+    return view('student.complaint');
 });
 Route::get('/finance', function () {
-    return view('finance');
+    return view('student.finance');
 });
 Route::get('/tracking', function () {
-    return view('tracking');
+    return view('student.tracking');
 });
 Route::get('/detail-finance', function () {
     return view('student.detailfinance');
@@ -66,6 +66,10 @@ Route::get('/admin-user', function () {
 Route::get('/admin-complaint', function () {
     return view('admin.complaint');
 });
+Route::get('/feedback', function () {
+    return view('student.feedback');
+});
+
 
 
 
