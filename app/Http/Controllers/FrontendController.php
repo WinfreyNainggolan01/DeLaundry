@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Complaint;
 use App\Models\Item;
 use App\Models\Order;
 use App\Models\Student;
+use App\Models\Complaint;
+use App\Models\Dormitory;
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Model;
 
 class FrontendController extends Controller
 {
@@ -23,6 +25,7 @@ class FrontendController extends Controller
     {
         $title = 'Create an Order';
         $studentId = auth()->guard('student')->user()->id;
+        
         $items = Item::whereDoesntHave('itemOrders.order', function ($query) use ($studentId) {
             $query->where('student_id', $studentId);
         })->get();
@@ -82,27 +85,41 @@ class FrontendController extends Controller
     }
 
 
-    public function done()
-    {
-        $student = auth()->guard('student')->user();
+    public function orderDone()
+{
+    $student = auth()->guard('student')->user();
 
-        $order = Order::create([
-            'ordx_id' => '-',
-            'date' => now()->format('Y-m-d'),
-            'student_id' => $student->id,
-            'dormitory_id' => $student->dormitory_id,
-        ]);
+    // Membuat order baru
+    $order = Order::create([
+        'ordx_id' => 'DLR' . mt_rand(100000000, 999999999),
+        'date_at' => now()->format('Y-m-d'),
+        'student_id' => $student->id,
+        'dormitory_id' => $student->dormitory_id,
+    ]);
 
-        $items = Item::where('student_id', $student->id)->get();
-        foreach ($items as $item) {
-            $order->itemOrders()->create([
-                'item_id' => $item->id,
-                'quantity' => $item->quantity,
-            ]);
-        }
+    // Ambil semua item milik student dan buat relasi order_item
+    $items = Item::where('student_id', $student->id)->get();
+    $orderedItems = $items->map(function ($item) use ($order) {
+        return [
+            'order_id' => $order->id,
+            'item_id' => $item->id,
+            'quantity' => $item->quantity,
+            'note' => $item->note,
+        ];
+    })->toArray();
 
-        return redirect()->route('order.summary')->with('success', 'Order completed');
-    }
+    $order->itemOrders()->createMany($orderedItems);
+
+    // Hapus item dari tabel sementara
+    Item::where('student_id', $student->id)->delete();
+
+    // Redirect ke halaman ringkasan order
+    return view('student.order-summary', [
+        'title' => 'Order Summary',
+        'order' => $order,
+        'items' => $items,
+    ]);
+}
 
     public function complaint()
     {
@@ -140,9 +157,33 @@ class FrontendController extends Controller
     // profile function
     public function profile()
     {
+        $student = auth()->guard('student')->user();
+        $dormitories = Dormitory::all();
+
         return view('student.profile', [
             'title' => 'Profile',
+            'dormitories' => $dormitories,
         ]);
+    }
+
+
+    public function editProfile(Request $request)
+    {
+        $request->validate([
+            'dormitory_id' => 'required|exists:dormitories,id',
+            'phone_number' => 'required|string|max:15',
+            'profile_photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
+        $student = auth()->guard('student')->user();
+        $student = Student::findOrFail($student->id);
+        $student->update([
+            'dormitory_id' => $request->input('dormitory_id'),
+            'phone_number' => $request->input('phone_number'),
+            'profile_photo' => $request->input('profile_photo'),
+        ]);
+
+        return redirect()->back()->with('success', 'Profile updated successfully');
     }
 
     // track function

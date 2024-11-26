@@ -17,7 +17,7 @@
             <img src="{{ asset('img/user.jpg') }}" class="h-20 w-20 rounded-full" alt="Profile Image">
             <div class="ml-4">
                 <p class="text-lg font-medium">{{ Auth::guard('student')->user()->name}}</p>
-                <p class="text-gray-500">iss22060@students.del.ac.id</p>
+                <p class="text-gray-500">{{ Auth::guard('student')->user()->generateEmail(Auth::guard('student')->user()->nim) }}</p>
             </div>
         </div>
     </div>
@@ -58,12 +58,47 @@
                 </div>
             </div>
             <div class="mt-6 flex justify-end">
-                <button class="bg-sky-800 text-white px-4 py-2 rounded-md hover:bg-blue-700">Edit Profile</button>
+                <button onclick="openEditModal()" class="bg-sky-800 text-white px-4 py-2 rounded-md hover:bg-blue-700">Edit Profile</button>
             </div>
         </div>
     </div>
-    
 </main>
 
+<!-- Modal Edit Profile -->
+<div id="editProfileModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
+    <div class="bg-white p-8 rounded-lg w-1/3">
+        <h2 class="text-xl font-bold mb-4">Edit Profile</h2>
+        <form method="POST" action="{{ route('edit.profile') }}" enctype="multipart/form-data">
+            @csrf
+            <div class="mb-4">
+                <label for="dormitory_id" class="block text-gray-700 font-bold mb-2">Dormitory</label>
+                <select id="dormitory_id" name="dormitory_id" class="w-full px-3 py-2 border rounded">
+                    @foreach($dormitories as $dormitory)
+                        <option value="{{ $dormitory->id }}" {{ $dormitory->id == Auth::guard('student')->user()->dormitory_id ? 'selected' : '' }}>
+                            {{ $dormitory->name }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="mb-4">
+                <label for="phone_number" class="block text-gray-700 font-bold mb-2">Mobile Phone</label>
+                <input type="text" id="phone_number" name="phone_number" value="{{ Auth::guard('student')->user()->phone_number }}" class="w-full px-3 py-2 border rounded">
+            </div>
+            <div class="mt-6 flex justify-end space-x-4">
+                <button type="button" onclick="closeEditModal()" class="px-4 py-2 rounded-lg bg-gray-500 text-white">Cancel</button>
+                <button type="submit" class="px-4 py-2 rounded-lg bg-sky-700 text-white">Save</button>
+            </div>
+        </form>
+    </div>
+</div>
 
+<script>
+    function openEditModal() {
+        document.getElementById('editProfileModal').classList.remove('hidden');
+    }
+
+    function closeEditModal() {
+        document.getElementById('editProfileModal').classList.add('hidden');
+    }
+</script>
 @endsection

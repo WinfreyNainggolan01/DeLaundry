@@ -21,7 +21,9 @@ class Student extends Authenticatable
         'password',
         'dormitory_id',
         'gender',
+        'program_study',
         'phone_number',
+        'photo',
     ];
 
     protected $hidden = [
@@ -32,6 +34,21 @@ class Student extends Authenticatable
     protected $casts = [
         'password' => 'hashed',
     ];
+
+    public static function generateEmail(string $nim): string
+    {
+        if (substr($nim, 0, 2) == '12S' || substr($nim, 0, 2) == '12s') {
+            $email = 'iss';
+        } elseif (substr($nim, 0, 2) == '13S') {
+            $email = 'ifs';
+        } elseif (substr($nim, 0, 2) == '14S') {
+            $email = 'els';
+        } else {
+            $email = 'unk';
+        }
+        $email .= substr($nim, 2, 5) . '@students.del.ac.id';
+        return $email;
+    }
 
     // Tambahkan relasi dormitory
     public function dormitory(): BelongsTo // Ubah ini
