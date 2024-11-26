@@ -32,6 +32,9 @@ Route::get('/finance', function () {
 Route::get('/tracking', function () {
     return view('tracking');
 });
+Route::get('/detail-finance', function () {
+    return view('student.detailfinance');
+});
 
 
 // Admin Route
