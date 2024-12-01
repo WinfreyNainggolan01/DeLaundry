@@ -5,25 +5,33 @@
     <meta charset="utf-8">
     <title>Beranda</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <!--=============== FAVICON ===============-->
+    <link
+      rel="shortcut icon"
+      href="{{ asset('img/Logo-DeLaundry.png') }}"
+      type="image/x-icon"
+    />
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     @vite('resources/css/app.css')
 </head>
 
-<body class="h-full">
 
+<body class="h-full">
 <div class="min-h-full">
     <!-- Navbar Section -->
     <nav class="bg-white" x-data="{ isOpen: false }">
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="flex h-16 items-center justify-between">
           <div class="flex items-center">
-            <div class="flex-shrink-0">
-              <img class="h-12 w-12" src="{{ asset('img/Logo-DeLaundry.png') }}" alt="DeLaundry Logo">
-            </div>
-            <h1 class="text-dark-blue text-xl font-bold ml-3">DeLaundry</h1>
+            <a href="" class="flex items-center">
+              <div class="flex-shrink-0">
+                <img class="h-12 w-12" src="{{ asset('img/Logo-DeLaundry.png') }}" alt="DeLaundry Logo">
+              </div>
+              <h1 class="text-dark-blue text-xl font-bold ml-3">DeLaundry</h1>
+            </a>
             <div class="hidden md:block">
-              <div class="ml-10 flex items-baseline space-x-4">
+              <div class="flex items-baseline space-x-4 ml-10">
                 <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
                 <a href="/" class="{{ request()->is('/') ? "bg-gray-200 text-black" : "text-gray-300 hover:bg-gray-700 hover:text-white"}} rounded-md px-3 py-2 text-sm font-medium" aria-current="page">Home</a>
                 <a href="#" class="rounded-md px-3 py-2 text-sm font-medium text-black hover:text-sky-500">Order</a>
@@ -34,6 +42,7 @@
           </div>
           <div class="hidden md:block">
             <div class="ml-4 flex items-center md:ml-6">
+              <!-- Notification -->
               <button type="button" class="relative rounded-full bg-gray-800 p-1 text-gray-400  focus:outline-none focus:ring-2 hover:text-sky-500 focus:ring-sky-300 focus:ring-offset-2 focus:ring-offset-gray-800">
                 <span class="absolute -inset-1.5"></span>
                 <span class="sr-only">View notifications</span>
@@ -42,34 +51,37 @@
                 </svg>
               </button>
   
-              <!-- Profile dropdown -->
+              <!-- Profile -->
               <div class="relative ml-3">
                 <div>
                   <button type="button" @click="isOpen = !isOpen" 
-                  class="relative flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2
-                  hover:text-sky-500 focus:ring-sky-300 focus:ring-offset-2 focus:ring-offset-gray-800 " id="user-menu-button" aria-expanded="false" aria-haspopup="true">
+                  class="relative flex max-w-xs items-center rounded-full text-gray-400 bg-gray-800 text-sm focus:outline-none focus:ring-2
+                  hover:text-sky-500  focus:ring-sky-300 focus:ring-offset-2 focus:ring-offset-gray-800 " id="user-menu-button" aria-expanded="false" aria-haspopup="true">
                     <span class="absolute -inset-1.5"></span>
                     <span class="sr-only">Open user menu</span>
-                    <svg class="w-8 h-8 text-gray-800 dark:text-gray-400 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                        <path stroke="currentColor" stroke-width="2" d="M7 17v1a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1a3 3 0 0 0-3-3h-4a3 3 0 0 0-3 3Zm8-9a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
-                      </svg>
-                      
-                      
+
+                    <svg class="w-8 h-8 text-gray-800 dark:text-gray-400" xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-person" viewBox="-2 -2 20 21">
+                      <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z"/>
+                    </svg>
                   </button>
                 </div>
 
-                <div x-show="isOpen"
-                x-transition:enter="transition ease-out duration-100 transform"
-                x-transition:enter-start="opacity-0 scale-95"
-                x-transition:enter-end="opacity-100 scale-100"
-                x-transition:leave="transition ease-in duration-75 transform"
-                x-transition:leave-start="opacity-100 scale-100"
-                x-transition:leave-end="opacity-0 scale-95"
+                <div 
+                  x-show="isOpen"
+                  x-transition:enter="transition ease-out duration-100 transform"
+                  x-transition:enter-start="opacity-0 scale-95"
+                  x-transition:enter-end="opacity-100 scale-100"
+                  x-transition:leave="transition ease-in duration-75 transform"
+                  x-transition:leave-start="opacity-100 scale-100"
+                  x-transition:leave-end="opacity-0 scale-95"
                 class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
                   <!-- Active: "bg-gray-100", Not Active: "" -->
                   <a href="/profile" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-0">Your Profile</a>
-                  <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-1">Settings</a>
-                  <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-2">Sign out</a>
+                  <form action="/logout" method="POST">
+                    @csrf
+                    <button type="submit" class="block w-full text-left px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-1">Sign Out
+                    </button>
+                  </form>
                 </div>
               </div>
             </div>
@@ -122,19 +134,28 @@
             </button>
           </div>
           <div class="mt-3 space-y-1 px-2">
-            <a href="/profile" class="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white">Your Profile</a>
-            <a href="#" class="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white">Settings</a>
-            <a href="#" class="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white">Sign out</a>
+            <a href="#" class="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white">Your Profile</a>
+            <a href="#" method="" class="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white">Sign out</a>
           </div>
         </div>
       </div>
     </nav>
   
+    <!-- Header -->
+    @auth
     <header class="bg-dark-blue shadow">
       <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-        <h1 class="text-3xl font-bold tracking-tight text-gray-100">DeLaundry</h1>
+        <h1 class="text-2xl font-bold tracking-tight text-gray-100">Welcome, {{ auth()->student()->name}}</h1>
       </div>
     </header>
+    @else
+    <header class="bg-dark-blue shadow">
+      <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+        <h1 class="text-2xl font-bold tracking-tight text-gray-100">DeLaundry</h1>
+      </div>
+    </header>
+    @endauth
+      
 
     <!-- Main content -->
     <main>
@@ -146,19 +167,13 @@
 
         <!-- Right Text Section -->
         <div class="flex flex-col justify-center">
-            <h2 class="text-2xl font-bold mb-4 font-title-content">Make Your Request</h2>
             <p class="text-lg mb-6">Welcome to DeLaundry, a professional laundry service designed specifically to meet the needs of IT Del students. We understand how busy college schedules and campus activities can be, and we are committed to providing efficient and reliable laundry solutions.</p>
             <p class="text-lg mb-8">With our convenient laundry service, we ensure your clothes are always clean and tidy. Focus your energy on your studies and campus activities, while we handle your laundry needs with high-quality standards.</p>
             
             <!-- Buttons -->
-            <div class="flex space-x-4">
-                <button class="bg-blue-500 text-white px-6 py-2 rounded-lg shadow hover:bg-blue-600">Add Request</button>
-                <button class="bg-gray-300 text-gray-800 px-6 py-2 rounded-lg shadow hover:bg-gray-400">Complaint</button>
-            </div>
+            
         </div>
     </div>
-<<<<<<< Updated upstream
-=======
 
     
     <section class="bg-white">
@@ -219,10 +234,29 @@
           </div>  
       </div>
     </section>
->>>>>>> Stashed changes
     </main>
   </div>
   
 </body>
+
+<!-- Footer -->
+<footer class="bg-gray-900
+  shadow sm:flex sm:items-center sm:justify-between p-4 sm:p-6 xl:p-8 antialiased">
+  <p class="mb-4 text-sm text-center text-gray-500 dark:text-gray-200 sm:mb-0">
+      &copy; 2024-2029 <a href="https://flowbite.com/" class="hover:underline" target="_blank">DeLaundry.com</a>. All rights reserved.
+  </p>
+  <div class="flex justify-center items-center space-x-1">
+    {{-- Facebook --}}
+    <a href="#" data-tooltip-target="tooltip-facebook" class="inline-flex justify-center p-2 text-gray-500 rounded-lg cursor-pointer dark:text-gray-200 dark:hover:text-white hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-600">
+        <img src="{{ asset('img/facebook.svg') }}" alt="facebook">
+        <span class="sr-only">Facebook</span>
+    </a>
+    {{-- Instagram --}}
+    <a href="#" data-tooltip-target="tooltip-twitter" class="inline-flex justify-center p-2 text-gray-500 rounded-lg cursor-pointer dark:text-gray-200 dark:hover:text-white hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-600">
+        <img src="{{ asset('img/instagram.svg') }}" alt="instagram">
+        <span class="sr-only">Instagram</span>
+    </a>
+</div>
+</footer>
 
 </html>

@@ -1,20 +1,13 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ApiController;
+use App\Http\Middleware\AdminMiddleware;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\LoginController;
+use App\Http\Middleware\StudentMiddleware;
+use App\Http\Controllers\FrontendController;
 
-<<<<<<< Updated upstream
-Route::get('/', function () {
-    return view('homepage');
-});
-
-Route::get('/login', function () {
-    return view('login');
-});
-
-Route::get('/profile', function () {
-    return view('login');
-});
-=======
 // User
 Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
 Route::post('/logout', [LoginController::class, 'logout']);
@@ -76,17 +69,8 @@ Route::get('/finance/detail/{id}', [FrontendController::class, 'financeDetail'])
 
 // --- POST ---
 Route::post('/complaint', [FrontendController::class, 'createComplaint'])->middleware(StudentMiddleware::class)->name('complaint.create');
->>>>>>> Stashed changes
 
-Route::get('/order', function () {
-    return view('order');
-});
 
-<<<<<<< Updated upstream
-Route::get('/profile', function () {
-    return view('profile');
-});
-=======
 
 
 // profile
@@ -107,4 +91,3 @@ Route::post('/admin-order/update/{orderId}', [AdminController::class, 'admin_ord
 
 Route::get('/admin-complaint', [AdminController::class, 'admin_complaint'])->middleware(AdminMiddleware::class)->name('admin_complaint')->controllerMiddleware('admin');
 
->>>>>>> Stashed changes
