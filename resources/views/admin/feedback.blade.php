@@ -27,7 +27,7 @@
         <!-- Form Feedback -->
         <div class="mb-4">
             <label for="feedback" class="block text-lg font-medium text-gray-700 mb-2">Tanggapan</label>
-            <textarea id="feedback" class="w-full border rounded-lg p-4 focus:outline-none focus:ring focus:border-blue-300" rows="5" placeholder="Write your feedback here..."></textarea>
+            <textarea id="feedback" class="w-full border rounded-lg p-4 focus:outline-none focus:ring focus:border-blue-300" rows="5" placeholder="Berikan tanggapan anda disini..."></textarea>
         </div>
 
         <!-- Footer Modal -->

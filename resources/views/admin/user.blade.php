@@ -16,7 +16,7 @@
                     </div>
                     <div class="text-right">
                         <h3 class="mt-1 text-2xl font-bold mb-5 text-gray-900">{{ $total_user }}</h3>
-                        <p class="mb-1 truncate text-gray-900">Total Users</p>
+                        <p class="mb-1 truncate text-gray-900">Total Pengguna</p>
                     </div>
                 </div>
             </div>
@@ -28,7 +28,7 @@
         <div class="card">
             <div class="card-header">
                 <div class="flex justify-between items-center">
-                    <h4 class="card-title">Users</h4>
+                    <h4 class="card-title">Pengguna</h4>
                 </div>
             </div>
             <div class="p-6 py-12">
@@ -36,15 +36,15 @@
                     <div class="min-w-full inline-block align-middle">
                         <div class="overflow-hidden">
                             <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-                                <caption class="py-2 text-left text-sm text-gray-600 dark:text-gray-500">List of users</caption>
+                                <caption class="py-2 text-left text-sm text-gray-600 dark:text-gray-500">Daftar Pengguna</caption>
                                 <thead>
                                     <tr>
                                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">No</th>
                                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">NIM</th>
-                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Name</th>
-                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Dormitory</th>
-                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Gender</th>
-                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Phone Number</th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Nama</th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Asrama</th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Jenis kelamin</th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Nomor Telepon</th>
                                         <th scope="col" class="px-6 py-3 text-end text-xs font-medium text-gray-500 uppercase"></th>
                                         <th scope="col" class="px-6 py-3 text-end text-xs font-medium text-gray-500 uppercase"></th>
 

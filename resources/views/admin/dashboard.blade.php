@@ -46,7 +46,7 @@
                     </div>
                     <div class="text-right"> 
                         <h3 class=" mt-1 text-2xl font-bold mb-5 text-gray-900">{{ $total_complaint }}</h3>
-                        <p class=" mb-1 truncate text-gray-900">Total Komplain</p>
+                        <p class=" mb-1 truncate text-gray-900">Total Keluhan</p>
                     </div>
                 </div>
             </div>

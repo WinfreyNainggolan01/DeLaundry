@@ -31,7 +31,7 @@
                 <li class="menu-item">
                     <a href="{{ route('admin_user') }}" :active="request()->is('admin-user')" class="menu-link">
                         <img src="{{ asset('img/people.svg') }}" alt="user">
-                        <h1 class="text-sm ml-3">Users</h1>
+                        <h1 class="text-sm ml-3">Pengguna</h1>
                     </a>
                 </li>
 
