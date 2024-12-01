@@ -5,59 +5,108 @@
 @endsection
 
 @section('content')
-    <main>
-    <section class="profile mx-auto max-w-5xl p-4">
-        <h2 class="text-lg font-bold text-left mb-2">Welcome, Jaka</h2>
-        <p class="text-left text-gray-500 text-sm mb-2">Tue, 07 June 2022</p>
+<main class="pb-6">
+    <section class="profile mx-auto max-w-5xl px-6 py-4">
+        <h2 class="text-lg font-bold text-left mb-2">Selamat Datang, {{ Auth::guard('student')->user()->name }}</h2>
+        <p class="text-left text-gray-500 text-sm mb-2">{{ now()->format('D, d F Y') }}</p>
         <hr class="my-4 border-gray-300">
     </section>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-    <!-- User Information -->
-        <div class="border border-gray-200 p-6 rounded-lg">
-            <div class="flex items-center mb-4">
-                <img src="{{ asset('img/user.jpg') }}" class="h-20 w-20 rounded-full" alt="Profile Image">
-                <div class="ml-4">
-                    <p class="text-lg font-medium">Jaka Sembung</p>
-                    <p class="text-gray-500">iss22060@students.del.ac.id</p>
-                </div>
+    <div class="max-w-5xl mx-auto px-6">
+        <div class="flex items-center mb-4">
+            <!-- Display Profile Photo -->
+            <img src="{{ asset('storage/' . (Auth::guard('student')->user()->photo ?? 'img/user.jpg')) }}" class="h-20 w-20 rounded-full" alt="Profile Image">
+            <div class="ml-4">
+                <p class="text-lg font-medium">{{ Auth::guard('student')->user()->name }}</p>
+                <p class="text-gray-500">{{ Auth::guard('student')->user()->generateEmail(Auth::guard('student')->user()->nim) }}</p>
             </div>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto px-6">
+        <!-- User Information -->
+        <div class="border border-gray-200 p-6 rounded-lg">
             <div class="space-y-4">
                 <div>
-                    <label class="text-sm font-medium">Name</label>
-                    <input type="text" value="Jaka Sembung" disabled class="mt-1 block w-1/2 bg-white rounded-md shadow-sm sm:text-sm">
+                    <label class="block text-gray-700 font-bold mb-2" for="name">Nama</label>
+                    <input type="text" value="{{ Auth::guard('student')->user()->name }}" disabled class="mt-1 block w-full bg-white rounded-md shadow-sm sm:text-sm px-3 py-2">
                 </div>
                 <div>
-                    <label class="text-sm font-medium">NIM</label>
-                    <input type="text" value="12S25060" disabled class="mt-1 block w-1/2 bg-white rounded-md shadow-sm sm:text-sm">
+                    <label class="block text-gray-700 font-bold mb-2" for="nim">NIM</label>
+                    <input type="text" value="{{ Auth::guard('student')->user()->nim }}" disabled class="mt-1 block w-full bg-white rounded-md shadow-sm sm:text-sm px-3 py-2">
                 </div>
                 <div>
-                    <label class="text-sm font-medium">Program Study</label>
-                    <input type="text" value="Information System" disabled class="mt-1 block w-1/2 bg-white rounded-md shadow-sm sm:text-sm">
+                    <label class="block text-gray-700 font-bold mb-2" for="program-stud">Program Studi</label>
+                    <input type="text" value="Information System" disabled class="mt-1 block w-full bg-white rounded-md shadow-sm sm:text-sm px-3 py-2">
                 </div>
             </div>
         </div>
 
         <!-- Contact Information -->
         <div class="border border-gray-200 p-6 rounded-lg">
-            <div class="space-y-4" style="margin-top: 97px;"> 
+            <div class="space-y-4">
                 <div>
-                    <label class="text-sm font-medium">Mobile Phone</label>
-                    <input type="text" value="081234567890" disabled class="mt-1 block w-1/2 bg-white rounded-md shadow-sm sm:text-sm">
+                    <label class="block text-gray-700 font-bold mb-2" for="mobile-phone">Telepon</label>
+                    <input type="text" value="{{ Auth::guard('student')->user()->phone_number }}" disabled class="mt-1 block w-full bg-white rounded-md shadow-sm sm:text-sm px-3 py-2">
                 </div>
-            <div>
-                <label class="text-sm font-medium">Gender</label>
-                <input type="text" value="Male" disabled class="mt-1 block w-1/2 bg-white rounded-md shadow-sm sm:text-sm">
-            </div>
                 <div>
-                    <label class="text-sm font-medium">Dormitory</label>
-                    <input type="text" value="Jati" disabled class="mt-1 block w-1/2 bg-white rounded-md shadow-sm sm:text-sm">
+                    <label class="block text-gray-700 font-bold mb-2" for="gender">Jenis Kelamin</label>
+                    <input type="text" value="{{ ucfirst( Auth::guard('student')->user()->gender )}}" disabled class="mt-1 block w-full bg-white rounded-md shadow-sm sm:text-sm px-3 py-2">
+                </div>
+                <div>
+                    <label class="block text-gray-700 font-bold mb-2" for="dormitory">Asrama</label>
+                    <input type="text" value="{{ Auth::guard('student')->user()->dormitory->name }}" disabled class="mt-1 block w-full bg-white rounded-md shadow-sm sm:text-sm px-3 py-2">
                 </div>
             </div>
-            <div class="mt-10">
-            <button class="bg-dark-blue text-white px-2 py-1 rounded-md">Edit Profile</button>
+            <div class="mt-6 flex justify-end">
+                <!-- Button to Open Modal for Editing -->
+                <button onclick="openEditModal()" class="bg-sky-800 text-white px-4 py-2 rounded-md hover:bg-blue-700">Edit Profil</button>
             </div>
         </div>
     </div>
-    </main>
+</main>
+
+<!-- Modal Edit Profile -->
+<div id="editProfileModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
+    <div class="bg-white p-8 rounded-lg w-1/3">
+        <h2 class="text-xl font-bold mb-4">Edit Profil</h2>
+        <form method="POST" action="{{ route('edit.profile') }}" enctype="multipart/form-data">
+            @csrf
+            <div class="mb-4">
+                <label for="dormitory_id" class="block text-gray-700 font-bold mb-2">Asrama</label>
+                <select id="dormitory_id" name="dormitory_id" class="w-full px-3 py-2 border rounded">
+                    @foreach($dormitories as $dormitory)
+                        @if($dormitory->gender == Auth::guard('student')->user()->gender)
+                            <option value="{{ $dormitory->id }}" {{ $dormitory->id == Auth::guard('student')->user()->dormitory_id ? 'selected' : '' }}>{{ $dormitory->name }}</option>
+                        @endif
+                    @endforeach
+                </select>
+            </div>
+            <div class="mb-4">
+                <label for="phone_number" class="block text-gray-700 font-bold mb-2">Telepon</label>
+                <input type="text" id="phone_number" name="phone_number" value="{{ Auth::guard('student')->user()->phone_number }}" class="w-full px-3 py-2 border rounded">
+            </div>
+            <div class="mb-4">
+                <label for="profile_photo" class="block text-gray-700 font-bold mb-2">Foto Profil</label>
+                <input type="file" id="profile_photo" name="profile_photo" class="w-full px-3 py-2 border rounded">
+            </div>
+            <div class="mt-6 flex justify-end space-x-4">
+                <button type="button" onclick="closeEditModal()" class="px-4 py-2 rounded-lg bg-gray-500 text-white">Batal</button>
+                <button type="submit" class="px-4 py-2 rounded-lg bg-sky-700 text-white">Simpan</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    // Open the modal to edit profile
+    function openEditModal() {
+        document.getElementById('editProfileModal').classList.remove('hidden');
+    }
+
+    // Close the modal without saving
+    function closeEditModal() {
+        document.getElementById('editProfileModal').classList.add('hidden');
+    }
+</script>
 @endsection

@@ -14,6 +14,8 @@
     href="{{ asset('img/Logo-DeLaundry.png') }}"
     type="image/x-icon"
     />
+    <script src="//unpkg.com/alpinejs" defer></script>
+    
     @vite('resources/css/app.css')
     @yield('head')
     {{-- <title>Dashboard | DeLaundry - Admin Dashboard</title> --}}
@@ -66,6 +68,11 @@
     <script src="{{asset('vendor/libs/apexcharts/apexcharts.min.js')}}"></script>
     <script src="{{ asset('vendor/js/pages/charts-apex.js') }}"></script>
     <script src="{{asset('vendor/js/pages/dashboard.js')}}"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
     @yield('script')
 </body>
 </html>

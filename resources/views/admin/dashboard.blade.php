@@ -17,7 +17,7 @@
                         <img src="{{ asset('img/person.svg') }}" alt="person" class="h-10 w-auto">
                     </div>
                     <div class="text-right">
-                        <h3 class="mt-1 text-2xl font-bold mb-5 text-gray-900">3</h3>
+                        <h3 class="mt-1 text-2xl font-bold mb-5 text-gray-900">{{ $total_user }}</h3>
                         <p class="mb-1 truncate text-gray-900">Total Users</p>
                     </div>
                 </div>
@@ -31,7 +31,7 @@
                         <img src="{{ asset('img/box-seam-blue.svg') }}" alt="person" class="h-10 w-auto">
                     </div>
                     <div class="text-right text-gray-900">
-                        <h3 class="text-gray-900 mt-1 text-2xl font-bold mb-5">3</h3>
+                        <h3 class="text-gray-900 mt-1 text-2xl font-bold mb-5">{{ $total_order }}</h3>
                         <p class="mb-1 truncate text-gray-900">Total Orders</p>
                     </div>
                 </div>
@@ -45,7 +45,7 @@
                         <img src="{{ asset('img/headset-blue.svg') }}" alt="person" class="h-10 w-auto">
                     </div>
                     <div class="text-right"> 
-                        <h3 class=" mt-1 text-2xl font-bold mb-5 text-gray-900">3</h3>
+                        <h3 class=" mt-1 text-2xl font-bold mb-5 text-gray-900">{{ $total_complaint }}</h3>
                         <p class=" mb-1 truncate text-gray-900">Total Complaints</p>
                     </div>
                 </div>

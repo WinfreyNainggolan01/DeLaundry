@@ -12,19 +12,20 @@ class Complaint extends Model
 {
     use HasFactory, SoftDeletes;
     protected $fillable = [
-        'ordx_id',
+        // 'ordx_id',
+        'student_id',
+        'order_id',
         'title',
         'date_at',
         'status',
         'description',
-        'order_id',
-        'student_id',
     ];
 
     public function order(): BelongsTo
     {
         return $this->belongsTo(Order::class);
     }
+
     public function student(): BelongsTo
     {
         return $this->belongsTo(Student::class);
@@ -32,6 +33,6 @@ class Complaint extends Model
 
     public function photos(): HasMany
     {
-        return $this->hasMany(ComplaintPhoto::class);
+        return $this->hasMany(ComplaintPhoto::class, 'complaint_id');
     }
 }

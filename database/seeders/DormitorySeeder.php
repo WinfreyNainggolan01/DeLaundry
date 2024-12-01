@@ -12,26 +12,31 @@ class DormitorySeeder extends Seeder
      */
     public function run(): void
     {
-        // $dormitory = [
-        //     [
-        //         'name' => 'Nazareth',
-        //         'gender' => 'male',
-        //     ],
-        //     [
-        //         'name' => 'Kana',
-        //         'gender'=> 'female',
-        //     ],
-        //     [
-        //         'name' => 'Pniel',
-        //         'gender' => 'male',
-        //     ],
-        // ];
         $dormitory = [
+            [
+                'name' => 'Nazareth',
+                'gender' => 'male',
+            ],
+            [
+                'name' => 'Kana',
+                'gender'=> 'female',
+            ],
+            [
+                'name' => 'Pniel',
+                'gender' => 'male',
+            ],
             [
                 'name' => 'Anthokia',
                 'gender' => 'male',
             ],
         ];
+        // $dormitory = [
+        //     [
+        //         'name' => 'Anthokia',
+        //         'gender' => 'male',
+        //     ],
+        // ];
+
         foreach ($dormitory as $dorm) {
             \App\Models\Dormitory::create($dorm);
         }

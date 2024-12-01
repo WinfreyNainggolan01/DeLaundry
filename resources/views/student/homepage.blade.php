@@ -2,6 +2,14 @@
 @section('head')
     <title>Homepage | DeLaundry</title>
 @endsection
+{{-- 
+@section('header')
+<header class="bg-dark-blue shadow">
+    <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+        <h1 class="text-2xl font-bold tracking-tight text-gray-100">Welcome, {{ Auth::guard('student')->user()->name }}</h1>
+    </div>
+</header>
+@endsection --}}
 
 @section('content')
 <main>
@@ -13,8 +21,10 @@
 
         <!-- Right Text Section -->
         <div class="flex flex-col justify-center">
-                <p class="text-lg mb-6">Welcome to DeLaundry, a professional laundry service designed specifically to meet the needs of IT Del students. We understand how busy college schedules and campus activities can be, and we are committed to providing efficient and reliable laundry solutions.</p>
-                <p class="text-lg mb-8">With our convenient laundry service, we ensure your clothes are always clean and tidy. Focus your energy on your studies and campus activities, while we handle your laundry needs with high-quality standards.</p>
+                <p class="text-lg mb-6">
+                    Selamat datang di DeLaundry, layanan laundry profesional yang dirancang khusus untuk memenuhi kebutuhan mahasiswa IT Del. Kami memahami betapa padatnya jadwal kuliah dan aktivitas kampus, dan kami berkomitmen untuk menyediakan solusi laundry yang efisien dan andal.</p>
+                <p class="text-lg mb-8">
+                    Dengan layanan laundry kami yang praktis, kami memastikan pakaian Anda selalu bersih dan rapi. Fokuskan energi Anda pada studi dan kegiatan kampus, sementara kami menangani kebutuhan laundry Anda dengan standar kualitas tinggi.</p>
                 
                 <!-- Buttons -->
                 
@@ -24,8 +34,8 @@
     <section class="bg-white">
         <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
             <div class="mx-auto max-w-screen-sm text-center lg:mb-16 mb-8">
-            <h2 class="mb-4 text-3xl lg:text-4xl tracking-tight font-extrabold text-black ">Our Services</h2>
-            <p class="font-light text-black sm:text-xl">At DeLaundry, we focus on delivering clean, fresh clothes with a service that adapts to your needs. Fast, reliable, and customer-centered, we make laundry easier for you.</p>
+            <h2 class="mb-4 text-3xl lg:text-4xl tracking-tight font-extrabold text-black ">Layanan Kami</h2>
+            <p class="font-light text-black sm:text-xl">Di DeLaundry, kami berfokus pada penyediaan pakaian bersih dan segar dengan layanan yang disesuaikan dengan kebutuhan Anda. Cepat, andal, dan berfokus pada pelanggan, kami membuat pencucian menjadi lebih mudah bagi Anda.</p>
             </div> 
             <div class="grid gap-16 lg:grid-cols-3 py-6">
             <!-- Card 1 -->
@@ -33,12 +43,12 @@
                 <div class=" flex justify-center">
                     <img src="{{ asset('img/laundry-place.svg') }}" alt="laundry place" class="max-w-md h-auto shadow-lg rounded-lg justify-center">
                 </div>
-                <h2 class="mb-2 mt-7 text-2xl font-bold tracking-tight text-gray-900"><a href="#">Laundry Your Items</a></h2>
-                <p class="mb-5 font-light text-gray-600 ">Static websites are now used to bootstrap lots of websites and are becoming the basis for a variety of tools that even influence both web designers and developers influence both web designers and developers.</p>
+                <h2 class="mb-2 mt-7 text-2xl font-bold tracking-tight text-gray-900"><a href="#">Buat Pesanan</a></h2>
+                <p class="mb-5 font-light text-gray-600 ">Cuci pakaian Anda dengan layanan terbaik kami, dirancang untuk memberikan kemudahan, kebersihan, dan kenyamanan. Nikmati pakaian bersih, segar, dan wangi tanpa repot!</p>
                 <div class="flex justify-center items-center">
                     <!-- Buttons -->
-                    <a href="#" class="inline-flex items-center font-medium text-primary-600 dark:text-primary-500">
-                        <button class="bg-blue-500 text-white px-6 py-2 rounded-2xl shadow hover:bg-blue-600">Add Request
+                    <a href="{{ route('order') }}" class="inline-flex items-center font-medium text-primary-600 dark:text-primary-500">
+                        <button class="bg-sky-800 text-white px-6 py-2 rounded-2xl shadow hover:bg-blue-600">Pesanan</a></h2>
                         </button>
                     </a>
                 </div>
@@ -49,12 +59,12 @@
                 <div class=" flex justify-center py-2">
                 <img src="{{ asset('img/customer-service.svg') }}" alt="customer service" class="max-w-md h-auto shadow-lg rounded-lg">
                 </div>
-                <h2 class="mb-2 mt-7 text-2xl font-bold tracking-tight text-gray-900"><a href="#">Complaint Your Problems</a></h2>
-                <p class="mb-5 font-light text-gray-600">Static websites are now used to bootstrap lots of websites and are becoming the basis for a variety of tools that even influence both web designers and developers influence both web designers and developers.</p>
+                <h2 class="mb-2 mt-7 text-2xl font-bold tracking-tight text-gray-900"><a href="#">Sampaikan Keluhan Anda</a></h2>
+                <p class="mb-5 font-light text-gray-600">Sampaikan keluhan Anda dengan mudah melalui halaman ini, agar kami dapat segera membantu menyelesaikan masalah dan terus meningkatkan kualitas layanan demi kepuasan Anda.</p>
                 <div class="flex justify-center items-center">
                     <!-- Buttons -->
-                    <a href="#" class="inline-flex items-center font-medium text-primary-600 dark:text-primary-500">
-                        <button class="bg-blue-500 text-white px-6 py-2 rounded-2xl shadow hover:bg-blue-600">Complaint</button>
+                    <a href="{{ route('complaint') }}" class="inline-flex items-center font-medium text-primary-600 dark:text-primary-500">
+                        <button class="bg-sky-800 text-white px-6 py-2 rounded-2xl shadow hover:bg-blue-600">Keluhan</button>
                     </a>
                 </div>
             </article>
@@ -64,12 +74,12 @@
                 <div class=" flex justify-center py-2 mt-11">
                     <img src="{{ asset('img/track-order.svg') }}" alt="track" class="max-w-md h-auto shadow-lg rounded-lg">
                 </div>
-                <h2 class="mb-2 mt-7 text-2xl font-bold tracking-tight text-gray-900"><a href="#">Track Your Orders</a></h2>
-                <p class="mb-5 font-light text-gray-600">Static websites are now used to bootstrap lots of websites and are becoming the basis for a variety of tools that even influence both web designers and developers influence both web designers and developers.</p>
+                <h2 class="mb-2 mt-7 text-2xl font-bold tracking-tight text-gray-900"><a href="#">Lacak Pesanan Anda</a></h2>
+                <p class="mb-5 font-light text-gray-600">Lacak pesanan Anda dengan mudah dan cepat melalui halaman ini untuk mengetahui status terbaru dari layanan kami, sehingga Anda selalu mendapatkan informasi yang akurat.</p>
                 <div class="flex justify-center items-center">
                     <!-- Buttons -->
-                    <a href="#" class="inline-flex items-center font-medium text-primary-600 dark:text-primary-500">
-                        <button class="bg-blue-500 text-white px-6 py-2 rounded-2xl shadow hover:bg-blue-600">Track</button>
+                    <a href="{{ route('tracking') }}" class="inline-flex items-center font-medium text-primary-600 dark:text-primary-500">
+                        <button class="bg-sky-800 text-white px-6 py-2 rounded-2xl shadow hover:bg-blue-600">Lacak</button>
                     </a>
                 </div>
             </article>                    

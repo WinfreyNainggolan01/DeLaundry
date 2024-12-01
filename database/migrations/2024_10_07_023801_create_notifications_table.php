@@ -11,14 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        // variabel student_id, complaint_id, description, status, date
         Schema::create('notifications', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('student_id')->constrained()->onDelete('cascade');
-            $table->foreignId('complaint_id')->constrained()->onDelete('cascade');
+            $table->foreignId('student_id')->nullable()->constrained()->onDelete('cascade');
+            $table->foreignId('order_id')->nullable()->constrained()->onDelete('cascade');
+            $table->foreignId('feedback_id')->nullable()->constrained('feedbacks')->onDelete('cascade'); // Pastikan ke tabel feedbacks
             $table->text('message');
-            $table->boolean('is_read');
             $table->date('date_at');
+            $table->enum('is_read',['unread','read'])->default('unread');
+            $table->enum('type',['order','complaint','feedback']);
             $table->softDeletes();
             $table->timestamps();
         });

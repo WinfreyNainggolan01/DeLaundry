@@ -17,14 +17,19 @@ class Order extends Model
         'date_at',
         'student_id',
         'dormitory_id',
-        'item_id',    
+        'status',
+        'items',
+    ];
+
+    protected $casts = [
+        'items' => 'array',
     ];
 
     public static function generateUniqueOrdxId(): string
     {
         $prefix = 'DLR';
         do{
-            $randomString = $prefix . mt_rand(1000,9999);
+            $randomString = $prefix . mt_rand(1000000,9999999);
         } while (self::where('ordx_id', $randomString)->exists());
 
         return $randomString;
@@ -55,10 +60,21 @@ class Order extends Model
         return $this->belongsTo(Dormitory::class);
     }
 
-    public function item(): BelongsTo
+    public function tracks()
     {
-        return $this->belongsTo(Item::class);
+        return $this->hasMany(Track::class, 'order_id');
     }
+
+    public function complaints(): HasMany
+    {
+        return $this->hasMany(Complaint::class, 'order_id');
+    }
+
+    public function feedbacks(): HasMany
+    {
+        return $this->hasMany(Feedback::class, 'order_id'); // Jika model Feedback sudah ada
+    }
+
 }
 
 

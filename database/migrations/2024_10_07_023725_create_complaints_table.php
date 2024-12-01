@@ -28,6 +28,10 @@ return new class extends Migration
     /**
      * Reverse the migrations.
      */
+
+    // relation to student, order
+    
+
     public function down(): void
     {
         Schema::dropIfExists('complaints');

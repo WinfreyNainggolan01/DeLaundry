@@ -16,8 +16,17 @@ class AdminMiddleware
 
     public function handle(Request $request, Closure $next): Response
     {
+        
         if (!auth()->guard('admin')->check()) {
             return redirect('/login');
+        }
+        return $next($request);
+    }
+
+    public function handleApi(Request $request, Closure $next): Response
+    {
+        if (!auth()->guard('admin')->check()) {
+            return response()->json(['message' => 'Unauthorized'], 401);
         }
         return $next($request);
     }

@@ -12,11 +12,20 @@ class AdminSeeder extends Seeder
      */
     public function run(): void
     {
+        // $admins = [
+        //     [
+        //         'name' => 'Admin',
+        //         'username' => 'admin',
+        //         'password' => bcrypt('admin123'),
+        //         'phone_number' => '081234567890',
+        //     ],
+        // ];
+        
         $admins = [
             [
-                'name' => 'Admin',
-                'username' => 'admin',
-                'password' => bcrypt('admin123'),
+                'name' => 'Jaka Sembung',
+                'username' => 'jaka123',
+                'password' => bcrypt('jaka123'),
                 'phone_number' => '081234567890',
             ],
         ];

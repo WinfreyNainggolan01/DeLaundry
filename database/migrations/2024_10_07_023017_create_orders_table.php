@@ -15,10 +15,11 @@ return new class extends Migration
             //variabel student_id, dormitory_id, item_id, date
             $table->id();
             $table->string('ordx_id');
-            $table->date('date');
+            $table->date('date_at');
             $table->foreignId('student_id')->constrained()->cascadeOnDelete();
             $table->foreignId('dormitory_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('item_id')->constrained()->cascadeOnDelete();
+            $table->enum('status', ['pending', 'picked_up', 'on_process', 'delivered', 'done']);
+            $table->json('items');
             $table->softDeletes();
             $table->timestamps();
         });

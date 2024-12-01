@@ -2,8 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Student;
 use Illuminate\Database\Seeder;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class StudentSeeder extends Seeder
 {
@@ -19,6 +20,7 @@ class StudentSeeder extends Seeder
                 'username' => 'winfrey-nainggolan',
                 'password' => bcrypt('winfrey123'),
                 'gender' => 'male',
+                'program_study' => 'Sistem Informasi',
                 'dormitory_id' => '1',
                 'phone_number' => '081234567890',
             ],
@@ -28,6 +30,7 @@ class StudentSeeder extends Seeder
                 'username' => 'yohana-siahaan',
                 'password' => bcrypt('yohana123'),
                 'gender' => 'female',
+                'program_study' => 'Sistem Informasi',
                 'dormitory_id' => '2',
                 'phone_number' => '081234567891',
             ], 
@@ -37,6 +40,7 @@ class StudentSeeder extends Seeder
                 'username' => 'ira-silalahi',
                 'password' => bcrypt('ira123'),
                 'gender' => 'female',
+                'program_study' => 'Sistem Informasi',
                 'dormitory_id' => '2',
                 'phone_number' => '081234567892',
             ],
@@ -44,5 +48,9 @@ class StudentSeeder extends Seeder
         foreach ($students as $student) {
             \App\Models\Student::create($student);
         }
+        
+        Student::factory(20)->create();
     }
+
+
 }
