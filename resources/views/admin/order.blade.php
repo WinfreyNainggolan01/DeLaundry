@@ -16,7 +16,7 @@
                     </div>
                     <div class="text-right">
                         <h3 class="mt-1 text-2xl font-bold mb-5 text-gray-900">{{ $total_order }}</h3>
-                        <p class="mb-1 truncate text-gray-900">Total Orders</p>
+                        <p class="mb-1 truncate text-gray-900">Total Pesanan</p>
                     </div>
                 </div>
             </div>
@@ -28,7 +28,7 @@
         <div class="card">
             <div class="card-header">
                 <div class="flex justify-between items-center">
-                    <h4 class="card-title">Orders</h4>
+                    <h4 class="card-title">Pesanan</h4>
                 </div>
             </div>
             <div class="p-6 py-12">
@@ -36,15 +36,15 @@
                     <div class="min-w-full inline-block align-middle">
                         <div class="overflow-hidden">
                             <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-                                <caption class="py-2 text-left text-sm text-gray-600 dark:text-gray-500">List of Orders</caption>
+                                <caption class="py-2 text-left text-sm text-gray-600 dark:text-gray-500">Daftar Pesanan</caption>
                                 <thead>
                                     <tr>
                                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">No</th>
                                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Order ID</th>
-                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Order By</th>
-                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Quantity</th>
-                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Weight</th>
-                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Order Date</th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Pesanan oleh</th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Jumlah</th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Berat</th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Tanggal Pemesanan</th>
                                         <th scope="col" class="px-6 py-3 text-end text-xs font-medium text-gray-500 uppercase">Status</th>
                                         <th scope="col" class="px-6 py-3 text-end text-xs font-medium text-gray-500 uppercase"></th>
                                         <th scope="col" class="px-6 py-3 text-end text-xs font-medium text-gray-500 uppercase"></th>
@@ -62,11 +62,11 @@
                                         <td class="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
                                             <div class="relative z-10">
                                                 <select class="btn border-gray-300 text-gray-900 h-10 rounded-md min-w-[180px] pl-3 pr-8 focus:outline-none focus:ring-2 focus:ring-blue-500 statusSelect" id="statusSelect-{{ $order->order_id }}">
-                                                    <option value="submit" {{ $order->status == 'submit' ? 'selected' : '' }}>Order Received</option>
-                                                    <option value="in_progress" {{ $order->status == 'in_progress' ? 'selected' : '' }}>Pick Up</option>
-                                                    <option value="completed" {{ $order->status == 'completed' ? 'selected' : '' }}>On Process</option>
-                                                    <option value="cancelled" {{ $order->status == 'cancelled' ? 'selected' : '' }}>Delivery</option>
-                                                    <option value="done" {{ $order->status == 'done' ? 'selected' : '' }}>Done</option>
+                                                    <option value="submit" {{ $order->status == 'submit' ? 'selected' : '' }}>Pesanan diterima</option>
+                                                    <option value="in_progress" {{ $order->status == 'in_progress' ? 'selected' : '' }}>Penjemputan</option>
+                                                    <option value="completed" {{ $order->status == 'completed' ? 'selected' : '' }}>Dalam proses</option>
+                                                    <option value="cancelled" {{ $order->status == 'cancelled' ? 'selected' : '' }}>Pengiriman</option>
+                                                    <option value="done" {{ $order->status == 'done' ? 'selected' : '' }}>Selesai</option>
                                                 </select>
                                             </div>
                                         </td>

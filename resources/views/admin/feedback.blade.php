@@ -5,7 +5,7 @@
         
         <!-- Header Modal -->
         <div class="flex justify-between items-center border-b pb-4">
-            <h3 class="text-2xl font-semibold text-gray-800">Provide Feedback</h3>
+            <h3 class="text-2xl font-semibold text-gray-800">Berikan Tanggapan</h3>
             <button onclick="closeModal()" class="text-gray-400 hover:text-gray-600 text-2xl">&times;</button>
         </div>
 
@@ -18,26 +18,26 @@
 
          
             <div class="text-gray-700 text-sm space-y-4">
-                <p><strong>Subject:</strong> Baju Putih Luntur</p>
+                <p><strong>Subjek:</strong> Baju Putih Luntur</p>
                 <p><strong>Order ID:</strong> DLR3455434</p>
-                <p><strong>Description:</strong> Terdapat noda berwarna pink di sekitar kancing baju</p>
+                <p><strong>Deskripsi:</strong> Terdapat noda berwarna pink di sekitar kancing baju</p>
             </div>
         </div>
 
         <!-- Form Feedback -->
         <div class="mb-4">
-            <label for="feedback" class="block text-lg font-medium text-gray-700 mb-2">Feedback</label>
+            <label for="feedback" class="block text-lg font-medium text-gray-700 mb-2">Tanggapan</label>
             <textarea id="feedback" class="w-full border rounded-lg p-4 focus:outline-none focus:ring focus:border-blue-300" rows="5" placeholder="Write your feedback here..."></textarea>
         </div>
 
         <!-- Footer Modal -->
         <div class="modal-footer flex justify-end space-x-4 w-full">
             <button type="button" onclick="closeModal()" class="bg-gray-300 text-gray-600 hover:bg-gray-400 hover:text-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 py-2 px-6 rounded">
-                Cancel
+                Batal
             </button>
 
             <button type="button" class="bg-[#28397e] border border-[#031003] text-white py-2 px-6 rounded hover:bg-[#1e2d63] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#031003]" id="saveChangesButton">
-                Send
+                Kirim
             </button>
         </div>
     </div>

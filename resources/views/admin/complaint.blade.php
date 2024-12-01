@@ -16,7 +16,7 @@
                     </div>
                     <div class="text-right"> 
                         <h3 class="mt-1 text-2xl font-bold mb-5 text-gray-900">3</h3>
-                        <p class="mb-1 truncate text-gray-900">Total Komplain</p>
+                        <p class="mb-1 truncate text-gray-900">Total Keluhan</p>
                     </div>
                 </div>
             </div>
@@ -30,7 +30,7 @@
                     </div>
                     <div class="text-right"> 
                         <h3 class="mt-1 text-2xl font-bold mb-5 text-gray-900">3</h3>
-                        <p class="mb-1 truncate text-gray-900">Selesai diproses</p>
+                        <p class="mb-1 truncate text-gray-900">Keluhan Teratasi</p>
                     </div>
                 </div>
             </div>
@@ -44,7 +44,7 @@
                     </div>
                     <div class="text-right"> 
                         <h3 class="mt-1 text-2xl font-bold mb-5 text-gray-900">3</h3>
-                        <p class="mb-1 truncate text-gray-900">Pending Complaints</p>
+                        <p class="mb-1 truncate text-gray-900">Keluhan Menunggu</p>
                     </div>
                 </div>
             </div>
@@ -56,7 +56,7 @@
         <div class="card">
             <div class="card-header">
                 <div class="flex justify-between items-center">
-                    <h4 class="card-title">Users</h4>
+                    <h4 class="card-title">Pengguna</h4>
                 </div>
             </div>
             <div class="p-6 py-12">
@@ -64,14 +64,14 @@
                     <div class="min-w-full inline-block align-middle">
                         <div class="overflow-hidden">
                             <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-                                <caption class="py-2 text-left text-sm text-gray-600 dark:text-gray-500">List of users</caption>
+                                <caption class="py-2 text-left text-sm text-gray-600 dark:text-gray-500">Daftar pengguna</caption>
                                 <thead>
                                     <tr>
                                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">No</th>
                                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Order ID</th>
-                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Complaint By</th>
-                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Subject</th>
-                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Date At</th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Keluhan oleh</th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Subjek</th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Tanggal</th>
                                         <th scope="col" class="px-6 py-3 text-xs font-medium text-gray-500 uppercase">Status</th>
                                         <th scope="col" class="px-6 py-3 text-end text-xs font-medium text-gray-500 uppercase"></th>
                                     </tr>
@@ -85,8 +85,8 @@
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">14/08/2024</td>
                                         <td class="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
                                             <select class="border border-gray-300 rounded px-7 py-1 text-gray-700 focus:outline-none focus:border-blue-500">
-                                                <option value="unreplied" selected>Unreplied</option>
-                                                <option value="replied">Replied</option>
+                                                <option value="unreplied" selected>Belum Terjawab</option>
+                                                <option value="replied">Sudah Terjawab</option>
                                             </select>
                                         </td>
                                         
@@ -106,8 +106,8 @@
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">15/08/2024</td>
                                         <td class="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
                                             <select class="border border-gray-300 rounded px-7 py-1 text-gray-700 focus:outline-none focus:border-blue-500">
-                                                <option value="unreplied" selected>Unreplied</option>
-                                                <option value="replied">Replied</option>
+                                                <option value="unreplied" selected>Belum Terjawab</option>
+                                                <option value="replied">Sudah Terjawab</option>
                                             </select>
                                         </td>
                                         
@@ -127,8 +127,8 @@
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">14/08/2024</td>
                                         <td class="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
                                             <select class="border border-gray-300 rounded px-7 py-1 text-gray-700 focus:outline-none focus:border-blue-500">
-                                                <option value="unreplied" selected>Unreplied</option>
-                                                <option value="replied">Replied</option>
+                                                <option value="unreplied" selected>Belum Terjawab</option>
+                                                <option value="replied">Sudah Terjawab</option>
                                             </select>
                                         </td>
                                       

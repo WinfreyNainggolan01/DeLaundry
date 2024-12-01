@@ -31,13 +31,13 @@
         <div class="fc-dropdown fc-dropdown-open:opacity-100 hidden opacity-0 w-44 z-50 transition-[margin,opacity] duration-300 mt-2 bg-white shadow-lg border rounded-lg p-2 border-gray-200">
             <a href="#" class="flex items-center py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100">
                 <img src="{{ asset('img/person_admin.svg') }}" alt="profile" class="w-5 h-5 mr-2"> <!-- Ukuran ikon dan margin kanan -->
-                <span>Profile</span>
+                <span>Profil</span>
             </a>
             <form action="/logout" method="POST">
             @csrf
             <button type="submit" class="flex items-center py-2 px-4 rounded-md text-sm text-gray-800 hover:bg-gray-100">
                 <i class="mgc_exit_line me-2"></i> 
-                <span>Sign Out</span>
+                <span>Keluar</span>
             </form>
         </div>
     </div>

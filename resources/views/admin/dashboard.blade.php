@@ -6,7 +6,7 @@
 
 @section('content')
     <div class="flex justify-left p-3 ">
-            <h2 class="text-3xl font-bold text-gray-800 mb-4">Welcome back, <span class="text-blue-600">{{ Auth::guard('admin')->user()->name }}</span></h2>
+            <h2 class="text-3xl font-bold text-gray-800 mb-4">Selamat datang, <span class="text-blue-600">{{ Auth::guard('admin')->user()->name }}</span></h2>
     </div>
     <!-- Card Total -->
     <div class="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-6">
@@ -18,7 +18,7 @@
                     </div>
                     <div class="text-right">
                         <h3 class="mt-1 text-2xl font-bold mb-5 text-gray-900">{{ $total_user }}</h3>
-                        <p class="mb-1 truncate text-gray-900">Total Users</p>
+                        <p class="mb-1 truncate text-gray-900">Total Pengguna</p>
                     </div>
                 </div>
             </div>
@@ -32,7 +32,7 @@
                     </div>
                     <div class="text-right text-gray-900">
                         <h3 class="text-gray-900 mt-1 text-2xl font-bold mb-5">{{ $total_order }}</h3>
-                        <p class="mb-1 truncate text-gray-900">Total Orders</p>
+                        <p class="mb-1 truncate text-gray-900">Total Pesanan</p>
                     </div>
                 </div>
             </div>
@@ -46,7 +46,7 @@
                     </div>
                     <div class="text-right"> 
                         <h3 class=" mt-1 text-2xl font-bold mb-5 text-gray-900">{{ $total_complaint }}</h3>
-                        <p class=" mb-1 truncate text-gray-900">Total Complaints</p>
+                        <p class=" mb-1 truncate text-gray-900">Total Komplain</p>
                     </div>
                 </div>
             </div>

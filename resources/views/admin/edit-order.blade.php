@@ -19,19 +19,19 @@
         <div class="modal-body mb-4">
             <div class="flex flex-col gap-3 mb-3">
                 <div class="flex items-center gap-4">
-                    <label for="editOrderNumber" class="text-base font-medium text-black w-32">Order Number:</label>
+                    <label for="editOrderNumber" class="text-base font-medium text-black w-32">Nomor Pesanan:</label>
                     <input type="text" id="editOrderNumber" readonly class="block w-96 px-3 py-2 border border-gray-300 rounded-md bg-gray-50 text-gray-800"/>
                 </div>
                 <div class="flex items-center gap-4">
-                    <label for="editCustomerName" class="text-base font-medium text-black w-32">Customer:</label>
+                    <label for="editCustomerName" class="text-base font-medium text-black w-32">Pelanggan:</label>
                     <input type="text" id="editCustomerName" readonly class="block w-96 px-3 py-2 border border-gray-300 rounded-md bg-gray-50 text-gray-800"/>
                 </div>
             </div>
         </div>
         
         <div class="modal-footer flex justify-end">
-            <button onclick="closeModal('editModal')" class="bg-gray-300 text-gray-700 px-4 py-2 rounded-md">Close</button>
-            <button onclick="saveEditOrder()" class="bg-primary text-white px-4 py-2 rounded-md">Save Changes</button>
+            <button onclick="closeModal('editModal')" class="bg-gray-300 text-gray-700 px-4 py-2 rounded-md">Tutup</button>
+            <button onclick="saveEditOrder()" class="bg-primary text-white px-4 py-2 rounded-md">Simpsn</button>
         </div>
     </div>
 </div>
