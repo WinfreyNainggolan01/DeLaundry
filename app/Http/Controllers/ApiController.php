@@ -2,22 +2,6 @@
 
 namespace App\Http\Controllers;
 use App\Models\Item;
-<<<<<<< Updated upstream
-use App\Models\Admin;
-use App\Models\Order;
-use App\Models\Student;
-use App\Models\Complaint;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\RedirectResponse;
-use App\Http\Resources\StudentResource;
-use App\Models\Track;
-
-class ApiController extends Controller
-{
-    public function allStudent()
-    {
-=======
 use App\Models\User;
 use App\Models\Admin;
 use App\Models\Order;
@@ -34,53 +18,6 @@ use Illuminate\Support\Facades\Validator;
 
 class ApiController extends Controller
 {
-    // public function loginApi(Request $request)
-    // {
-    //     $credentials = $request->validate([
-    //         'username' => ['required'],
-    //         'password' => ['required'],
-    //     ]);
-
-    //     // User adalah Student
-    //     $student = Student::where('username', $credentials['username'])->first();
-    //     if ($student && Hash::check($credentials['password'], $student->password)) {
-    //         $token = $student->createToken('StudentToken')->plainTextToken;
-    //         return response()->json([
-    //             'token' => $token,
-    //             'role' => 'student',
-    //         ]);}
-
-    //     // User adalah Admin
-    //     $admin = Admin::where('username', $credentials['username'])->first();
-    //     if ($admin && Hash::check($credentials['password'], $admin->password)) {
-    //         $token = $admin->createToken('AdminToken')->plainTextToken;
-    //         return response()->json([
-    //             'token' => $token,
-    //             'role' => 'admin',
-    //         ]);
-    //     }
-
-    //     // Jika login gagal, arahkan kembali ke halaman login dengan pesan error
-    //     return response()->json(['message' => 'Username atau Password salah'], 401);
-    // }
-
-    // public function getUser(Request $request)
-    // {
-    //     $user = $request->user();
-    //     return response()->json([
-    //         'id' => $user->id,
-    //         'name' => $user->name,
-    //         'email' => $user->email,
-    //     ]);
-    // }
-
-    // public function logoutApi(Request $request)
-    // {
-    //     $request->user()->currentAccessToken()->delete();
-    //     return response()->json([
-    //         'message' => 'Logged out',
-    //     ]);
-    // }
 
 
     public function login(Request $request)
@@ -154,16 +91,10 @@ class ApiController extends Controller
 
     public function allStudent()
     {
->>>>>>> Stashed changes
         $students = Student::all();
         return StudentResource::collection($students);
     }
 
-<<<<<<< Updated upstream
-    public function getProfile(Request $request){
-        $user = $request->user();
-        return StudentResource::make($user);
-=======
     public function getProfile(){
         // cari student berdasarkan modelnya
         $student = auth('sanctum')->user();
@@ -185,7 +116,6 @@ class ApiController extends Controller
         ]);
 
         return $studentResource;
->>>>>>> Stashed changes
     }
 
     public function editProfile(Request $request){
@@ -321,11 +251,8 @@ class ApiController extends Controller
                 'student_id' => $student->id,
                 'dormitory_id' => $student->dormitory_id,
                 'status' => 'Pending',
-<<<<<<< Updated upstream
-=======
                 'weight' => 0,
                 'price' => 0,
->>>>>>> Stashed changes
                 'items' => [], 
             ]);
 
@@ -341,10 +268,7 @@ class ApiController extends Controller
                 'items' => $orderedItems->toArray(),
             ]);
 
-<<<<<<< Updated upstream
-=======
 
->>>>>>> Stashed changes
             Item::where('student_id', $student->id)->delete();
 
             return response()->json([
@@ -384,14 +308,6 @@ class ApiController extends Controller
         ], 200);
     }
 
-<<<<<<< Updated upstream
-    public function createComplaintOrder(Request $request){
-        $order = Order::find($request->order_id);
-        if (!$order) {
-            return response()->json([
-                'error' => 'Order ID not found',
-            ], 404);
-=======
     public function createComplaintOrder(Request $request, $ordx_id){
         $validatedData = $request->validate([
             'title' => 'required|string|max:100',
@@ -405,25 +321,16 @@ class ApiController extends Controller
             return response()->json([
                 'error' => 'Order ID not found'
             ]);
->>>>>>> Stashed changes
         }
 
         $complaint = Complaint::create([
             'order_id' => $order->id,
             'student_id' => $order->student_id,
-<<<<<<< Updated upstream
-            'title' => $request->title,
-            'date' => now()->format('Y-m-d'),
-            'status' => 'pending',
-            'image' => $request->image ?? null,
-            'description' => $request->description,
-=======
             'title' => $validatedData['title'],
             'date_at' => now()->format('Y-m-d'),
             'status' => 'pending',
             'image' => $request->image ?? null,
             'description' => $validatedData['description'],
->>>>>>> Stashed changes
         ]);
 
         return response()->json([

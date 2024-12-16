@@ -21,11 +21,7 @@ class Feedback extends Model
 
     public function order(): BelongsTo
     {
-<<<<<<< Updated upstream
-        return $this->belongsTo(Complaint::class, 'complaint_id');
-=======
         return $this->belongsTo(Order::class, 'order_id');
->>>>>>> Stashed changes
     }
 
     public function student(): BelongsTo
@@ -33,15 +29,9 @@ class Feedback extends Model
         return $this->belongsTo(Student::class, 'student_id');
     }
 
-<<<<<<< Updated upstream
-    public function feedback(): BelongsTo
-    {
-        return $this->belongsTo(Feedback::class, 'feedback_id');
-=======
     public function complaint(): BelongsTo
     {
         return $this->belongsTo(Feedback::class, 'complaint_id');
->>>>>>> Stashed changes
     }
 
 }

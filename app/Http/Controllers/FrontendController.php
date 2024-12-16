@@ -5,13 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\Bill;
 use App\Models\Item;
 use App\Models\Order;
+use App\Models\Track;
 use App\Models\Finance;
 use App\Models\Student;
 use App\Models\Feedback;
 use App\Models\Complaint;
 use App\Models\Dormitory;
 use Illuminate\Http\Request;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 
 class FrontendController extends Controller
@@ -80,128 +80,6 @@ class FrontendController extends Controller
 
     public function orderDone()
     {
-<<<<<<< Updated upstream
-        // Mendapatkan data student yang sedang login
-        $student = auth()->guard('student')->user();
-
-        // Membuat order baru
-        $order = Order::create([
-            'ordx_id' => Order::generateUniqueOrdxId(),
-            'date_at' => now(),
-            'student_id' => $student->id,
-            'dormitory_id' => $student->dormitory_id,
-            'status' => 'Pending',
-            'items' => [],  // Inisialisasi kolom items (akan diisi nanti)
-        ]);
-
-        // Ambil semua item milik student dan siapkan data untuk disimpan dalam 'items'
-        $items = Item::where('student_id', $student->id)->get();
-
-        // Mengubah data item menjadi array untuk kolom 'items'
-        $orderedItems = $items->map(function ($item) {
-            return [
-                'name' => $item->name,
-                'quantity' => $item->quantity,
-                'note' => $item->note,
-            ];
-        });
-
-        // Menyimpan data item dalam format JSON ke kolom 'items'
-        $order->update([
-            'items' => $orderedItems->toArray(),
-        ]);
-
-        // Hapus item yang sudah diproses dari tabel sementara
-        Item::where('student_id', $student->id)->delete();
-
-        // Redirect ke halaman ringkasan order
-        return view('student.order-summary', [
-            'title' => 'Order Summary',
-            'order' => $order,
-        ]);
-    }
-
-
-public function yourOrder()
-    {
-        $student = auth()->guard('student')->user();
-        $orders = Order::with('itemOrders') // Include itemOrders for better performance
-            ->where('student_id', $student->id)
-            ->get();
-
-        return view('student.your-order', [
-            'title' => 'Your Order',
-            'orders' => $orders,
-        ]);
-    }
-
-    public function yourDetail($ordx_id)
-    {
-        // Cari order berdasarkan ID (gunakan firstOrFail untuk memastikan jika order tidak ditemukan, akan menghasilkan 404)
-        $order = Order::where('ordx_id', $ordx_id)->firstOrFail(); // Mengambil order berdasarkan ordx_id
-
-        // Tidak perlu json_decode karena 'items' sudah berupa array
-        $items = $order->items; // Cukup ambil data 'items' yang sudah dalam format array
-
-        return view('student.detail-your-order', [
-            'title' => 'Your Order Detail',
-            'order' => $order,
-            'items' => $items, // Kirim data 'items' langsung tanpa decode
-        ]);
-    }
-
-    public function yourComplaint($ordx_id)
-    {
-        // Pastikan ordx_id dalam lowercase
-        $ordx_id = strtolower($ordx_id);
-        
-        // Cari order berdasarkan ordx_id
-        $order = Order::where('ordx_id', $ordx_id)->firstOrFail();
-
-        return view('student.complaint-your-order', [
-            'title' => 'Your Complaint',
-            'order' => $order, // Kirimkan data order ke blade
-        ]);
-    }
-
-public function submitComplaint(Request $request, $ordx_id)
-{
-    $request->validate([
-        'title' => 'required|string|max:255',
-        'description' => 'required|string',
-        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-    ]);
-
-    // Cari order berdasarkan ordx_id
-    $order = Order::where('ordx_id', $ordx_id)->firstOrFail();
-
-    $complaint = Complaint::create([
-        'order_id' => $order->id,
-        'student_id' => auth()->guard('student')->id(),
-        'title' => $request->input('title'),
-        'description' => $request->input('description'),
-        'date_at' => now(),
-        'status' => 'Pending',
-    ]);
-
-    if ($request->hasFile('image')) {
-        $imagePath = $request->file('image')->store('complaints', 'public');
-        $complaint->photos()->create(['photo' => $imagePath]);
-    }
-
-    return redirect()->route('homepage', strtolower($order->ordx_id))->with('success', 'Complaint submitted successfully.');
-}
-
-public function yourFeedback($order_id)
-{
-    $order = Order::findOrFail($order_id);
-
-    return view('student.feedback-your-order', [
-        'title' => 'Your Feedback',
-        'order' => $order,
-    ]);
-}
-=======
         $student = auth()->guard('student')->user();
         $order = Order::create([
             'ordx_id'       => Order::generateUniqueOrdxId(),
@@ -250,6 +128,24 @@ public function yourFeedback($order_id)
                 'status'        => 'unpaid',
             ]);
         }
+
+        // jika ada track pada order sebelumnya maka hapus untuk semua order tidak berdasarkan order_id
+        // hapus semua isi pada track dengan truncate
+        Track::truncate();
+
+        // buatkan track untuk order 
+        // untuk messages bertipe data 
+        Track::create([
+            'order_id'  => $order->id,
+            'messages'  => json_encode([
+                [
+                    'status'        => 'pending',
+                    'description'   => 'Order has been created',
+                    'date_at'       => now()->setTimezone('Asia/Jakarta')->format('D, d M Y'),
+                    'time_at'       => now()->setTimezone('Asia/Jakarta')->format('H:i') . ' WIB',
+                ],
+            ]),
+        ]);
 
         return view('student.order-summary', [
             'title' => 'Order Summary',
@@ -357,14 +253,6 @@ public function yourFeedback($order_id)
             'feedback' => $feedback,
         ]);
     }
->>>>>>> Stashed changes
-
-    public function complaint()
-    {
-        return view('student.complaint', [
-            'title' => 'Create Complaint',
-        ]);
-    }
 
     public function createComplaint(Request $request){
         $request->validate([
@@ -415,32 +303,15 @@ public function yourFeedback($order_id)
         $student = auth()->guard('student')->user();
         $student = Student::findOrFail($student->id);
 
-<<<<<<< Updated upstream
-        // Update data mahasiswa
-=======
->>>>>>> Stashed changes
         $student->update([
             'dormitory_id' => $request->input('dormitory_id'),
             'phone_number' => $request->input('phone_number'),
         ]);
 
-<<<<<<< Updated upstream
-        // Proses upload foto jika ada
-        if ($request->hasFile('profile_photo')) {
-            // Simpan foto baru ke folder 'profile_photos' di disk 'public'
-            $photoPath = $request->file('profile_photo')->store('profile_photos', 'public');
-
-            // Hapus foto lama jika ada
-            if ($student->photo) {
-                Storage::disk('public')->delete($student->photo);
-            }
-
-            // Update kolom 'photo' di tabel 'students' dengan path foto baru
-=======
         if ($request->hasFile('profile_photo')) {
             $file_name = date('Y-m-d') . '-' . $request->file('profile_photo')->getClientOriginalName();
 
-            $photoPath = 'photo-student/' . $file_name;
+            $photoPath = 'photo-student/'.$file_name;
 
             if ($student->photo && Storage::disk('public')->exists($student->photo)) {
                 Storage::disk('public')->delete($student->photo);
@@ -448,7 +319,6 @@ public function yourFeedback($order_id)
 
             Storage::disk('public')->put($photoPath, file_get_contents($request->file('profile_photo')));
             
->>>>>>> Stashed changes
             $student->update([
                 'photo' => $photoPath,
             ]);
@@ -457,66 +327,6 @@ public function yourFeedback($order_id)
         return redirect()->back()->with('success', 'Profile updated successfully');
     }
 
-<<<<<<< Updated upstream
-
-    // track function
-    public function track()
-    {
-        return view('student.track', [
-            'title' => 'Track',
-        ]);
-    }
-
-    public function finance()
-{
-    // Mengambil semua order yang statusnya 'Done' berdasarkan student_id yang sedang login
-    $orders = Order::where('student_id', auth()->guard('student')->id())
-        ->where('status', 'Done')
-        ->get()
-        ->groupBy(function ($order) {
-            // Mengelompokkan order berdasarkan bulan dan tahun
-            return $order->date_at->format('F Y');
-        })
-        ->map(function ($orders) {
-            // Menghitung total berat dan total biaya per bulan
-            return [
-                'month' => $orders->first()->date_at->format('F Y'),
-                'total_weight' => $orders->sum('total_weight'),
-                'total_amount' => $orders->sum('total_amount'),
-            ];
-        });
-
-    // Membuat record di model Bill untuk setiap bulan yang dihitung
-    foreach ($orders as $order) {
-        // Membuat tagihan untuk setiap bulan yang dihitung
-        Bill::create([
-            'student_id' => auth()->guard('student')->id(),
-            'order_id' => $order['order_id'], // Pastikan memiliki relasi yang tepat dengan order_id
-            'date_at' => now(),
-            'month' => $order['month'],
-            'total_weight' => $order['total_weight'],
-            'total_amount' => $order['total_amount'],
-        ]);
-    }
-
-    // Mengambil semua tagihan yang telah dibuat dan mengirim ke view
-    $finances = Bill::where('student_id', auth()->guard('student')->id())->get();
-
-    return view('student.finance', [
-        'title' => 'Finance',
-        'finances' => $finances,
-    ]);
-}
-
-
-    public function detailFinance($id)
-    {
-        // Cari detail finance berdasarkan ID
-        $finance = Bill::findOrFail($id);
-        // Ambil semua data yang relevan dari relasi atau model lainnya
-        return view('student.detail-finance', compact('Bill'));
-    }
-=======
 
     // Finance
     public function finance()
@@ -551,7 +361,6 @@ public function yourFeedback($order_id)
             ->where('status', 'done')
             ->whereMonth('date_at', now()->format('m'))
             ->get();
->>>>>>> Stashed changes
     
         return view('student.detail-finance', [
             'title'         => 'Payment Details',
@@ -560,18 +369,48 @@ public function yourFeedback($order_id)
         ]);
     }
     
-    // Track 
+    // public function track()
+    // {
+    //     $studentId = auth()->guard('student')->id();
+    //     $order = Order::where('student_id', $studentId)
+    //             ->orderBy('date_at', 'desc')
+    //             ->first();
+
+    //     if (!$order) {
+    //         return redirect()->route('homepage')->withErrors('No orders found.');
+    //     }
+
+    //     // Ambil data tracking dari order
+    //     $track = Track::where('order_id', $order->id)->first();
+    //     $messages = $track ? json_decode($track->messages, true) : [];
+
+    //     return view('student.track', [
+    //         'title' => 'Track',
+    //         'order' => $order,
+    //         'messages' => $messages,
+    //     ]);
+    // }
+
+    //  Track 
     public function track()
     {
-        // cari order yang paling awal dari segi detik yang akan di cek tracknya berdasarkan $table->enum('status',['order-received', 'pick-up', 'on-process', 'delivery', 'done']);
         $studentId = auth()->guard('student')->id();
         $order = Order::where('student_id', $studentId)
-            ->orderBy('date_at', 'asc')
+            ->orderBy('date_at', 'desc')
+            ->orderBy('created_at', 'desc')
             ->first();
+
+        if (!$order) {
+            return redirect()->route('homepage')->withErrors('No orders found.');
+        }
+
+        $track = Track::where('order_id', $order->id)->first();
+        $messages = $track ? json_decode($track->messages, true) : [];
 
         return view('student.track', [
             'title' => 'Track',
             'order' => $order,
+            'messages' => $messages,
         ]);
     }
 }

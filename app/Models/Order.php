@@ -17,19 +17,10 @@ class Order extends Model
         'date_at',
         'student_id',
         'dormitory_id',
-<<<<<<< Updated upstream
-        'status',
-        'items',
-    ];
-
-    protected $casts = [
-        'items' => 'array',
-=======
         'weight',
         'price',
         'status',
         'items',
->>>>>>> Stashed changes
     ];
 
     protected $casts = [
@@ -77,21 +68,6 @@ class Order extends Model
         return $this->belongsTo(Dormitory::class);
     }
 
-<<<<<<< Updated upstream
-    public function tracks()
-    {
-        return $this->hasMany(Track::class, 'order_id');
-    }
-
-    public function complaints(): HasMany
-    {
-        return $this->hasMany(Complaint::class, 'order_id');
-    }
-
-    public function feedbacks(): HasMany
-    {
-        return $this->hasMany(Feedback::class, 'order_id'); // Jika model Feedback sudah ada
-=======
 
     public function feedbacks(): HasMany
     {
@@ -101,7 +77,6 @@ class Order extends Model
     public function bill(): BelongsTo
     {
         return $this->belongsTo(Bill::class, 'bill_id');
->>>>>>> Stashed changes
     }
 
 }

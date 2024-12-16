@@ -2,16 +2,12 @@
 
 namespace App\Http\Controllers;
 
-<<<<<<< Updated upstream
-use App\Models\Order;
-use App\Models\Student;
-=======
 use App\Models\Bill;
 use App\Models\Admin;
 use App\Models\Order;
+use App\Models\Track;
 use App\Models\Student;
 use App\Models\Feedback;
->>>>>>> Stashed changes
 use App\Models\Complaint;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -68,13 +64,6 @@ class AdminController extends Controller
     // dashboard function
     public function admin_dashboard()
     {
-<<<<<<< Updated upstream
-        return view('admin.dashboard',[
-            // send total user in database 
-            'total_user' => Student::count(),
-            'total_order' => Order::count(),
-            'total_complaint' => Complaint::count(),
-=======
         $total_user = Student::count();
         $total_order = Order::count();
         $total_complaint = Complaint::count();
@@ -88,7 +77,6 @@ class AdminController extends Controller
             'total_order'       => $total_order,
             'total_complaint'   => $total_complaint,
             'monthlyEarnings'   => $monthlyEarnings,
->>>>>>> Stashed changes
         ]);
     }
 
@@ -105,50 +93,6 @@ class AdminController extends Controller
     // order function
     public function admin_order()
     {
-<<<<<<< Updated upstream
-        // ambil semua order yang berasal dari database untuk ditampilkan kedalam tabel admin dan buat total order yang dilakukan oleh user yang akan ditampilkan dalam page admin.order
-        $orders = Order::all();
-        $total_order = Order::count();
-        return view('admin.order', [
-            'orders' => $orders,
-            'total_order' => $total_order,
-        ]);
-    }
-
-    public function admin_order_detail($id)
-    {
-        // ambil data order berdasarkan id yang dikirim dari route
-        $order = Order::with('items')->find($id);
-        return view('admin.order_detail', [
-            'order' => $order,
-            'items' => $order->items,
-        ]);
-    }
-
-    // fungsi untuk mengubah order yaitu status, weight dan total
-    public function admin_order_update(Request $request, $id)
-    {
-        // ambil data order berdasarkan id yang dikirim dari route
-        $order = Order::find($id);
-        // update data order
-        $order->update([
-            'status' => $request->status,
-            'weight' => $request->weight,
-            'total' => $request->total,
-        ]);
-        // redirect ke halaman order
-        return redirect()->route('admin.order');
-    }
-
-    public function showDetail($orderId)
-    {
-        $order = Order::with('student', 'items')->findOrFail($orderId); // Load the items and student relationships
-        return view('admin.detail-order', compact('order', 'order->items'));
-    }
-
-    // complaint function
-    public function admin_complaint()
-=======
         $orders = Order::all();
         $total_order = Order::count();
         return view('admin.order', [
@@ -158,7 +102,6 @@ class AdminController extends Controller
     }
 
     public function admin_order_detail($ordx_id)
->>>>>>> Stashed changes
     {
         $order = Order::where('ordx_id', $ordx_id)->firstOrFail();
         $items = $order->items;
@@ -203,6 +146,60 @@ class AdminController extends Controller
             'total_weight'  => $bill->total_weight + $weight,
             'total_amount'  => $bill->total_amount + $price,
         ]);
+
+        // cari track order dengan order_id yang sama dengan order
+        $track = Track::where('order_id', $order->id)->first();
+
+        switch ($request->status) {
+            case 'picked_up':
+                $track->update([
+                    'messages' => json_encode([
+                        [
+                            'status'        => 'picked_up',
+                            'description'   => 'Order has been picked up',
+                            'date_at'       => now()->setTimezone('Asia/Jakarta')->format('D, d M Y'),
+                            'time_at'       => now()->setTimezone('Asia/Jakarta')->format('H:i') . ' WIB',
+                        ],
+                    ]),
+                ]);
+                break;
+            case 'on_process':
+                $track->update([
+                    'messages' => json_encode([
+                        [
+                            'status'        => 'on_process',
+                            'description'   => 'Order is being processed',
+                            'date_at'       => now()->setTimezone('Asia/Jakarta')->format('D, d M Y'),
+                            'time_at'       => now()->setTimezone('Asia/Jakarta')->format('H:i') . ' WIB',
+                        ],
+                    ]),
+                ]);
+                break;
+            case 'delivered':
+                $track->update([
+                    'messages' => json_encode([
+                        [
+                            'status'        => 'delivered',
+                            'description'   => 'Order has been delivered',
+                            'date_at'       => now()->setTimezone('Asia/Jakarta')->format('D, d M Y'),
+                            'time_at'       => now()->setTimezone('Asia/Jakarta')->format('H:i') . ' WIB',
+                        ],
+                    ]),
+                ]);
+                break;
+            case 'done':
+                $track->update([
+                    'messages' => json_encode([
+                        [
+                            'status'        => 'done',
+                            'description'   => 'Order has been done',
+                            'date_at'       => now()->setTimezone('Asia/Jakarta')->format('D, d M Y'),
+                            'time_at'       => now()->setTimezone('Asia/Jakarta')->format('H:i') . ' WIB',
+                        ],
+                    ]),
+                ]);
+                break;
+        }
 
         return redirect()->route('admin_order')->with('success', 'Order updated successfully');
     }
@@ -267,6 +264,4 @@ class AdminController extends Controller
     
         return redirect()->route('admin_complaint')->with('success', 'Feedback created successfully');
     }
-
-
 }

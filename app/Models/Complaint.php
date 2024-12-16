@@ -12,20 +12,13 @@ class Complaint extends Model
 {
     use HasFactory, SoftDeletes;
     protected $fillable = [
-<<<<<<< Updated upstream
-        // 'ordx_id',
-=======
->>>>>>> Stashed changes
         'student_id',
         'order_id',
         'title',
         'date_at',
         'status',
         'description',
-<<<<<<< Updated upstream
-=======
         'image',
->>>>>>> Stashed changes
     ];
 
     public function order(): BelongsTo

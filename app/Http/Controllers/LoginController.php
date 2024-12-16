@@ -54,7 +54,6 @@ class LoginController extends Controller
         return redirect('/login');
     }
 
-<<<<<<< Updated upstream
     public function loginApi(Request $request)
     {
         $credentials = $request->validate([
@@ -62,7 +61,7 @@ class LoginController extends Controller
             'password' => ['required'],
         ]);
 
-        // Cek apakah user adalah Student
+        // User adalah Student
         $student = Student::where('username', $credentials['username'])->first();
         if ($student && Hash::check($credentials['password'], $student->password)) {
             $token = $student->createToken('StudentToken')->plainTextToken;
@@ -71,7 +70,7 @@ class LoginController extends Controller
                 'role' => 'student',
             ]);}
 
-        // Cek apakah user adalah Admin
+        // User adalah Admin
         $admin = Admin::where('username', $credentials['username'])->first();
         if ($admin && Hash::check($credentials['password'], $admin->password)) {
             $token = $admin->createToken('AdminToken')->plainTextToken;
@@ -85,7 +84,6 @@ class LoginController extends Controller
         return response()->json(['message' => 'Username atau Password salah'], 401);
     }
 
-    // Endpoint untuk mendapatkan data user
     public function getUser(Request $request)
     {
         $user = $request->user();
@@ -96,8 +94,6 @@ class LoginController extends Controller
         ]);
     }
 
-    
-
     public function logoutApi(Request $request)
     {
         $request->user()->currentAccessToken()->delete();
@@ -105,7 +101,5 @@ class LoginController extends Controller
             'message' => 'Logged out',
         ]);
     }
-
-=======
->>>>>>> Stashed changes
+    
 }

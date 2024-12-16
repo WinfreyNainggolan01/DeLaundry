@@ -23,13 +23,6 @@ class Item extends Model
         return $this->hasMany(ItemOrder::class, 'item_id');
     }
 
-<<<<<<< Updated upstream
-    // public function items():HasMany
-    // {
-    //     return $this->hasMany(Item::class);
-    // }
-=======
->>>>>>> Stashed changes
 
     public function orderItems(): HasMany
     {

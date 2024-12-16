@@ -57,16 +57,6 @@ class Student extends Authenticatable
         return $email;
     }
 
-    public function getPhotoAttribute($value)
-    {
-<<<<<<< Updated upstream
-        return $value ? $value : 'img/default-profile.png';
-=======
-        return $value ? 'storage/' . $value : 'storage/default/default-profile.jpg';
->>>>>>> Stashed changes
-    }
-    
-
     // Tambahkan relasi dormitory
     public function dormitory(): BelongsTo // Ubah ini
     {
