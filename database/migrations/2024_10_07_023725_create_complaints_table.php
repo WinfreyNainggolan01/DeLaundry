@@ -18,8 +18,9 @@ return new class extends Migration
             $table->foreignId('order_id')->constrained()->onDelete('cascade');
             $table->string('title');
             $table->date('date_at');
-            $table->string('status');
+            $table->enum('status', ['pending', 'responded']);
             $table->text('description');
+            $table->string('image')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

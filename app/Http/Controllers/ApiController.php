@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Item;
+<<<<<<< Updated upstream
 use App\Models\Admin;
 use App\Models\Order;
 use App\Models\Student;
@@ -16,13 +17,175 @@ class ApiController extends Controller
 {
     public function allStudent()
     {
+=======
+use App\Models\User;
+use App\Models\Admin;
+use App\Models\Order;
+use App\Models\Track;
+use App\Models\Student;
+use App\Models\Complaint;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\RedirectResponse;
+use App\Http\Resources\StudentResource;
+use Illuminate\Support\Facades\Validator;
+
+class ApiController extends Controller
+{
+    // public function loginApi(Request $request)
+    // {
+    //     $credentials = $request->validate([
+    //         'username' => ['required'],
+    //         'password' => ['required'],
+    //     ]);
+
+    //     // User adalah Student
+    //     $student = Student::where('username', $credentials['username'])->first();
+    //     if ($student && Hash::check($credentials['password'], $student->password)) {
+    //         $token = $student->createToken('StudentToken')->plainTextToken;
+    //         return response()->json([
+    //             'token' => $token,
+    //             'role' => 'student',
+    //         ]);}
+
+    //     // User adalah Admin
+    //     $admin = Admin::where('username', $credentials['username'])->first();
+    //     if ($admin && Hash::check($credentials['password'], $admin->password)) {
+    //         $token = $admin->createToken('AdminToken')->plainTextToken;
+    //         return response()->json([
+    //             'token' => $token,
+    //             'role' => 'admin',
+    //         ]);
+    //     }
+
+    //     // Jika login gagal, arahkan kembali ke halaman login dengan pesan error
+    //     return response()->json(['message' => 'Username atau Password salah'], 401);
+    // }
+
+    // public function getUser(Request $request)
+    // {
+    //     $user = $request->user();
+    //     return response()->json([
+    //         'id' => $user->id,
+    //         'name' => $user->name,
+    //         'email' => $user->email,
+    //     ]);
+    // }
+
+    // public function logoutApi(Request $request)
+    // {
+    //     $request->user()->currentAccessToken()->delete();
+    //     return response()->json([
+    //         'message' => 'Logged out',
+    //     ]);
+    // }
+
+
+    public function login(Request $request)
+    {
+        $credentials = $request->validate([
+            'username' => ['required', 'string'],
+            'password' => ['required', 'string'],
+        ]);
+
+        $student = Student::where('username', $credentials['username'])->first();
+        if ($student && Hash::check($credentials['password'], $student->password)) {
+            $token = $student->createToken('StudentToken')->plainTextToken;
+            return response()->json([
+                'message' => 'Login successful',
+                'token' => $token,
+                'role' => 'student',
+                'links' => [
+                    'profile' => route('profile.show', $student->id),
+                ]
+            ], 200);
+        }
+
+        $admin = Admin::where('username', $credentials['username'])->first();
+        if ($admin && Hash::check($credentials['password'], $admin->password)) {
+            $token = $admin->createToken('AdminToken')->plainTextToken;
+            return response()->json([
+                'message' => 'Login successful',
+                'token' => $token,
+                'role' => 'admin',
+                'links' => [
+                    'dashboard' => route('admin.dashboard'), 
+                    'manage_users' => route('admin.manageUsers'),
+                    'view_reports' => route('admin.viewReports')
+                ]
+            ], 200);
+        }
+
+        return response()->json([
+            'error_message' => 'Invalid username or password'
+        ], 401);
+    }
+
+    public function viewOrder(Request $request)
+    {
+        // Cek apakah pengguna terautentikasi
+        $student = auth('sanctum')->user();
+
+        // Jika tidak ada pengguna terautentikasi, kirimkan respons error
+        if (!$student) {
+            return response()->json([
+                'error_message' => 'User not authenticated'
+            ], 401);
+        }
+
+        // Ambil pesanan berdasarkan id pengguna yang terautentikasi
+        $orders = Order::where('student_id', $student->id)->get();
+
+        // Jika tidak ada pesanan
+        if ($orders->isEmpty()) {
+            return response()->json([
+                'message' => 'No orders found for this user.'
+            ], 404);
+        }
+
+        // Jika pesanan ditemukan
+        return response()->json([
+            'message' => 'Orders retrieved successfully',
+            'orders' => $orders,
+        ], 200);
+    }
+
+    public function allStudent()
+    {
+>>>>>>> Stashed changes
         $students = Student::all();
         return StudentResource::collection($students);
     }
 
+<<<<<<< Updated upstream
     public function getProfile(Request $request){
         $user = $request->user();
         return StudentResource::make($user);
+=======
+    public function getProfile(){
+        // cari student berdasarkan modelnya
+        $student = auth('sanctum')->user();
+        return StudentResource::make($student);
+    }
+
+    public function getProfileHts(Request $request)
+    {
+        $user = $request->user();
+
+        $studentResource = StudentResource::make($user);
+
+        $studentResource->additional([
+            'links' => [
+                'edit_profile' => URL::route('editProfile'), 
+                'view_orders' => URL::route('viewOrders'),
+                'view_complaints' => URL::route('viewComplaints')
+            ]
+        ]);
+
+        return $studentResource;
+>>>>>>> Stashed changes
     }
 
     public function editProfile(Request $request){
@@ -158,6 +321,11 @@ class ApiController extends Controller
                 'student_id' => $student->id,
                 'dormitory_id' => $student->dormitory_id,
                 'status' => 'Pending',
+<<<<<<< Updated upstream
+=======
+                'weight' => 0,
+                'price' => 0,
+>>>>>>> Stashed changes
                 'items' => [], 
             ]);
 
@@ -173,6 +341,10 @@ class ApiController extends Controller
                 'items' => $orderedItems->toArray(),
             ]);
 
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
             Item::where('student_id', $student->id)->delete();
 
             return response()->json([
@@ -212,22 +384,46 @@ class ApiController extends Controller
         ], 200);
     }
 
+<<<<<<< Updated upstream
     public function createComplaintOrder(Request $request){
         $order = Order::find($request->order_id);
         if (!$order) {
             return response()->json([
                 'error' => 'Order ID not found',
             ], 404);
+=======
+    public function createComplaintOrder(Request $request, $ordx_id){
+        $validatedData = $request->validate([
+            'title' => 'required|string|max:100',
+            'description' => 'required|string|max:255',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+        ]);
+
+        $student = auth('sanctum')->user();
+        $order = Order::where('ordx_id', $ordx_id)->first();
+        if(!$order) {
+            return response()->json([
+                'error' => 'Order ID not found'
+            ]);
+>>>>>>> Stashed changes
         }
 
         $complaint = Complaint::create([
             'order_id' => $order->id,
             'student_id' => $order->student_id,
+<<<<<<< Updated upstream
             'title' => $request->title,
             'date' => now()->format('Y-m-d'),
             'status' => 'pending',
             'image' => $request->image ?? null,
             'description' => $request->description,
+=======
+            'title' => $validatedData['title'],
+            'date_at' => now()->format('Y-m-d'),
+            'status' => 'pending',
+            'image' => $request->image ?? null,
+            'description' => $validatedData['description'],
+>>>>>>> Stashed changes
         ]);
 
         return response()->json([

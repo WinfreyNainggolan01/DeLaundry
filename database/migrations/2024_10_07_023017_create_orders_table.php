@@ -19,6 +19,11 @@ return new class extends Migration
             $table->foreignId('student_id')->constrained()->cascadeOnDelete();
             $table->foreignId('dormitory_id')->constrained()->cascadeOnDelete();
             $table->enum('status', ['pending', 'picked_up', 'on_process', 'delivered', 'done']);
+<<<<<<< Updated upstream
+=======
+            $table->float('weight');
+            $table->float('price');
+>>>>>>> Stashed changes
             $table->json('items');
             $table->softDeletes();
             $table->timestamps();

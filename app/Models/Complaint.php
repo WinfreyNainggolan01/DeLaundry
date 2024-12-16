@@ -12,23 +12,35 @@ class Complaint extends Model
 {
     use HasFactory, SoftDeletes;
     protected $fillable = [
+<<<<<<< Updated upstream
         // 'ordx_id',
+=======
+>>>>>>> Stashed changes
         'student_id',
         'order_id',
         'title',
         'date_at',
         'status',
         'description',
+<<<<<<< Updated upstream
+=======
+        'image',
+>>>>>>> Stashed changes
     ];
 
     public function order(): BelongsTo
     {
-        return $this->belongsTo(Order::class);
+        return $this->belongsTo(Order::class, 'order_id');
     }
 
     public function student(): BelongsTo
     {
         return $this->belongsTo(Student::class);
+    }
+
+    public function feedback(): BelongsTo
+    {
+        return $this->belongsTo(Feedback::class);
     }
 
     public function photos(): HasMany

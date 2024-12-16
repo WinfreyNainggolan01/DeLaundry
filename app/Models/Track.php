@@ -21,5 +21,9 @@ class Track extends Model
     {
         return $this->belongsTo(Order::class, 'order_id');
     }
+<<<<<<< Updated upstream
+=======
+    
+>>>>>>> Stashed changes
 
 }

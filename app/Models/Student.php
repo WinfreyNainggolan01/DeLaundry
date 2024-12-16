@@ -59,7 +59,11 @@ class Student extends Authenticatable
 
     public function getPhotoAttribute($value)
     {
+<<<<<<< Updated upstream
         return $value ? $value : 'img/default-profile.png';
+=======
+        return $value ? 'storage/' . $value : 'storage/default/default-profile.jpg';
+>>>>>>> Stashed changes
     }
     
 
@@ -67,5 +71,10 @@ class Student extends Authenticatable
     public function dormitory(): BelongsTo // Ubah ini
     {
         return $this->belongsTo(Dormitory::class);
+    }
+
+    public function bill():BelongsTo
+    {
+        return $this->belongsTo(Bill::class);
     }
 }

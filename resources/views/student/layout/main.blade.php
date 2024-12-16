@@ -36,17 +36,25 @@
                 <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
                 <nav class="flex space-x-4">
                   <a href="{{ route('homepage') }}" 
-                     class="{{ request()->routeIs('homepage') ? 'bg-gray-200 text-black' : 'text-black hover:bg-gray-300 hover:text-sky-700' }} rounded-md px-3 py-2 text-sm font-semibold" 
+                     class="{{ request()->routeIs('homepage') ? 'bg-gray-200 text-black' : 'text-black hover:bg-gray-300 hover:text-sky-700' }} 
+                     rounded-md px-3 py-2 text-sm font-semibold" 
                      aria-current="page">Home</a>
               
                   <a href="{{ route('order') }}" 
-                     class="{{ request()->routeIs('order') ? 'bg-gray-200 text-black' : 'text-black hover:bg-gray-300 hover:text-sky-700' }} rounded-md px-3 py-2 text-sm font-semibold">Order</a>
+                     class="{{ request()->routeIs('order') ? 'bg-gray-200 text-black' : 'text-black hover:bg-gray-300 hover:text-sky-700' }}
+                      rounded-md px-3 py-2 text-sm font-semibold">Order</a>
               
                   <a href="{{ route('finance') }}" 
+<<<<<<< Updated upstream
                      class="{{ request()->routeIs('finance') ? 'bg-gray-200 text-black' : 'text-black hover:bg-gray-300 hover:text-sky-700' }} rounded-md px-3 py-2 text-sm font-semibold">Finance</a>
+=======
+                     class="{{ request()->routeIs('finance') ? 'bg-gray-200 text-black' : 'text-black hover:bg-gray-300 hover:text-sky-700' }} 
+                     rounded-md px-3 py-2 text-sm font-semibold">Finance</a>
+>>>>>>> Stashed changes
               
                   <a href="{{ route('tracking') }}" 
-                     class="{{ request()->routeIs('tracking') ? 'bg-gray-200 text-black' : 'text-black hover:bg-gray-300 hover:text-sky-700' }} rounded-md px-3 py-2 text-sm font-semibold">Tracking</a>
+                     class="{{ request()->routeIs('tracking') ? 'bg-gray-200 text-black' : 'text-black hover:bg-gray-300 hover:text-sky-700' }} 
+                     rounded-md px-3 py-2 text-sm font-semibold">Tracking</a>
               </nav>
               
               </div>

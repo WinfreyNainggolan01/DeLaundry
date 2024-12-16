@@ -89,12 +89,22 @@
                                 <td class="px-4 py-2 border text-left">{{ $index + 1 }}</td>
                                 <td class="px-4 py-2 border text-left">{{ $order->ordx_id }}</td>
                                 <td class="px-4 py-2 border text-left">{{ $order->date_at }}</td>
+<<<<<<< Updated upstream
                                 <td class="px-4 py-2 border text-left">{{ $order->itemOrders->sum('weight') }}</td>
                                 <td class="px-4 py-2 border text-left">Rp. {{ number_format($order->itemOrders->sum('price'), 0, ',', '.') }}</td>
                                 <td class="px-4 py-2 border text-left">{{ ucfirst(strtolower($order->status)) ?? 'Pending' }}</td>
                                 <td class="px-4 py-2 border text-left">
                                     <div x-data="{ open: false }" class="relative inline-block text-left">
                                         <button @click="open = !open" class="flex items-center px-2 py-1 bg-gray-200 text-gray-700 text-sm rounded-md border border-gray-300 hover:bg-gray-300 focus:outline-none">
+=======
+                                <td class="px-4 py-2 border text-left">{{ $order->weight }}</td>
+                                <td class="px-4 py-2 border text-left">Rp. {{ $order->price }}</td>
+                                <td class="px-4 py-2 border text-left">{{ \App\Models\Order::statusToValue($order->status) }}</td>
+                                <td class="px-4 py-2 border text-left">
+                                    <div x-data="{ open: false }" class="relative inline-block text-left">
+                                        <button @click="open = !open" class="flex items-center px-2 py-1 bg-gray-200 text-gray-700 text-sm rounded-md border border-gray-300
+                                         hover:bg-gray-300 focus:outline-none">
+>>>>>>> Stashed changes
                                             Tools
                                         </button>
                                         <div x-show="open" @click.away="open = false" class="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-10">

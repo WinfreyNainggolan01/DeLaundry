@@ -13,9 +13,11 @@ return new class extends Migration
     {
         Schema::create('admins', function (Blueprint $table) {
             $table->id();
+            $table->string('code_admin')->unique();
             $table->string('name');
             $table->string('username')->unique();
             $table->string('password');
+            $table->enum('gender',['male', 'female']);
             $table->string('phone_number');
             $table->string('photo')->nullable();
             $table->softDeletes();

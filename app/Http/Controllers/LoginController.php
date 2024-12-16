@@ -23,17 +23,13 @@ class LoginController extends Controller
             'password' => ['required'],
         ]);
 
-        // dd('berhasil login');
-
         if (Auth::guard('student')->attempt($credentials)) {
             $request->session()->regenerate();
-            // dd('berhasil login student');
             return redirect()->intended('/homepage');
         }
 
         if (Auth::guard('admin')->attempt($credentials)) {
             $request->session()->regenerate();
-            // dd('berhasil login admin');
             return redirect()->intended('/admin-dashboard');
         }
 
@@ -58,6 +54,7 @@ class LoginController extends Controller
         return redirect('/login');
     }
 
+<<<<<<< Updated upstream
     public function loginApi(Request $request)
     {
         $credentials = $request->validate([
@@ -109,4 +106,6 @@ class LoginController extends Controller
         ]);
     }
 
+=======
+>>>>>>> Stashed changes
 }

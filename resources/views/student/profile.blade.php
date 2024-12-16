@@ -15,7 +15,12 @@
     <div class="max-w-5xl mx-auto px-6">
         <div class="flex items-center mb-4">
             <!-- Display Profile Photo -->
+<<<<<<< Updated upstream
             <img src="{{ asset('storage/' . (Auth::guard('student')->user()->photo ?? 'img/user.jpg')) }}" class="h-20 w-20 rounded-full" alt="Profile Image">
+=======
+            <img src="{{ url(Auth::guard('student')->user()->photo) }}" class="h-20 w-20 rounded-full" alt="Profile Image">
+           
+>>>>>>> Stashed changes
             <div class="ml-4">
                 <p class="text-lg font-medium">{{ Auth::guard('student')->user()->name }}</p>
                 <p class="text-gray-500">{{ Auth::guard('student')->user()->generateEmail(Auth::guard('student')->user()->nim) }}</p>
@@ -88,7 +93,11 @@
             </div>
             <div class="mb-4">
                 <label for="profile_photo" class="block text-gray-700 font-bold mb-2">Profile Photo</label>
+<<<<<<< Updated upstream
                 <input type="file" id="profile_photo" name="profile_photo" class="w-full px-3 py-2 border rounded">
+=======
+                <input type="file" accept="image/*" id="profile_photo" name="profile_photo" class="w-full px-3 py-2 border rounded">
+>>>>>>> Stashed changes
             </div>
             <div class="mt-6 flex justify-end space-x-4">
                 <button type="button" onclick="closeEditModal()" class="px-4 py-2 rounded-lg bg-gray-500 text-white">Cancel</button>

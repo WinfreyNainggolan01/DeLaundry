@@ -11,12 +11,20 @@ return new class extends Migration
      */
     public function up(): void
     {
+<<<<<<< Updated upstream
         Schema::create('feedbacks', function (Blueprint $table) {
+=======
+        Schema::create('feedback', function (Blueprint $table) {
+>>>>>>> Stashed changes
             $table->id();
             $table->foreignId('complaint_id')->constrained()->onDelete('cascade');
             $table->foreignId('student_id')->constrained()->onDelete('cascade');
             $table->text('feedback_response');
+<<<<<<< Updated upstream
             $table->enum('status', ['pending', 'resolved', 'unresolved'])->default('pending');
+=======
+            $table->enum('status', ['resolved', 'unresolved'])->default('unresolved');
+>>>>>>> Stashed changes
             $table->date('date_at');
             $table->timestamps();
         });

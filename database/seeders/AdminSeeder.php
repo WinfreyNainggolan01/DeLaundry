@@ -23,6 +23,7 @@ class AdminSeeder extends Seeder
         
         $admins = [
             [
+                'code_admin' => 'ADM001',
                 'name' => 'Jaka Sembung',
                 'username' => 'jaka123',
                 'password' => bcrypt('jaka123'),

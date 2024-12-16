@@ -15,7 +15,11 @@ return new class extends Migration
             $table->id();
             $table->foreignId('student_id')->nullable()->constrained()->onDelete('cascade');
             $table->foreignId('order_id')->nullable()->constrained()->onDelete('cascade');
+<<<<<<< Updated upstream
             $table->foreignId('feedback_id')->nullable()->constrained('feedbacks')->onDelete('cascade'); // Pastikan ke tabel feedbacks
+=======
+            $table->foreignId('feedback_id')->nullable()->constrained('feedback')->onDelete('cascade'); // Pastikan ke tabel feedbacks
+>>>>>>> Stashed changes
             $table->text('message');
             $table->date('date_at');
             $table->enum('is_read',['unread','read'])->default('unread');
