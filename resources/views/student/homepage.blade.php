@@ -2,14 +2,6 @@
 @section('head')
     <title>Homepage | DeLaundry</title>
 @endsection
-{{-- 
-@section('header')
-<header class="bg-dark-blue shadow">
-    <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-        <h1 class="text-2xl font-bold tracking-tight text-gray-100">Welcome, {{ Auth::guard('student')->user()->name }}</h1>
-    </div>
-</header>
-@endsection --}}
 
 @section('content')
 <main>
@@ -21,11 +13,8 @@
 
         <!-- Right Text Section -->
         <div class="flex flex-col justify-center">
-                <p class="text-lg mb-6">Selamat Datang di DeLaundry. DeLaundry adalah layanan laundry profesional yang dirancang khusus untuk
-                     memenuhi kebutuhan mahasiswa IT Del. Kami memahami jadwal kuliah yang padat dan aktivitas kampus yang sibuk, sehingga kami 
-                     berkomitmen untuk menyediakan solusi laundry yang efisien dan dapat diandalkan.</p>
-                <p class="text-lg mb-8">Dengan layanan kami, pakaian Anda akan selalu bersih, rapi, dan harum. Fokuskan energi Anda untuk belajar
-                     dan menjalani kegiatan kampus, sementara kebutuhan laundry Anda kami tangani dengan standar kualitas terbaik.</p>
+                <p class="text-lg mb-6">Selamat Datang di DeLaundry. DeLaundry adalah layanan laundry profesional yang dirancang khusus untuk memenuhi kebutuhan mahasiswa IT Del. Kami memahami jadwal kuliah yang padat dan aktivitas kampus yang sibuk, sehingga kami berkomitmen untuk menyediakan solusi laundry yang efisien dan dapat diandalkan.</p>
+                <p class="text-lg mb-8">Dengan layanan kami, pakaian Anda akan selalu bersih, rapi, dan harum. Fokuskan energi Anda untuk belajar dan menjalani kegiatan kampus, sementara kebutuhan laundry Anda kami tangani dengan standar kualitas terbaik.</p>
                 
                 <!-- Buttons -->
                 
@@ -36,8 +25,7 @@
         <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
             <div class="mx-auto max-w-screen-sm text-center lg:mb-16 mb-8">
             <h2 class="mb-4 text-3xl lg:text-4xl tracking-tight font-extrabold text-black ">Our Services</h2>
-            <p class="font-light text-black sm:text-xl">Di DeLaundry, kami berfokus pada memberikan pakaian yang bersih, segar, dan layanan yang sesuai dengan kebutuhan Anda. 
-                Cepat, dapat diandalkan, dan berorientasi pada pelanggan, kami hadir untuk mempermudah kebutuhan laundry Anda.</p>
+            <p class="font-light text-black sm:text-xl">Di DeLaundry, kami berfokus pada memberikan pakaian yang bersih, segar, dan layanan yang sesuai dengan kebutuhan Anda. Cepat, dapat diandalkan, dan berorientasi pada pelanggan, kami hadir untuk mempermudah kebutuhan laundry Anda.</p>
             </div> 
             <div class="grid gap-16 lg:grid-cols-3 py-6">
             <!-- Card 1 -->

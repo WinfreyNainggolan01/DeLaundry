@@ -8,7 +8,7 @@
 <main class="container mx-auto px-4 py-8">
     <section class="container mx-auto px-4 py-8">
         <h2 class="text-2xl font-bold text-gray-800 mb-6">Fill Your Items</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
             <form action="{{ route('add.item') }}" method="POST" class="w-full mb-8">
                 @csrf
                 <div class="mb-4">
@@ -29,6 +29,11 @@
                     <button type="submit" class="bg-sky-700 text-white px-4 py-2 rounded-lg">Add Item</button>
                 </div>
             </form>
+
+            {{-- Right Section --}}
+            <div class="relative text-white hidden lg:block">
+                <img class="absolute inset-0 bg-no-repeat bg-cover bg-center opacity-50 scale-85 -my-24" src="{{ asset('img/order-item.svg') }}" alt="insert item">
+            </div>
         </div>
 
         <div class="mt-8">

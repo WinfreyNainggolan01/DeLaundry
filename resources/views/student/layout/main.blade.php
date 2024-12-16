@@ -36,25 +36,17 @@
                 <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
                 <nav class="flex space-x-4">
                   <a href="{{ route('homepage') }}" 
-                     class="{{ request()->routeIs('homepage') ? 'bg-gray-200 text-black' : 'text-black hover:bg-gray-300 hover:text-sky-700' }} 
-                     rounded-md px-3 py-2 text-sm font-semibold" 
+                     class="{{ request()->routeIs('homepage') ? 'bg-gray-200 text-black' : 'text-black hover:bg-gray-300 hover:text-sky-700' }} rounded-md px-3 py-2 text-sm font-semibold" 
                      aria-current="page">Home</a>
               
                   <a href="{{ route('order') }}" 
-                     class="{{ request()->routeIs('order') ? 'bg-gray-200 text-black' : 'text-black hover:bg-gray-300 hover:text-sky-700' }}
-                      rounded-md px-3 py-2 text-sm font-semibold">Order</a>
+                     class="{{ request()->routeIs('order') ? 'bg-gray-200 text-black' : 'text-black hover:bg-gray-300 hover:text-sky-700' }} rounded-md px-3 py-2 text-sm font-semibold">Order</a>
               
                   <a href="{{ route('finance') }}" 
-<<<<<<< Updated upstream
                      class="{{ request()->routeIs('finance') ? 'bg-gray-200 text-black' : 'text-black hover:bg-gray-300 hover:text-sky-700' }} rounded-md px-3 py-2 text-sm font-semibold">Finance</a>
-=======
-                     class="{{ request()->routeIs('finance') ? 'bg-gray-200 text-black' : 'text-black hover:bg-gray-300 hover:text-sky-700' }} 
-                     rounded-md px-3 py-2 text-sm font-semibold">Finance</a>
->>>>>>> Stashed changes
               
                   <a href="{{ route('tracking') }}" 
-                     class="{{ request()->routeIs('tracking') ? 'bg-gray-200 text-black' : 'text-black hover:bg-gray-300 hover:text-sky-700' }} 
-                     rounded-md px-3 py-2 text-sm font-semibold">Tracking</a>
+                     class="{{ request()->routeIs('tracking') ? 'bg-gray-200 text-black' : 'text-black hover:bg-gray-300 hover:text-sky-700' }} rounded-md px-3 py-2 text-sm font-semibold">Tracking</a>
               </nav>
               
               </div>
@@ -63,7 +55,7 @@
 
           <div x-data="{ isNotificationOpen: false, isProfileOpen: false }" class="hidden md:block">
             <div class="ml-4 flex items-center md:ml-6">
-              <!-- Notification -->
+              {{-- <!-- Notification -->
               <div class="relative ml-3" x-data="{ isNotificationOpen: false, isProfileOpen: false }">
                 <!-- Button Notification -->
                 <button @click="isNotificationOpen = !isNotificationOpen; isProfileOpen = false" 
@@ -91,7 +83,7 @@
                     <a href="#" class="block px-4 py-2 text-sm text-gray-700">Notification 1</a>
                     <a href="#" class="block px-4 py-2 text-sm text-gray-700">Notification 2</a>
                 </div>
-            </div>
+            </div> --}}
         
                 <!-- Profile -->
                 <div class="relative ml-3">

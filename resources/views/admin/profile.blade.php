@@ -10,12 +10,12 @@
         <div class="bg-white p-8 rounded-lg shadow-lg max-w-4xl mx-auto mt-10">
             <h1 class="text-3xl font-bold mb-6 text-gray-800">Your Profile</h1>
             <div class="flex justify-center mb-6">
-                {{-- @if (Auth::guard('admin')->user()->photo != null)
+                @if (Auth::guard('admin')->user()->photo != null)
                     <img alt="Profile Photo" class="rounded-full w-32 h-32 object-cover" height="128" src="{{ url('storage/'. Auth::guard('admin')->user()->photo) }}" width="128"/>
                 @else
                     <img alt="Profile Photo" class="rounded-full w-32 h-32 object-cover" height="128" src="{{ url('storage/default/default-profile.jpg') }}" width="128"/>
-                @endif --}}
-                <img alt="Profile Photo" class="rounded-full w-32 h-32 object-cover" height="128" src="{{ asset('img/default-profile.jpg') }}" width="128"/>
+                @endif
+                {{-- <img alt="Profile Photo" class="rounded-full w-32 h-32 object-cover" height="128" src="{{ asset('img/default-profile.jpg') }}" width="128"/> --}}
             </div>
             <div class="space-y-6">
                 <div class="flex items-center">

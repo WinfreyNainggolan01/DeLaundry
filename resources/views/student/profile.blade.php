@@ -15,12 +15,13 @@
     <div class="max-w-5xl mx-auto px-6">
         <div class="flex items-center mb-4">
             <!-- Display Profile Photo -->
-<<<<<<< Updated upstream
-            <img src="{{ asset('storage/' . (Auth::guard('student')->user()->photo ?? 'img/user.jpg')) }}" class="h-20 w-20 rounded-full" alt="Profile Image">
-=======
-            <img src="{{ url(Auth::guard('student')->user()->photo) }}" class="h-20 w-20 rounded-full" alt="Profile Image">
-           
->>>>>>> Stashed changes
+            @if (Auth::guard('student')->user()->photo)
+                <img src="{{ url('storage/'. Auth::guard('student')->user()->photo) }}" class="h-20 w-20 rounded-full" alt="Profile Image">
+            @else
+                <img src="{{  url('storage/default/default-profile.jpg') }}" class="h-20 w-20 rounded-full" alt="Profile Image">
+            @endif
+
+            <!-- Display User Information -->
             <div class="ml-4">
                 <p class="text-lg font-medium">{{ Auth::guard('student')->user()->name }}</p>
                 <p class="text-gray-500">{{ Auth::guard('student')->user()->generateEmail(Auth::guard('student')->user()->nim) }}</p>
@@ -65,7 +66,7 @@
             </div>
             <div class="mt-6 flex justify-end">
                 <!-- Button to Open Modal for Editing -->
-                <button onclick="openEditModal()" class="bg-sky-800 text-white px-4 py-2 rounded-md hover:bg-blue-700">Edit Profile</button>
+                <button onclick="openEditModal()" class="bg-sky-800 text-white px-4 py-2 rounded-md hover:bg-blue-600">Edit Profile</button>
             </div>
         </div>
     </div>
@@ -93,11 +94,7 @@
             </div>
             <div class="mb-4">
                 <label for="profile_photo" class="block text-gray-700 font-bold mb-2">Profile Photo</label>
-<<<<<<< Updated upstream
-                <input type="file" id="profile_photo" name="profile_photo" class="w-full px-3 py-2 border rounded">
-=======
                 <input type="file" accept="image/*" id="profile_photo" name="profile_photo" class="w-full px-3 py-2 border rounded">
->>>>>>> Stashed changes
             </div>
             <div class="mt-6 flex justify-end space-x-4">
                 <button type="button" onclick="closeEditModal()" class="px-4 py-2 rounded-lg bg-gray-500 text-white">Cancel</button>

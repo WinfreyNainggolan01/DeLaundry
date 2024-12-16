@@ -14,9 +14,9 @@
 </head>
 <body class="bg-dark-blue">
     <div class="flex min-h-screen items-center justify-center px-6 py-12 lg:px-8">
-        <div class="font-inter grid grid-cols-1 lg:grid-cols-2 gap-16 items-center lg:px-20">
+        <div class="font-inter grid grid-cols-1 gap-16 items-center lg:grid-cols-2 lg:px-20">
             <!-- Left Section: Image and Text -->
-            <div class="relative text-white">
+            <div class="relative text-white hidden lg:block">
                 <img class="absolute inset-0 bg-no-repeat bg-cover bg-center opacity-20 scale-110 -my-24" src="{{ asset('img/well-done-baloon.png') }}" alt="balloon">
                 <div class="relative z-10">
                     <h1 class="text-sm font-semibold uppercase tracking-wide text-teal-300">Best Laundry</h1>
@@ -54,7 +54,7 @@
                         <div>
                             <label for="username" class="block text-sm font-medium leading-6 text-gray-900">Username</label>
                             <div class="mt-2">
-                                <input id="username" name="username" type="text" autocomplete="username" class="block w-full rounded-md border-0 py-1.5  text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-800 sm:text-sm sm:leading-6 p-3 
+                                <input id="username" name="username" type="text" autocomplete="username" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-800 sm:text-sm sm:leading-6 p-3 
                                 @error('username') border-red-500 @enderror" autofocus required>
                             </div>
                             @error('username')

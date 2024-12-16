@@ -31,7 +31,7 @@
                 </tr>
                 <tr>
                     <td class="py-2 px-4 border">Customer</td>
-                    <td class="py-2 px-4 border">{{ ucfirst(strtolower(auth()->guard('student')->user()->name)) }}</td>
+                    <td class="py-2 px-4 border">{{ ucwords(strtolower(auth()->guard('student')->user()->name)) }}</td>
                 </tr>
                 <tr>
                     <td class="py-2 px-4 border">Date</td>

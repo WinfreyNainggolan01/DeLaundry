@@ -55,16 +55,16 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <!-- Welcome Section -->
             <div class="mb-8">
-                <h1 class="text-2xl font-bold text-gray-900 mb-4">Welcome to Your Order Page!</h1>
+                
                 <p class="text-gray-700">
-                    Here, you will find a complete list of your orders with all the important details easily accessible.
-                    This page allows you to thoroughly review your order information, track their status, and take action when necessary. 
-                    Through the tools button, you can file a complaint for a specific order, ensuring that your concerns are handled with utmost care.
+                    Di sini, Anda akan menemukan daftar lengkap pesanan Anda dengan semua detail penting yang mudah diakses.
+                    Halaman ini memungkinkan Anda untuk meninjau secara menyeluruh informasi pesanan Anda, melacak statusnya, dan mengambil tindakan yang diperlukan.
+                    Melalui tombol alat, Anda dapat mengajukan keluhan untuk pesanan tertentu, memastikan bahwa keluhan Anda ditangani dengan sangat hati-hati.
                 </p>
                 <p class="text-gray-700 mt-4">
-                    Additionally, you can view responses to any complaints you’ve submitted, providing you with clear and transparent information.
-                    The tools also allow you to explore detailed information about each order you’ve placed. 
-                    Browse through your orders now, and let us ensure your laundry experience remains smooth, hassle-free, and satisfying!
+                    Selain itu, Anda dapat melihat tanggapan atas setiap keluhan yang telah Anda ajukan, memberikan Anda informasi yang jelas dan transparan.
+                    Alat-alat ini juga memungkinkan Anda untuk mengeksplorasi informasi terperinci tentang setiap pesanan yang telah Anda lakukan.
+                    Jelajahi pesanan Anda sekarang, dan biarkan kami memastikan pengalaman laundry Anda tetap lancar, bebas repot, dan memuaskan!
                 </p>
             </div>
 
@@ -88,23 +88,13 @@
                             <tr class="border-t odd:bg-gray-50 even:bg-white">
                                 <td class="px-4 py-2 border text-left">{{ $index + 1 }}</td>
                                 <td class="px-4 py-2 border text-left">{{ $order->ordx_id }}</td>
-                                <td class="px-4 py-2 border text-left">{{ $order->date_at }}</td>
-<<<<<<< Updated upstream
-                                <td class="px-4 py-2 border text-left">{{ $order->itemOrders->sum('weight') }}</td>
-                                <td class="px-4 py-2 border text-left">Rp. {{ number_format($order->itemOrders->sum('price'), 0, ',', '.') }}</td>
-                                <td class="px-4 py-2 border text-left">{{ ucfirst(strtolower($order->status)) ?? 'Pending' }}</td>
-                                <td class="px-4 py-2 border text-left">
-                                    <div x-data="{ open: false }" class="relative inline-block text-left">
-                                        <button @click="open = !open" class="flex items-center px-2 py-1 bg-gray-200 text-gray-700 text-sm rounded-md border border-gray-300 hover:bg-gray-300 focus:outline-none">
-=======
+                                <td class="px-4 py-2 border text-left">{{ \Carbon\Carbon::parse($order->date_at)->format('d-m-Y') }}</td>
                                 <td class="px-4 py-2 border text-left">{{ $order->weight }}</td>
                                 <td class="px-4 py-2 border text-left">Rp. {{ $order->price }}</td>
                                 <td class="px-4 py-2 border text-left">{{ \App\Models\Order::statusToValue($order->status) }}</td>
                                 <td class="px-4 py-2 border text-left">
                                     <div x-data="{ open: false }" class="relative inline-block text-left">
-                                        <button @click="open = !open" class="flex items-center px-2 py-1 bg-gray-200 text-gray-700 text-sm rounded-md border border-gray-300
-                                         hover:bg-gray-300 focus:outline-none">
->>>>>>> Stashed changes
+                                        <button @click="open = !open" class="flex items-center px-2 py-1 bg-gray-200 text-gray-700 text-sm rounded-md border border-gray-300 hover:bg-gray-300 focus:outline-none">
                                             Tools
                                         </button>
                                         <div x-show="open" @click.away="open = false" class="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-10">

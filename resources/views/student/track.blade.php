@@ -5,56 +5,59 @@
 @endsection
 
 @section('content')
-<main>
-    <div class="bg-white py-6 sm:py-8 lg:py-12">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <h2 class="text-3xl font-extrabold text-gray-900 text-center mb-4">Your Order Status</h2>
-    <p class="text-center text-base text-gray-600 mb-8">
-        This is the Laundry Order Tracking page! Easily track your laundry status from Order Received, Pick Up, On Process, to Delivery. Stay informed with real-time updates, ensuring you always know where your order is without any hassle. Enjoy the convenience of seamless tracking, making your laundry experience smooth and worry-free.
+<main class="container mx-auto px-4 py-8">
+    <p class="text-center text-gray-700 mt-4">
+        Ini adalah halaman Pelacakan Pesanan Laundry! Pantau status laundry Anda dengan mudah mulai dari Pesanan Diterima, Penjemputan, dan Proses Pencucian, hingga Pengantaran. Tetap terinformasi dengan pembaruan real-time, memastikan Anda selalu mengetahui perkembangan pesanan tanpa repot. Nikmati kenyamanan pelacakan yang mulus, menjadikan pengalaman laundry Anda lebih praktis dan bebas khawatir.
     </p>
-
-    <div class="bg-gray-100 p-6 rounded-lg shadow-md max-w-full mx-auto mb-8">
-        <h3 class="text-center text-lg font-semibold text-gray-700 mb-4">Order Number: <span class="text-sky-600">{{ $order->ordx_id }}</span></h3>
-
-        <div class="flex justify-between items-center w-full max-w-5xl mx-auto">
+    <div class="bg-white shadow rounded-lg p-6 mt-8">
+        <div class="flex items-center justify-between mb-6">
+            <span class="text-gray-700 font-semibold">Order Number</span>
+            <span class="text-blue-900 font-bold">{{ $order->ordx_id }}</span>
+        </div>
+        <div class="flex items-center justify-between mb-6">
             @php
                 $statuses = ['Order Received', 'Pick Up', 'On Process', 'Delivery', 'Done'];
-                $completed = $tracks->pluck('status')->toArray();
+                $currentStatus = $order->status;
+                $statusIndex = array_search($currentStatus, ['pending', 'picked_up', 'on_process', 'delivered', 'done']);
             @endphp
-            @foreach ($statuses as $status)
-                <div class="text-center">
-                    <div class="{{ in_array($status, $completed) ? 'bg-sky-600 text-white' : 'bg-gray-300 text-gray-500' }} w-12 h-12 rounded-full flex items-center justify-center mx-auto">
-                        <img src="img/{{ strtolower(str_replace(' ', '-', $status)) }}.png" alt="{{ $status }}" class="w-8 h-8" />
+            @foreach ($statuses as $index => $status)
+                <div class="flex flex-col items-center">
+                    <div class="{{ $index <= $statusIndex ? 'bg-sky-600 text-white' : 'bg-gray-300 text-gray-500' }} w-12 h-12 rounded-full flex items-center justify-center mx-auto">
+                        <img src="{{ asset('img/track/'. strtolower(str_replace(' ', '-', $status))) . '.png'}}" alt="{{ $status }}" class="w-8 h-8" />
                     </div>
-                    <p class="mt-2 text-sm font-medium {{ in_array($status, $completed) ? 'text-gray-700' : 'text-gray-500' }}">{{ $status }}</p>
+                    <p class="mt-2 text-sm font-medium {{ $index <= $statusIndex ? 'text-gray-700' : 'text-gray-500' }}">{{ $status }}</p>
                 </div>
                 @if (!$loop->last)
-                    <div class="mx-2"></div>
+                    <div class="flex-1 h-1 {{ $index < $statusIndex ? 'bg-sky-600' : 'bg-gray-300' }}"></div>
                 @endif
             @endforeach
         </div>
-    </div>
 
-    <div class="max-w-5xl mx-auto">
-        @foreach ($tracks as $track)
-            <div class="flex mb-4">
-                <div class="w-1/4 text-gray-500 text-sm">
-                    <p>{{ \Carbon\Carbon::parse($track->date_at)->format('D, d M Y H:i') }}</p>
+        <div class="text-gray-700">
+            @php
+                $statusDescriptions = [
+                    'pending' => 'Your laundry order has been successfully placed and is awaiting pickup.',
+                    'picked_up' => 'Our team is on the way to collect your laundry for processing.',
+                    'on_process' => 'Your laundry is being cleaned and prepared with care.',
+                    'delivered' => 'Your laundry is on the way to be delivered to you.',
+                    'done' => 'Your laundry order has been completed and delivered.'
+                ];
+            @endphp
+            @foreach ($messages as $message)
+                <div class="mb-4">
+                    <p class="font-semibold">{{ $message['date_at'] }}</p>
+                    <p class="text-sm">{{ $message['time_at'] }}</p>
+                    <p class="mt-2">{{ ucfirst(str_replace('_', ' ', $message['status'])) }}</p>
+                    <p class="text-sm">{{ $message['description'] }}</p>
                 </div>
-                <div class="w-3/4">
-                    <h4 class="text-gray-700 font-semibold">{{ $track->status }}</h4>
-                    <p class="text-sm text-gray-600">{{ $track->description }}</p>
-                </div>
-            </div>
-        @endforeach
-
-        @if ($tracks->isEmpty())
-            <div class="text-center text-gray-500">
-                <p>No tracking information available for this order.</p>
-            </div>
-        @endif
+            @endforeach
+        </div>
+        <!-- Back to Orders Button -->
+        <div class="mt-8">
+            <a href="{{ route('homepage') }}" class="inline-flex items-center bg-gray-600 text-white py-2 px-6 rounded-lg shadow transition">
+                Back
+            </a>
+        </div>
     </div>
-    </div>
-    </div>
-    </main>
+</main>
 @endsection

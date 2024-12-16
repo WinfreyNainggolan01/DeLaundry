@@ -7,23 +7,6 @@
 @section('content')
 <main class="feedback-page">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-<<<<<<< Updated upstream
-        <h1 class="text-3xl font-bold mb-6">Your Feedback</h1>
-        
-        @if ($feedback)
-        <div class="bg-white p-6 rounded-lg shadow-md">
-            <h2 class="text-xl font-semibold mb-4">Feedback Details</h2>
-            <p><strong>Order ID:</strong> {{ $feedback->order_id }}</p>
-            <p><strong>Subject:</strong> {{ $feedback->subject }}</p>
-            <p><strong>Description:</strong> {{ $feedback->description }}</p>
-            <p><strong>Response:</strong> {{ $feedback->feedback_response }}</p>
-        </div>
-        @else
-        <div class="bg-yellow-100 p-6 rounded-lg shadow-md">
-            <p class="text-yellow-700">No feedback found for this order.</p>
-        </div>
-        @endif
-=======
         
         @if ($feedback)
         <div class="bg-white p-6 rounded-lg shadow-lg border border-gray-200">
@@ -65,14 +48,10 @@
 
         <!-- Back to Orders Button -->
         <div class="mt-8">
-            <a href="{{ route('your.order') }}" class="inline-flex items-center bg-gray-800 text-white py-3 px-6 rounded-lg shadow hover:bg-gray-900 transition">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h11M9 21l-6-6 6-6" />
-                </svg>
-                Back to Orders
+            <a href="{{ route('your.order') }}" class="inline-flex items-center bg-gray-600 text-white py-3 px-6 rounded-lg shadow transition">
+                Back
             </a>
         </div>
->>>>>>> Stashed changes
     </div>
 </main>
 @endsection

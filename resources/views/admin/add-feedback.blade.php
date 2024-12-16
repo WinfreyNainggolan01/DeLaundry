@@ -12,7 +12,7 @@
         </h1>
         <div class="flex flex-col md:flex-row">
             <div class="md:w-1/2">
-                <img alt="A white shirt with pink stains around the buttons" class="rounded-lg mb-6 md:mb-0" height="400" src="{{ url('storage/'. $complaint->image) }}" width="600"/>
+                <img alt="Complaint Image" class="rounded-lg mb-6 md:mb-0" height="400" src="{{ url('storage/'. $complaint->image) }}" width="600"/>
                 
             </div>
             <div class="md:w-1/2 md:pl-8">
@@ -62,3 +62,4 @@
     </div>
 </div>
 @endsection
+

@@ -31,21 +31,21 @@
                 <li class="menu-item">
                     <a href="{{ route('admin_user') }}" :active="request()->is('admin-user')" class="menu-link">
                         <img src="{{ asset('img/people.svg') }}" alt="user">
-                        <h1 class="text-sm ml-3">Pengguna</h1>
+                        <h1 class="text-sm ml-3">Users</h1>
                     </a>
                 </li>
 
                 <li class="menu-item">
                     <a href="{{ route('admin_order') }}" :active="request()->is('admin-order')" class="menu-link">
                         <img src="{{ asset('img/collection.svg') }}" alt="order">
-                        <h1 class="text-sm ml-3">Pesanan</h1>
+                        <h1 class="text-sm ml-3">Orders</h1>
                     </a>
                 </li>
 
                 <li class="menu-item">
                     <a href="{{ route('admin_complaint') }}" :active="request()->is('admin-complaint')" class="menu-link">
                         <img src="{{ asset('img/chat-right-text.svg') }}" alt="complaint">
-                        <h1 class="text-sm ml-3">Keluhan</h1>
+                        <h1 class="text-sm ml-3">Complaints</h1>
                     </a>
                 </li>
             </ul>
