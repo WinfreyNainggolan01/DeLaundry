@@ -174,7 +174,6 @@ class FrontendController extends Controller
         ]);
     }
 
-
     public function yourOrder()
     {
         $student = auth()->guard('student')->user();
@@ -214,10 +213,28 @@ class FrontendController extends Controller
     public function submitComplaint(Request $request, $ordx_id)
     {
         $request->validate([
-            'title'         => 'required|string|max:255',
-            'description'   => 'required|string',
-            'image'         => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'title' => [
+                'required',
+                'string',
+                'max:255',
+                function ($attribute, $value, $fail) {
+                    if (preg_match_all('/[^a-zA-Z0-9\s]/', $value) > 4) {
+                        $fail('The characters may not contain more than 4 non-alphanumeric characters.');
+                    }
+                },
+            ],
+            'description' => [
+                'required',
+                'string',
+                function ($attribute, $value, $fail) {
+                    if (preg_match_all('/[^a-zA-Z0-9\s]/', $value) > 4) {
+                        $fail('The characters may not contain more than 4 non-alphanumeric characters.');
+                    }
+                },
+            ],
+            'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
+
         $order = Order::where('ordx_id', $ordx_id)->firstOrFail();
     
         if ($order->student_id !== auth()->guard('student')->id()) {
@@ -280,10 +297,8 @@ class FrontendController extends Controller
         $ordx_id = strtolower($ordx_id);
         $order = Order::where('ordx_id', $ordx_id)->firstOrFail();
     
-        // Cari complaint dari order
         $complaint = Complaint::where('order_id', $order->id)->first();
     
-        // Cari feedback dari complaint
         $feedback = $complaint ? Feedback::where('complaint_id', $complaint->id)->first() : null;
     
         return view('student.feedback-your-order', [
@@ -291,32 +306,6 @@ class FrontendController extends Controller
             'order' => $order,
             'complaint' => $complaint,
             'feedback' => $feedback,
-        ]);
-    }
-
-    public function createComplaint(Request $request){
-        $request->validate([
-            'order-id'      => 'required|string|max:12',
-            'title'         => 'required|string|max:200',
-            'image'         => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'description'   => 'required|string|max:500',
-        ]);
-
-        Complaint::create([
-            'order_id'      => $request->input('order-id'),
-            'title'         => $request->input('title'),
-            'image'         => $request->input('image'),
-            'description'   => $request->input('description'),
-        ]);
-
-        return redirect()->route('complaint')->with('success', 'Complaint created successfully');
-    }
-
-    // notification function
-    public function notification()
-    {
-        return view('student.notification', [
-            'title' => 'Notification Page',
         ]);
     }
 

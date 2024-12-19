@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Bill;
 use App\Models\Item;
 use App\Models\Admin;
 use App\Models\Order;
@@ -11,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Resources\StudentResource;
+use Illuminate\Support\Facades\Storage;
 
 class ApiController extends Controller
 {
@@ -54,29 +56,276 @@ class ApiController extends Controller
         ], 401);
     }
 
-    public function viewOrder(Request $request)
+    /* =========================================== */
+
+    public function addItem(Request $request)
     {
-        // Cek apakah pengguna terautentikasi
+        $request->validate([
+            'name-item' => [
+                'required',
+                'string',
+                'max:100',
+                function ($attribute, $value, $fail) {
+                    if (preg_match_all('/[^a-zA-Z0-9\s]/', $value) > 4) {
+                        $fail('The ' . $attribute . ' may not contain more than 4 non-alphanumeric characters.');
+                    }
+                },
+            ],
+            'quantity' => 'required|integer|min:0|max:200',
+            'note' => [
+                'nullable',
+                'string',
+                'max:200',
+                function ($attribute, $value, $fail) {
+                    if (preg_match_all('/[^a-zA-Z0-9\s]/', $value) > 4) {
+                        $fail('The ' . $attribute . ' may not contain more than 4 non-alphanumeric characters.');
+                    }
+                },
+            ],
+        ]);
+
+        $student = auth('sanctum')->user();
+        if (!$student) {
+            return response()->json(['error' => 'Unauthorized'], 401);
+        }
+
+        $item = Item::create([
+            'name'          => $request->input('name-item'),
+            'quantity'      => $request->input('quantity'),
+            'note'          => $request->input('note') ? $request->input('note') : '-',
+            'student_id'    => $student->id,
+        ]);
+
+        return response()->json(['message' => 'Item added successfully', 'item' => $item], 201);
+    }
+
+    public function editItem(Request $request, $id)
+    {
+        $request->validate([
+            'name-item' => [
+                'required',
+                'string',
+                'max:100',
+                function ($attribute, $value, $fail) {
+                    if (preg_match_all('/[^a-zA-Z0-9\s]/', $value) > 4) {
+                        $fail('The ' . $attribute . ' may not contain more than 4 non-alphanumeric characters.');
+                    }
+                },
+            ],
+            'quantity' => 'required|integer|min:0|max:200',
+            'note' => [
+                'nullable',
+                'string',
+                'max:200',
+                function ($attribute, $value, $fail) {
+                    if (preg_match_all('/[^a-zA-Z0-9\s]/', $value) > 4) {
+                        $fail('The ' . $attribute . ' may not contain more than 4 non-alphanumeric characters.');
+                    }
+                },
+            ],
+        ]);
+
+        $item = Item::findOrFail($id);
+        $item->update([
+            'name'          => $request->input('name-item'),
+            'quantity'      => $request->input('quantity'),
+            'note'          => $request->input('note') ? $request->input('note') : '-',
+        ]);
+
+        return response()->json(['message' => 'Item updated successfully', 'item' => $item], 200);
+    }
+
+    public function deleteItem($id)
+    {
+        $item = Item::findOrFail($id);
+        $item->delete();
+        return response()->json(['message' => 'Item deleted successfully'], 200);
+    }
+
+    public function orderDone()
+    {
+        $student = auth('sanctum')->user();
+        if (!$student) {
+            return response()->json(['error' => 'Unauthorized'], 401);
+        }
+
+        $order = Order::create([
+            'ordx_id'       => Order::generateUniqueOrdxId(),
+            'date_at'       => now(),
+            'student_id'    => $student->id,
+            'dormitory_id'  => $student->dormitory_id,
+            'weight'        => 0,
+            'price'         => 0,
+            'status'        => 'Pending',
+            'items'         => [],
+        ]);
+
+        $items = Item::where('student_id', $student->id)->get();
+        $orderedItems = $items->map(function ($item) {
+            return [
+                'name'      => $item->name,
+                'quantity'  => $item->quantity,
+                'note'      => $item->note,
+            ];
+        });
+
+        $order->update([
+            'items' => $orderedItems->toArray(),
+        ]);
+
+        Item::where('student_id', $student->id)->delete();
+        $bill = Bill::where('student_id', $student->id)
+            ->whereMonth('date_at', now()->format('m'))
+            ->first();
+        
+        if ($bill) {
+            $bill->update([
+                'total_weight' => $bill->total_weight + $order->weight,
+                'total_amount' => $bill->total_amount + $order->price,
+            ]);
+        } else {
+            Bill::create([
+                'student_id'    => $student->id,
+                'order_id'      => $order->id,
+                'date_at'       => now(),
+                'month'         => now()->format('Y-m'),
+                'total_weight'  => $order->weight,
+                'total_amount'  => $order->price,
+                'status'        => 'unpaid',
+            ]);
+        }
+        Track::truncate();
+        Track::create([
+            'order_id'  => $order->id,
+            'messages'  => json_encode([
+                [
+                    'status'        => 'pending',
+                    'description'   => 'Order has been created',
+                    'date_at'       => now()->setTimezone('Asia/Jakarta')->format('D, d M Y'),
+                    'time_at'       => now()->setTimezone('Asia/Jakarta')->format('H:i') . ' WIB',
+                ],
+            ]),
+        ]);
+
+        return response()->json(['message' => 'Order created successfully', 'order' => $order], 201);
+    }
+
+    public function submitComplaint(Request $request, $ordx_id)
+    {
+        $request->validate([
+            'title' => [
+                'required',
+                'string',
+                'max:255',
+                function ($attribute, $value, $fail) {
+                    if (preg_match_all('/[^a-zA-Z0-9\s]/', $value) > 4) {
+                        $fail('The characters may not contain more than 4 non-alphanumeric characters.');
+                    }
+                },
+            ],
+            'description' => [
+                'required',
+                'string',
+                function ($attribute, $value, $fail) {
+                    if (preg_match_all('/[^a-zA-Z0-9\s]/', $value) > 4) {
+                        $fail('The characters may not contain more than 4 non-alphanumeric characters.');
+                    }
+                },
+            ],
+            'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+        ]);
+
+        $order = Order::where('ordx_id', $ordx_id)->firstOrFail();
+    
+        // cari student yang sedang login
         $student = auth('sanctum')->user();
 
-        // Jika tidak ada pengguna terautentikasi, kirimkan respons error
+        $complaint = Complaint::create([
+            'order_id'      => $order->id,
+            'student_id'    => $student->id,
+            'ordx_id'       => $order->ordx_id,
+            'title'         => $request->input('title'),
+            'description'   => $request->input('description'),
+            'date_at'       => now()->format('Y-m-d H:i:s'),
+            'status'        => 'Pending',
+        ]);
+
+        if ($request->hasFile('image')) {
+            $file_name = date('Y-m-d') . '-' . $request->file('image')->getClientOriginalName();
+            $photo_path = 'complaints/' . $file_name;
+
+            if($complaint->image && Storage::disk('public')->exists($complaint->image)){
+                Storage::disk('public')->delete($complaint->image);
+            }
+
+            Storage::disk('public')->put($photo_path, file_get_contents($request->file('image')));
+
+            $complaint->update([
+                'image' => $photo_path,
+            ]);
+        }
+
+        return response()->json(['message' => 'Complaint successfully submitted', 'complaint' => $complaint], 201);
+    }
+
+    public function editProfile(Request $request)
+    {
+        $request->validate([
+            'dormitory_id' => 'required|exists:dormitories,id',
+            'phone_number' => [
+                'required',
+                'string','min:12',
+                'max:13',
+                'regex:/^[0-9]+$/',
+            ],
+            'profile_photo' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+        ]);
+
+        $student = auth('sanctum')->user();
+        $student = Student::findOrFail($student->id);
+
+        $student->update([
+            'dormitory_id' => $request->input('dormitory_id'),
+            'phone_number' => $request->input('phone_number'),
+        ]);
+
+        if ($request->hasFile('profile_photo')) {
+            $file_name = date('Y-m-d') . '-' . $request->file('profile_photo')->getClientOriginalName();
+
+            $photoPath = 'photo-student/'.$file_name;
+
+            if ($student->photo && Storage::disk('public')->exists($student->photo)) {
+                Storage::disk('public')->delete($student->photo);
+            }
+
+            Storage::disk('public')->put($photoPath, file_get_contents($request->file('profile_photo')));
+            
+            $student->update([
+                'photo' => $photoPath,
+            ]);
+        }
+
+        return response()->json(['message' => 'Profile updated successfully', 'student' => $student], 200);
+    }
+
+
+    public function viewOrder(Request $request)
+    {
+        $student = auth('sanctum')->user();
+
         if (!$student) {
             return response()->json([
                 'error_message' => 'User not authenticated'
             ], 401);
         }
-
-        // Ambil pesanan berdasarkan id pengguna yang terautentikasi
         $orders = Order::where('student_id', $student->id)->get();
 
-        // Jika tidak ada pesanan
         if ($orders->isEmpty()) {
             return response()->json([
                 'message' => 'No orders found for this user.'
             ], 404);
         }
 
-        // Jika pesanan ditemukan
         return response()->json([
             'message' => 'Orders retrieved successfully',
             'orders' => $orders,
@@ -90,134 +339,8 @@ class ApiController extends Controller
     }
 
     public function getProfile(){
-        // cari student berdasarkan modelnya
         $student = auth('sanctum')->user();
         return StudentResource::make($student);
-    }
-
-    public function getProfileHts(Request $request)
-    {
-        $user = $request->user();
-
-        $studentResource = StudentResource::make($user);
-
-        $studentResource->additional([
-            'links' => [
-                'edit_profile' => URL::route('editProfile'), 
-                'view_orders' => URL::route('viewOrders'),
-                'view_complaints' => URL::route('viewComplaints')
-            ]
-        ]);
-
-        return $studentResource;
-    }
-
-    public function editProfile(Request $request){
-        $user = $request->user();
-        $request->validate([
-            'phone_number' => 'required|string|max:15',
-            'profile_photo' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
-            'dormitory_id' => 'required|exists:dormitories,id',
-        ]);
-
-        $profile_photo = $user->profile_photo;
-        if ($request->hasFile('profile_photo')) {
-            $profile_photo = $request->file('profile_photo')->store('images', 'public');
-        }
-
-        $user->update([
-            'phone_number' => $request->phone_number,
-            'profile_photo' => $profile_photo,
-            'dormitory_id' => $request->dormitory_id,
-        ]);
-
-        return StudentResource::make($user);
-    }
-
-    public function addItem(Request $request)
-    {
-
-        $validatedData = $request->validate([
-            'name_item' => 'required|string|max:100',
-            'quantity' => 'required|integer|min:1',
-            'note' => 'nullable|string|max:200',
-        ]);
-
-        $student = auth('sanctum')->user();
-
-        $item = Item::create([
-            'name' => $validatedData['name_item'],
-            'quantity' => $validatedData['quantity'],
-            'note' => $validatedData['note'] ?? '-',
-            'student_id' => $student->id,
-        ]);
-
-        return response()->json([
-            'message' => 'Item added successfully',
-            'item' => [
-                'id' => $item->id,
-                'name' => $item->name,
-                'quantity' => $item->quantity,
-                'note' => $item->note,
-                'student_id' => $item->student_id,
-            ],
-        ], 201);
-    }
-
-
-    public function editItem(Request $request, $id)
-    {
-        $validatedData = $request->validate([
-            'name_item' => 'required|string|max:100',
-            'quantity' => 'required|integer|min:1',
-            'note' => 'nullable|string|max:260',
-        ]);
-
-        $student = auth('sanctum')->user();
-        $item = Item::where('id', $id)->where('student_id', $student->id)->first();
-
-        if (!$item) {
-            return response()->json([
-                'error' => 'Item not found or does not belong to you',
-            ], 404);
-        }
-
-        $item->update([
-            'name' => $validatedData['name_item'],
-            'quantity' => $validatedData['quantity'],
-            'note' => $validatedData['note'] ?? $item->note,
-        ]);
-
-        return response()->json([
-            'message' => 'Item updated successfully',
-            'item' => [
-                'id' => $item->id,
-                'name' => $item->name,
-                'quantity' => $item->quantity,
-                'note' => $item->note,
-            ],
-        ], 200);
-    }
-
-    public function deleteItem($id)
-    {
-        $student = auth('sanctum')->user();
-        if (!$student) {
-            return response()->json([
-                'error' => 'Unauthorized',
-            ], 401);
-        }
-        $item = Item::where('id', $id)->where('student_id', $student->id)->first();
-        if (!$item) {
-            return response()->json([
-                'error' => 'Item not found or does not belong to you',
-            ], 404);
-        }
-
-        $item->delete();
-        return response()->json([
-            'message' => 'Item deleted successfully',
-        ], 200);
     }
 
     public function doneOrder()
@@ -262,7 +385,6 @@ class ApiController extends Controller
                 'items' => $orderedItems->toArray(),
             ]);
 
-
             Item::where('student_id', $student->id)->delete();
 
             return response()->json([
@@ -281,7 +403,6 @@ class ApiController extends Controller
             ], 500); 
         }
     }
-
 
     public function getStudentOrder()
     {
@@ -309,7 +430,6 @@ class ApiController extends Controller
             'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
-        $student = auth('sanctum')->user();
         $order = Order::where('ordx_id', $ordx_id)->first();
         if(!$order) {
             return response()->json([
@@ -335,7 +455,6 @@ class ApiController extends Controller
 
     public function trackOrder(Request $request){
         $student = auth('sanctum')->user();
-        // mengambil order terakhir yang dilakukan oleh user
         $order = Order::where('student_id', $student->id)
             ->orderBy('created_at', 'desc')
             ->first();
@@ -345,8 +464,6 @@ class ApiController extends Controller
                 'error' => 'Order not found',
             ], 404);
         }
-
-        // membuat track order dari kelas Track dengan tabel column order_id, status, description, date
         $track = Track::create([
             'order_id' => $order->id,
             'status' => 'pending',
