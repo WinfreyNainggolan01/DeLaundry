@@ -6,11 +6,12 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Database\Eloquent\Relations\BelongsTo; 
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Laravel\Sanctum\HasApiTokens;
 
 class Student extends Authenticatable
 {
-    use Notifiable, SoftDeletes, HasFactory;
+    use Notifiable, SoftDeletes, HasFactory, HasApiTokens;
 
     protected $guard = 'student';  // pastikan ini sesuai
 
@@ -24,6 +25,7 @@ class Student extends Authenticatable
         'program_study',
         'phone_number',
         'photo',
+        'photo_public_id',
     ];
 
     protected $hidden = [
@@ -37,16 +39,22 @@ class Student extends Authenticatable
 
     public static function generateEmail(string $nim): string
     {
-        if (substr($nim, 0, 2) == '12S' || substr($nim, 0, 2) == '12s') {
-            $email = 'iss';
-        } elseif (substr($nim, 0, 2) == '13S') {
-            $email = 'ifs';
-        } elseif (substr($nim, 0, 2) == '14S') {
-            $email = 'els';
+        // Ambil 3 karakter pertama dari NIM
+        $prefix = strtoupper(substr($nim, 0, 3)); // Gunakan strtoupper untuk memastikan huruf besar
+    
+        if ($prefix === '12S') {
+            $emailPrefix = 'iss';
+        } elseif ($prefix === '13S') {
+            $emailPrefix = 'ifs';
+        } elseif ($prefix === '14S') {
+            $emailPrefix = 'els';
         } else {
-            $email = 'unk';
+            $emailPrefix = 'unk';
         }
-        $email .= substr($nim, 2, 5) . '@students.del.ac.id';
+    
+        // Ambil 5 karakter berikutnya setelah prefix untuk melengkapi email
+        $email = $emailPrefix . substr($nim, 3, 5) . '@students.del.ac.id';
+    
         return $email;
     }
 
@@ -54,5 +62,10 @@ class Student extends Authenticatable
     public function dormitory(): BelongsTo // Ubah ini
     {
         return $this->belongsTo(Dormitory::class);
+    }
+
+    public function bill():BelongsTo
+    {
+        return $this->belongsTo(Bill::class);
     }
 }

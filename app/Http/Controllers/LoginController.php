@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Admin;
+use App\Models\Student;
 use Illuminate\Http\Request;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\RedirectResponse;
 
 class LoginController extends Controller
 {
@@ -20,17 +23,13 @@ class LoginController extends Controller
             'password' => ['required'],
         ]);
 
-        // dd('berhasil login');
-
         if (Auth::guard('student')->attempt($credentials)) {
             $request->session()->regenerate();
-            // dd('berhasil login student');
             return redirect()->intended('/homepage');
         }
 
         if (Auth::guard('admin')->attempt($credentials)) {
             $request->session()->regenerate();
-            // dd('berhasil login admin');
             return redirect()->intended('/admin-dashboard');
         }
 
@@ -54,4 +53,53 @@ class LoginController extends Controller
 
         return redirect('/login');
     }
+
+    public function loginApi(Request $request)
+    {
+        $credentials = $request->validate([
+            'username' => ['required'],
+            'password' => ['required'],
+        ]);
+
+        // User adalah Student
+        $student = Student::where('username', $credentials['username'])->first();
+        if ($student && Hash::check($credentials['password'], $student->password)) {
+            $token = $student->createToken('StudentToken')->plainTextToken;
+            return response()->json([
+                'token' => $token,
+                'role' => 'student',
+            ]);}
+
+        // User adalah Admin
+        $admin = Admin::where('username', $credentials['username'])->first();
+        if ($admin && Hash::check($credentials['password'], $admin->password)) {
+            $token = $admin->createToken('AdminToken')->plainTextToken;
+            return response()->json([
+                'token' => $token,
+                'role' => 'admin',
+            ]);
+        }
+
+        // Jika login gagal, arahkan kembali ke halaman login dengan pesan error
+        return response()->json(['message' => 'Username atau Password salah'], 401);
+    }
+
+    public function getUser(Request $request)
+    {
+        $user = $request->user();
+        return response()->json([
+            'id' => $user->id,
+            'name' => $user->name,
+            'email' => $user->email,
+        ]);
+    }
+
+    public function logoutApi(Request $request)
+    {
+        $request->user()->currentAccessToken()->delete();
+        return response()->json([
+            'message' => 'Logged out',
+        ]);
+    }
+    
 }

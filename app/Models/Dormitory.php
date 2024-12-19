@@ -15,8 +15,8 @@ class Dormitory extends Model
         'gender'
     ];
 
-    public function dormitories(): HasMany
-    {
-        return $this->hasMany(Dormitory::class);
-    }
+    // public function dormitories(): HasMany
+    // {
+    //     return $this->hasMany(Dormitory::class);
+    // }
 }

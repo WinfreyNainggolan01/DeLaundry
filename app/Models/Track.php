@@ -12,13 +12,13 @@ class Track extends Model
     use HasFactory, SoftDeletes;
     protected $fillable = [
         'order_id',
-        'status',
-        'description',
-        'date_at',
+        'messages',
     ];
 
     public function order(): BelongsTo
     {
         return $this->belongsTo(Order::class, 'order_id');
     }
+    
+
 }

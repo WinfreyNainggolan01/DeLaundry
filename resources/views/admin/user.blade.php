@@ -62,23 +62,7 @@
                                     </tr>
                                 </tbody>
                                 @endforeach
-                                {{-- {{ $students->links() }} --}}
-                                {{-- <tr>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">3</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">12S22048</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Ira Silalahi</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Kana</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Female</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">081234567890</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
-                                        <a class="text-primary hover:text-sky-700" href="#">Action</a>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
-                                        <a class="text-primary hover:text-sky-700" href="#">
-                                            <img src="{{ asset('img/pencil-square.svg') }}" alt="">
-                                        </a>
-                                    </td>
-                                </tr> --}}
+                                
                             </table>
                         </div>
                     </div>

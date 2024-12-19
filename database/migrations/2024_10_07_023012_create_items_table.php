@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('items', function (Blueprint $table) {
             // variabel name, quantity, note
             $table->id();
+            $table->foreignId('student_id')->constrained()->cascadeOnDelete();
             $table->string('name');
             $table->integer('quantity');
             $table->string('note');
-            $table->foreignId('student_id')->constrained()->cascadeOnDelete();
             $table->softDeletes();
             $table->timestamps();
         });

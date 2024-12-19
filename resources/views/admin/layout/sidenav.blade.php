@@ -1,7 +1,7 @@
 <nav>
     <div class="app-menu">
         <!-- Sidenav Brand Logo -->
-        <a href="" class="flex items-center">
+        <a href="{{ route('admin_dashboard') }}" class="flex items-center">
             <div class="flex-shrink-0 p-5">
             <img class="h-12 w-12" src="{{ asset('img/Logo-DeLaundry.png') }}" alt="DeLaundry Logo">
             </div>

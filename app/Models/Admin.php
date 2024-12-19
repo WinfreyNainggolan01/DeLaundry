@@ -2,14 +2,14 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class Admin extends Authenticatable
 {
-    use HasFactory, Notifiable;
+    use HasApiTokens,HasFactory, Notifiable ;
 
     /**
      * The attributes that are mass assignable.
@@ -20,9 +20,11 @@ class Admin extends Authenticatable
     protected $table = 'admins';
 
     protected $fillable = [
+        'code_admin',
         'name',
         'username',
         'password',
+        'gender',
         'phone_number',
         'photo',
     ];
@@ -48,4 +50,5 @@ class Admin extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
 }

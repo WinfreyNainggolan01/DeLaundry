@@ -45,9 +45,6 @@
                   <a href="{{ route('finance') }}" 
                      class="{{ request()->routeIs('finance') ? 'bg-gray-200 text-black' : 'text-black hover:bg-gray-300 hover:text-sky-700' }} rounded-md px-3 py-2 text-sm font-semibold">Finance</a>
               
-                  <a href="{{ route('complaint') }}" 
-                     class="{{ request()->routeIs('complaint') ? 'bg-gray-200 text-black' : 'text-black hover:bg-gray-300 hover:text-sky-700' }} rounded-md px-3 py-2 text-sm font-semibold">Complaint</a>
-              
                   <a href="{{ route('tracking') }}" 
                      class="{{ request()->routeIs('tracking') ? 'bg-gray-200 text-black' : 'text-black hover:bg-gray-300 hover:text-sky-700' }} rounded-md px-3 py-2 text-sm font-semibold">Tracking</a>
               </nav>
@@ -58,7 +55,7 @@
 
           <div x-data="{ isNotificationOpen: false, isProfileOpen: false }" class="hidden md:block">
             <div class="ml-4 flex items-center md:ml-6">
-              <!-- Notification -->
+              {{-- <!-- Notification -->
               <div class="relative ml-3" x-data="{ isNotificationOpen: false, isProfileOpen: false }">
                 <!-- Button Notification -->
                 <button @click="isNotificationOpen = !isNotificationOpen; isProfileOpen = false" 
@@ -86,7 +83,7 @@
                     <a href="#" class="block px-4 py-2 text-sm text-gray-700">Notification 1</a>
                     <a href="#" class="block px-4 py-2 text-sm text-gray-700">Notification 2</a>
                 </div>
-            </div>
+            </div> --}}
         
                 <!-- Profile -->
                 <div class="relative ml-3">
@@ -114,7 +111,7 @@
                         class="absolute right-0 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none z-20"
                         role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button">
                         <a href="{{ route('profile') }}" class="block px-4 py-2 text-sm text-gray-700">Your Profile</a>
-                        <a href="{{ route('profile') }}" class="block px-4 py-2 text-sm text-gray-700">Your Orders</a>
+                        <a href="{{ route('your.order') }}" class="block px-4 py-2 text-sm text-gray-700">Your Orders</a>
                         <form action="/logout" method="POST">
                             @csrf
                             <button type="submit" class="block w-full text-left px-4 py-2 text-sm text-gray-700">Sign Out</button>

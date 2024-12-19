@@ -12,11 +12,10 @@ class Item extends Model
 {
     use HasFactory, SoftDeletes;
     protected $fillable = [
-        'name',
         'student_id',
+        'name',
         'quantity',
         'note',
-
     ];
 
     public function itemOrders(): HasMany
@@ -24,9 +23,10 @@ class Item extends Model
         return $this->hasMany(ItemOrder::class, 'item_id');
     }
 
-    public function items():HasMany
+
+    public function orderItems(): HasMany
     {
-        return $this->hasMany(Item::class);
+        return $this->hasMany(ItemOrder::class, 'item_id');
     }
 
     public function student(): BelongsTo

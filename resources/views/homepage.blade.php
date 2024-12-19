@@ -193,7 +193,7 @@
                   <div class="flex justify-center items-center">
                       
                       <!-- Buttons -->
-                      <a href="#" class="inline-flex items-center font-medium text-primary-600 dark:text-primary-500">
+                      <a href="{{ route("order") }}" class="inline-flex items-center font-medium text-primary-600 dark:text-primary-500">
                         <button class="bg-blue-500 text-white px-6 py-2 rounded-2xl shadow hover:bg-blue-600">Add Request
                         </button>
                       </a>
@@ -210,7 +210,7 @@
                   <div class="flex justify-center items-center">
                       
                       <!-- Buttons -->
-                      <a href="#" class="inline-flex items-center font-medium text-primary-600 dark:text-primary-500">
+                      <a href="{{ route("your.order") }}" class="inline-flex items-center font-medium text-primary-600 dark:text-primary-500">
                         <button class="bg-blue-500 text-white px-6 py-2 rounded-2xl shadow hover:bg-blue-600">Complaint</button>
                       </a>
                   </div>
@@ -226,7 +226,7 @@
                 <div class="flex justify-center items-center">
                     
                     <!-- Buttons -->
-                    <a href="#" class="inline-flex items-center font-medium text-primary-600 dark:text-primary-500">
+                    <a href="{{ route("tracking") }}" class="inline-flex items-center font-medium text-primary-600 dark:text-primary-500">
                       <button class="bg-blue-500 text-white px-6 py-2 rounded-2xl shadow hover:bg-blue-600">Track</button>
                     </a>
                 </div>

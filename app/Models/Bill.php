@@ -6,26 +6,28 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Bill extends Model
 {
     use HasFactory, SoftDeletes;
     protected $fillable = [
-        // variabel student_id, order_id, date_at, month, total_weight, total_amount
         'student_id',
         'order_id',
         'date_at',
         'month',
         'total_weight',
         'total_amount',
+        'status',
     ];
 
-    public function order():BelongsTo
+    public function students():HasMany
     {
-        return $this->belongsTo(Order::class);
+        return $this->hasMany(Student::class);
     }
-    public function student():BelongsTo
+
+    public function orders():HasMany
     {
-        return $this->belongsTo(Student::class);
+        return $this->hasMany(Order::class);
     }
 }

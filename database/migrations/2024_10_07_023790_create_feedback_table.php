@@ -11,15 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        // variabel student_id, complaint_id, description, status, date
-        Schema::create('notifications', function (Blueprint $table) {
+        Schema::create('feedback', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('student_id')->constrained()->onDelete('cascade');
             $table->foreignId('complaint_id')->constrained()->onDelete('cascade');
-            $table->text('message');
-            $table->boolean('is_read');
+            $table->foreignId('student_id')->constrained()->onDelete('cascade');
+            $table->text('feedback_response');
+            $table->enum('status', ['resolved', 'unresolved'])->default('unresolved');
             $table->date('date_at');
-            $table->softDeletes();
             $table->timestamps();
         });
     }
@@ -29,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('notifications');
+        Schema::dropIfExists('feedbacks');
     }
 };

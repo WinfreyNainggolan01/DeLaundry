@@ -16,32 +16,46 @@ class Order extends Model
         'ordx_id',
         'date_at',
         'student_id',
-        'dormitory_id', 
+        'dormitory_id',
+        'weight',
+        'price',
+        'status',
+        'items',
     ];
+
+    protected $casts = [
+        'items' => 'array',
+        'date_at' => 'datetime',
+    ];
+
+    
 
     public static function generateUniqueOrdxId(): string
     {
         $prefix = 'DLR';
         do{
-            $randomString = $prefix . mt_rand(1000,9999);
+            $randomString = $prefix . mt_rand(1000000,9999999);
         } while (self::where('ordx_id', $randomString)->exists());
 
         return $randomString;
     }
 
-    public function orders(): HasMany
+    public static function statusToValue($status): string
     {
-        return $this->hasMany(Order::class);
+        $statusValue = [
+            'pending' => 'Pending',
+            'picked_up' => 'Picked Up',
+            'on_process' => 'On Process',
+            'delivered' => 'Delivered',
+            'done' => 'Done',
+        ];
+    
+        return $statusValue[$status];
     }
 
     public function itemOrders(): HasMany
     {
         return $this->hasMany(ItemOrder::class, 'order_id');
-    }
-
-    public function orderFinances(): HasMany
-    {
-        return $this->hasMany(OrderFinance::class, 'order_id');
     }
 
     public function student(): BelongsTo
@@ -52,6 +66,17 @@ class Order extends Model
     public function dormitory(): BelongsTo
     {
         return $this->belongsTo(Dormitory::class);
+    }
+
+
+    public function feedbacks(): HasMany
+    {
+        return $this->hasMany(Feedback::class, 'order_id');
+    }
+
+    public function bill(): BelongsTo
+    {
+        return $this->belongsTo(Bill::class, 'bill_id');
     }
 
 }

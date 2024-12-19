@@ -14,9 +14,16 @@
 
     <div class="max-w-5xl mx-auto px-6">
         <div class="flex items-center mb-4">
-            <img src="{{ asset('img/user.jpg') }}" class="h-20 w-20 rounded-full" alt="Profile Image">
+            <!-- Display Profile Photo -->
+            @if (Auth::guard('student')->user()->photo)
+                <img src="{{ url('storage/'. Auth::guard('student')->user()->photo) }}" class="h-20 w-20 rounded-full" alt="Profile Image">
+            @else
+                <img src="{{  url('storage/default/default-profile.jpg') }}" class="h-20 w-20 rounded-full" alt="Profile Image">
+            @endif
+
+            <!-- Display User Information -->
             <div class="ml-4">
-                <p class="text-lg font-medium">{{ Auth::guard('student')->user()->name}}</p>
+                <p class="text-lg font-medium">{{ Auth::guard('student')->user()->name }}</p>
                 <p class="text-gray-500">{{ Auth::guard('student')->user()->generateEmail(Auth::guard('student')->user()->nim) }}</p>
             </div>
         </div>
@@ -31,7 +38,7 @@
                     <input type="text" value="{{ Auth::guard('student')->user()->name }}" disabled class="mt-1 block w-full bg-white rounded-md shadow-sm sm:text-sm px-3 py-2">
                 </div>
                 <div>
-                    <label class="block text-gray-700 font-bold mb-2" for="nim">NIM </label>
+                    <label class="block text-gray-700 font-bold mb-2" for="nim">NIM</label>
                     <input type="text" value="{{ Auth::guard('student')->user()->nim }}" disabled class="mt-1 block w-full bg-white rounded-md shadow-sm sm:text-sm px-3 py-2">
                 </div>
                 <div>
@@ -58,7 +65,8 @@
                 </div>
             </div>
             <div class="mt-6 flex justify-end">
-                <button onclick="openEditModal()" class="bg-sky-800 text-white px-4 py-2 rounded-md hover:bg-blue-700">Edit Profile</button>
+                <!-- Button to Open Modal for Editing -->
+                <button onclick="openEditModal()" class="bg-sky-800 text-white px-4 py-2 rounded-md hover:bg-blue-600">Edit Profile</button>
             </div>
         </div>
     </div>
@@ -74,15 +82,19 @@
                 <label for="dormitory_id" class="block text-gray-700 font-bold mb-2">Dormitory</label>
                 <select id="dormitory_id" name="dormitory_id" class="w-full px-3 py-2 border rounded">
                     @foreach($dormitories as $dormitory)
-                        <option value="{{ $dormitory->id }}" {{ $dormitory->id == Auth::guard('student')->user()->dormitory_id ? 'selected' : '' }}>
-                            {{ $dormitory->name }}
-                        </option>
+                        @if($dormitory->gender == Auth::guard('student')->user()->gender)
+                            <option value="{{ $dormitory->id }}" {{ $dormitory->id == Auth::guard('student')->user()->dormitory_id ? 'selected' : '' }}>{{ $dormitory->name }}</option>
+                        @endif
                     @endforeach
                 </select>
             </div>
             <div class="mb-4">
                 <label for="phone_number" class="block text-gray-700 font-bold mb-2">Mobile Phone</label>
                 <input type="text" id="phone_number" name="phone_number" value="{{ Auth::guard('student')->user()->phone_number }}" class="w-full px-3 py-2 border rounded">
+            </div>
+            <div class="mb-4">
+                <label for="profile_photo" class="block text-gray-700 font-bold mb-2">Profile Photo</label>
+                <input type="file" accept="image/*" id="profile_photo" name="profile_photo" class="w-full px-3 py-2 border rounded">
             </div>
             <div class="mt-6 flex justify-end space-x-4">
                 <button type="button" onclick="closeEditModal()" class="px-4 py-2 rounded-lg bg-gray-500 text-white">Cancel</button>
@@ -93,10 +105,12 @@
 </div>
 
 <script>
+    // Open the modal to edit profile
     function openEditModal() {
         document.getElementById('editProfileModal').classList.remove('hidden');
     }
 
+    // Close the modal without saving
     function closeEditModal() {
         document.getElementById('editProfileModal').classList.add('hidden');
     }

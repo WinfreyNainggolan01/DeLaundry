@@ -15,7 +15,7 @@
                         <img src="{{ asset('img/person.svg') }}" alt="person" class="h-10 w-auto">
                     </div>
                     <div class="text-right">
-                        <h3 class="mt-1 text-2xl font-bold mb-5 text-gray-900">3</h3>
+                        <h3 class="mt-1 text-2xl font-bold mb-5 text-gray-900">{{ $total_order }}</h3>
                         <p class="mb-1 truncate text-gray-900">Total Orders</p>
                     </div>
                 </div>
@@ -42,103 +42,43 @@
                                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">No</th>
                                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Order ID</th>
                                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Order By</th>
-                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Quantity</th>
                                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Weight</th>
                                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Order Date</th>
-                                        <th scope="col" class="px-6 py-3 text-end text-xs font-medium text-gray-500 uppercase">Status</th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
                                         <th scope="col" class="px-6 py-3 text-end text-xs font-medium text-gray-500 uppercase"></th>
                                         <th scope="col" class="px-6 py-3 text-end text-xs font-medium text-gray-500 uppercase"></th>
-
                                     </tr>
                                 </thead>
                                 <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
+                                    @foreach ($orders as $order)
                                     <tr>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">1</td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">DLR01234567</td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Winfrey Nainggolan</td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">10</td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">1.6</td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">13/08/2024</td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
-                                            <div class="relative z-10 ">
-                                                <a href="#" class="btn border-gray-700 text-gray-900 h-8 w-auto relative z-20">
-                                                    Submit
-                                                    <img src="{{ asset('img/caret-down-fill.svg') }}" alt="" class="absolute right-1 top-1/3 transform -translate-y-1/2 z-10 h-3 w-auto">
-                                                </a>
-                                            </div>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ $loop->iteration }}</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ $order->ordx_id }}</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ $order->student->name }}</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $order->weight }}</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $order->created_at->format('d/m/Y') }}</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 text-left">
+                                            {{ \App\Models\Order::statusToValue($order->status) }}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
-                                            <a class="text-primary hover:text-sky-700" href="#">
-                                                <img src="{{ asset('img/pencil-square.svg') }}" alt="">
+                                            <a class="text-primary hover:text-sky-700" href="{{ route('admin.order.detail', ['ordx_id' => strtolower($order->ordx_id)]) }}">
+                                                <img src="{{ asset('img/eye.svg') }}" alt="Lihat Detail">
                                             </a>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
-                                            <a class="text-primary hover:text-sky-700" href="#">
-                                                <img src="{{ asset('img/eye.svg') }}" alt="">
+                                            <a href="{{ route('admin_order_edit', ['ordx_id' => strtolower($order->ordx_id)]) }}" class="text-primary hover:text-sky-700">
+                                                <img src="{{ asset('img/pencil-square.svg') }}" alt="Edit Order">
                                             </a>
                                         </td>
                                     </tr>
-
-                                    <tr>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">2</td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"> - </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Yohana Siahaan</td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">12</td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900"> - </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">12/08/2024</td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
-                                            <div class="relative z-10 ">
-                                                <a href="#" class="btn border-gray-700 text-gray-900 h-8 w-auto relative z-20">
-                                                    Submit
-                                                    <img src="{{ asset('img/caret-down-fill.svg') }}" alt="" class="absolute right-1 top-1/3 transform -translate-y-1/2 z-10 h-3 w-auto">
-                                                </a>
-                                            </div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
-                                            <a class="text-primary hover:text-sky-700" href="#">
-                                                <img src="{{ asset('img/pencil-square.svg') }}" alt="">
-                                            </a>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
-                                            <a class="text-primary hover:text-sky-700" href="#">
-                                                <img src="{{ asset('img/eye.svg') }}" alt="">
-                                            </a>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">3</td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">DLR4324643</td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Ira Silalahi</td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">8</td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">1.4</td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">14/08/2024</td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
-                                            <div class="relative z-10 ">
-                                                <a href="#" class="btn border-gray-700 text-gray-900 h-8 w-auto relative z-20">
-                                                    Submit
-                                                    <img src="{{ asset('img/caret-down-fill.svg') }}" alt="" class="absolute right-1 top-1/3 transform -translate-y-1/2 z-10 h-3 w-auto">
-                                                </a>
-                                            </div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
-                                            <a class="text-primary hover:text-sky-700" href="#">
-                                                <img src="{{ asset('img/pencil-square.svg') }}" alt="">
-                                            </a>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
-                                            <a class="text-primary hover:text-sky-700" href="#">
-                                                <img src="{{ asset('img/eye.svg') }}" alt="">
-                                            </a>
-                                        </td>
-                                    </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
             </div>
-        </div> <!-- end table-->
+        </div>
     </div>
 </main>
 @endsection

@@ -18,6 +18,10 @@ return new class extends Migration
             $table->date('date_at');
             $table->foreignId('student_id')->constrained()->cascadeOnDelete();
             $table->foreignId('dormitory_id')->constrained()->cascadeOnDelete();
+            $table->enum('status', ['pending', 'picked_up', 'on_process', 'delivered', 'done']);
+            $table->float('weight');
+            $table->float('price');
+            $table->json('items');
             $table->softDeletes();
             $table->timestamps();
         });

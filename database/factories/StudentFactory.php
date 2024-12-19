@@ -30,10 +30,9 @@ class StudentFactory extends Factory
             'username' => strtolower(str_replace(' ', '-',$this->faker->unique()->userName())),
             'password' => bcrypt('password'),
             'dormitory_id' => $this->faker->numberBetween(1, 4),
+            'program_study' => $this->faker->randomElement(['Sistem Informasi', 'Teknik Informatika', 'Teknik Elektro']),
             'gender' => $this->faker->randomElement(['male', 'female']),
             'phone_number' => $this->faker->phoneNumber(),
-
-            // strtolower(str_replace(' ', '-', $title)),
         ];
     }
 }

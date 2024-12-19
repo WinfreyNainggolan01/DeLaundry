@@ -15,9 +15,7 @@ return new class extends Migration
         Schema::create('tracks', function (Blueprint $table) {
             $table->id();
             $table->foreignId('order_id')->constrained()->onDelete('cascade');
-            $table->string('status');
-            $table->text('description');
-            $table->date('date_at');
+            $table->json('messages');
             $table->softDeletes();
             $table->timestamps();
         });

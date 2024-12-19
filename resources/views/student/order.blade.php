@@ -8,7 +8,7 @@
 <main class="container mx-auto px-4 py-8">
     <section class="container mx-auto px-4 py-8">
         <h2 class="text-2xl font-bold text-gray-800 mb-6">Fill Your Items</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
             <form action="{{ route('add.item') }}" method="POST" class="w-full mb-8">
                 @csrf
                 <div class="mb-4">
@@ -29,6 +29,11 @@
                     <button type="submit" class="bg-sky-700 text-white px-4 py-2 rounded-lg">Add Item</button>
                 </div>
             </form>
+
+            {{-- Right Section --}}
+            <div class="relative text-white hidden lg:block">
+                <img class="absolute inset-0 bg-no-repeat bg-cover bg-center opacity-50 scale-85 -my-24" src="{{ asset('img/order-item.svg') }}" alt="insert item">
+            </div>
         </div>
 
         <div class="mt-8">
@@ -71,7 +76,48 @@
 </main>
 
 <!-- Modal Edit Item -->
-<!-- (Modal code remains unchanged) -->
+<div id="editItemModal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-gray-900 bg-opacity-50">
+    <div class="bg-white p-6 rounded-lg shadow-lg max-w-lg w-full">
+        <h3 class="text-2xl font-bold mb-4">Edit Item</h3>
+        <form id="editItemForm" method="POST">
+            @csrf
+            @method('POST')
+            <input type="hidden" name="id" id="editItemId">
+            <div class="mb-4">
+                <label for="editItemName" class="block text-gray-700 font-bold mb-2">Name Item</label>
+                <input type="text" id="editItemName" name="name-item" class="w-full px-3 py-2 border rounded" required>
+            </div>
+            <div class="mb-4">
+                <label for="editItemQuantity" class="block text-gray-700 font-bold mb-2">Quantity</label>
+                <input type="number" id="editItemQuantity" name="quantity" class="w-full px-3 py-2 border rounded" required>
+            </div>
+            <div class="mb-4">
+                <label for="editItemNote" class="block text-gray-700 font-bold mb-2">Note</label>
+                <textarea id="editItemNote" name="note" rows="5" class="w-full px-3 py-2 border rounded"></textarea>
+            </div>
+            <div class="flex justify-end space-x-4">
+                <button type="button" onclick="closeEditModal()" class="bg-gray-500 text-white px-4 py-2 rounded-lg">Cancel</button>
+                <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-lg">Save Changes</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Modal Delete Item -->
+<div id="deleteItemModal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-gray-900 bg-opacity-50">
+    <div class="bg-white p-6 rounded-lg shadow-lg max-w-lg w-full">
+        <h3 class="text-2xl font-bold mb-4">Delete Item</h3>
+        <p class="mb-4">Are you sure you want to delete this item?</p>
+        <form id="deleteItemForm" method="POST">
+            @csrf
+            @method('POST')
+            <div class="flex justify-end space-x-4">
+                <button type="button" onclick="closeDeleteModal()" class="bg-gray-500 text-white px-4 py-2 rounded-lg">Cancel</button>
+                <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded-lg">Delete</button>
+            </div>
+        </form>
+    </div>
+</div>
 
 <script>
     function openEditModal(id, name, quantity, note) {
