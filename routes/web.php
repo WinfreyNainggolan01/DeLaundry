@@ -73,9 +73,6 @@ Route::group(['middleware' => StudentMiddleware::class], function (){
 });
 
 
-
-
-
 // // Authentification
 // Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
 Route::post('/logout', [LoginController::class, 'logout']);
