@@ -2,8 +2,6 @@
 
 Welcome to the DeLaundry project! This website is a part of the Web Programming and Testing course, specifically designed to streamline the laundry process for IT Del campus students and administrators. It offers features tailored to enhance user experience and operational efficiency.
 
-![DeLaundry Banner](https://github.com/WinfreyNainggolan01/DeLaundry/blob/main/public/img/Logo-DeLaundry.png)
-
 ## Features
 
 ### For Students
